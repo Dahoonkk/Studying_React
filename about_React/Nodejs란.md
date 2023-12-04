@@ -15,3 +15,6 @@
 ```bash -
 npx create-react-app <폴더 이름>
 ```
+
+- npx란 무엇인가?
+  - npx는 노드 패키지 실행을 도와주는 도구로 create-react-app이란 npm 레지스트리에 있는 패키지를 <폴더 이름> 폴더에서 실행하여 리액트를 설치하게 된다.
