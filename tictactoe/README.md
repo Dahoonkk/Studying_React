@@ -281,3 +281,11 @@ class Button2 extends React.Component {
 }
 ```
 </details>
+
+<details>
+<summary>State와 Props 비교</summary>
+
+|State|Props|
+|:---:|:---:|
+|1️⃣ 부모 컴포넌트에서 자녀 컴포넌트로 데이터를 보내는게 아닌 해당 컴포넌트 내부에서 데이터를 전달하려면?? State 사용</br>2️⃣ State는 변경 가능(mutable)</br>3️⃣ State가 변하면 re-render 된다.|1️⃣ Props는 Properties의 줄임말</br>2️⃣ Props는 상속하는 부모 컴포넌트에 데이터 등을 전달하는 방법</br>3️⃣ Props는 읽기 전용(immutable)으로 자녀 컴포넌트 입장에서는 변하지 않는다.(변하게 하고자 하면 부모 컴포넌트에서 state를 변경시켜줘야 함)|
+</details>
