@@ -172,7 +172,7 @@ export class Square extends Component {
   
   render() {
     return (
-      <button className="square" onClick={() => this.setState({value:'X'})}> // State 변경하기
+      <button className="square" onClick={() => { this.setState({value:'X'})}}> // State 변경하기
         {this.state.value} // State 이용하기
       </button>
     )
