@@ -289,3 +289,30 @@ class Button2 extends React.Component {
 |:---:|:---:|
 |1️⃣ 부모 컴포넌트에서 자녀 컴포넌트로 데이터를 보내는게 아닌 해당 컴포넌트 내부에서 데이터를 전달하려면?? State 사용</br>2️⃣ State는 변경 가능(mutable)</br>3️⃣ State가 변하면 re-render 된다.|1️⃣ Props는 Properties의 줄임말</br>2️⃣ Props는 상속하는 부모 컴포넌트에 데이터 등을 전달하는 방법</br>3️⃣ Props는 읽기 전용(immutable)으로 자녀 컴포넌트 입장에서는 변하지 않는다.(변하게 하고자 하면 부모 컴포넌트에서 state를 변경시켜줘야 함)|
 </details>
+
+<details>
+<summary>부모 컴포넌트에서 state 보관하기</summary>
+
+- 여러 개의 자식으로부터 데이터를 모으거나 두 개의 자식 컴포넌트들이 서로 통신하게 하려면 부모 컴포넌트에 공유 state를 정의해야 한다.
+- 부모 컴포넌트는 props를 사용하여 자식 컴포넌트에 state를 다시 전달할 수 있다.
+  - 이것은 자식 컴포넌트들이 서로 또는 부모 컴포넌트와 동기화하도록 만든다.
+
+```javascript
+// Board(부모 클래스)에 생성자를 추가하고 9개의 사각형에 해당하는 9개의 null 배열 초기 state로 설정
+export class Board extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+    };
+  }
+}
+
+// Sqaure 컴포넌트에 내려주는 Prop 값 변경해주기 
+renderSquare(i) {
+  return <Square value={this.state.squares[i]} />
+}
+
+// 
+```
+</details>
