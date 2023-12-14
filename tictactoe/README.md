@@ -104,3 +104,84 @@ function hello() {
 }
 ```
 </details>
+
+<details>
+<summary>Props를 통해 컴포넌트 간 데이터 전달하기</summary>
+
+### Props란?
+- Props란 Properties의 줄임말로 상속하는 부모 컴포넌트로부터 자녀 컴포넌트에 데이터 등을 전달하는 방법을 말한다.
+- Props는 읽기 전용(immutable)으로 자녀 컴포넌트 입장에서는 변하지 않는다.
+  - 변하게 하고자 하면 부모 컴포넌트에서 state를 변경시켜줘야 한다.
+
+- 부모 Board 컴포넌트에서 자식 Square 컴포넌트 prop을 전달
+```javascript
+// Board.js
+renderSquare(i) {
+    return <Sqaure value={i}/>
+}
+
+// Square.js
+export class Square extends Component {
+    render() {
+        return (
+            <button className="square">
+                {this.props.value}
+            </button>
+        )
+    }
+}
+```
+</details>
+
+<details>
+<summary>State 추가하기</summary>
+
+### React State란 무엇인가?
+- 컴포넌트의 랜더링 결과물에 영향을 주는 데이터를 갖고 있는 객체
+- State가 변경되면 컴포넌트는 리랜더링(Re-rendering)된다. 
+- 또한 State는 컴포넌트 안에서 관리된다.
+
+### Constructor
+- constructor(생성자)를 사용하면 인스턴스화된 객체에서 다른 메서드를 호출하기 전에 수행해야 하는 사용자 지정 초기화를 제공할 수 있다.
+- 아래 코드를 예시로 들면 클래스를 new를 붙여 (new User("John")) 인스턴스 객체로 생성하면 넘겨받은 인수와 함께 constructor가 먼저 실행된다.
+  - 이 때 넘겨받은 인수인 John이 this.name에 할당된다.
+```javascript
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+  sayHi() {
+    alert(this.name);
+  }
+}
+
+let user = new User("John");
+user.sayHi();
+```
+
+### TicTacToe State 사용해보기
+```javascript
+export class Square extends Component {
+  // State 생성  
+  constructor(props) {
+    super(props);
+    this.state = {
+      value:null,
+    };
+  }
+  
+  render() {
+    return (
+      <button className="square" onClick={() => this.setState({value:'X'})}> // State 변경하기
+        {this.state.value} // State 이용하기
+      </button>
+    )
+  }
+}
+```
+- React 컴포넌트는 생성자에 this.state를 설정하는 것으로 state를 가질 수 있다. 
+- this.state는 정의된 React 컴포넌트에 대해 비공개로 간주해야 한다.
+
+> ❗ 주의사항 <br>
+> JavaScript 클래스에서 하위 클래스의 생성자를 정의할 때 항상 super를 호출해야 한다. 모든 React 컴포넌트 클래스는 생성자를 가질 때 super(props) 호출 구문부터 작성해야 한다.
+</details>
