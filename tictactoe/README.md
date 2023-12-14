@@ -172,7 +172,7 @@ export class Square extends Component {
   
   render() {
     return (
-      <button className="square" onClick={() => { this.setState({value:'X'})}}> // State 변경하기
+      <button className="square" onClick={() => {this.setState({value:'X'})}}> // State 변경하기
         {this.state.value} // State 이용하기
       </button>
     )
@@ -184,4 +184,97 @@ export class Square extends Component {
 
 > ❗ 주의사항 <br>
 > JavaScript 클래스에서 하위 클래스의 생성자를 정의할 때 항상 super를 호출해야 한다. 모든 React 컴포넌트 클래스는 생성자를 가질 때 super(props) 호출 구문부터 작성해야 한다.
+</details>
+
+<details>
+<summary>super(props)란?</summary>
+
+### 자바스크립트에서 super
+- super 키워드는 자식 클래스 내에서 부모 클래스의 생성자를 호출할 때 사용
+- super 키워드는 자식 클래스 내에서 부모 클래스의 메소드를 호출할 때 사용
+
+```javascript
+class Car {
+  constructor(brand) {
+    this.carname = brand;
+  } // 부모 클래스의 생성자 호출
+  present() {
+    return "I have a " + this.carname;
+  } // 부모 클래스의 메소드 호출
+}
+
+class Model extends Car {
+  constructor(brand, mod) {
+    super(brand);
+    this.model = mod;
+  }
+  show() {
+    return super.present() + ', it is a ' + this.model;
+  }
+}
+
+let myCar = new Model("Ford", "Mustang");
+myCar.show();
+```
+
+### super 이후에 this 키워드
+- 새성자에서는 super 키워드 하나만 사용되거나 this 키워드가 사용되기 전에 호출되어야 한다.
+
+```javascript
+class Square extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { a: true };
+  }
+}
+```
+
+### super 이후에 this 키워드가 나와야 하는 이유
+- 아래 소스 코드와 같이 부모 클래스의 생성자를 호출 하기 전 this.name을 사용하려고 하면 문제가 되기 때문이다.
+- React에서 this.state를 생성자에서 정의할 때 super가 먼저와야 하는 이유도 이와 같다.
+```javascript
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+class PolitePerson extends Person {
+  constructor(name) {
+    this.greatColleagues(); // 여기서 문제가 발생
+    super(name);
+  }
+  greatColleagues() {
+    alert("My name is " + this.name + ", nice to meet you!");
+  }
+}
+```
+
+### React에서 Super에 props를 인자로 전달하는 이유
+- React.Component 객체가 생성될 때 props 속성을 초기화하기 위해 부모 컴포넌트에게 props를 전달
+- 생성자 내부에서도 this.props를 정상적으로 사용할 수 있도록 보장하기 위해
+
+```javascript
+class Component {
+  constructor(props) {
+    this.props = props;
+  }
+}
+
+class Button1 extends React.Component {
+  constructor(props) {
+    super();
+    console.log(props);
+    console.log(this.props);
+  }
+}
+
+class Button2 extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+    console.log(this.props);
+  }
+}
+```
 </details>
