@@ -263,7 +263,10 @@ class Component {
 
 class Button1 extends React.Component {
   constructor(props) {
-    super();
+    super(); // 이렇게 사용할 경우
+    // react에서 임의로 props를 할당
+    // 하지만 constructor 내부에서는 this.props를 사용할 수 없음
+    // 때문에 props를 넣어서 사용하는 것이 좋음
     console.log(props);
     console.log(this.props);
   }
