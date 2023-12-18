@@ -313,6 +313,81 @@ renderSquare(i) {
   return <Square value={this.state.squares[i]} />
 }
 
-// 
+// 내려받은 Props를 위한 Square 컴포넌트 변경
+export class Square extends Component {
+  render() {
+    return (
+      <button
+        className="square"
+        onClick={() => this.props.onClick()}>
+        {this.props.value}
+      </button>
+    )
+  }
+}
 ```
+
+### 현재 스퀘어 컴포넌트를 클릭할 때 발생하는 일들
+1. 내장된 DOM <button> 컴포넌트에 있는 onClick prop은 React에게 클릭 이벤트 리스너를 설정하라고 알려줌
+2. 버튼을 클릭하면 React는 Square의 render() 함수에 정의된 onClick 이벤틑 핸들러를 호출
+3. 이벤트 핸들러는 this.props.onClick()를 호출함. Square의 onClick prop은 Board에서 정의도었음.
+4. Board에서 Square로 onClick={() => this.handleClick(i)}를 전달했기 때문에 Square를 클릭하면 Board의 handleClick(i)를 호출함
+</details>
+
+<details>
+<summary>리액트 불변성 지키기</summary>
+
+### 리액트 불변성이란 무엇인가?
+- 불변성이란 사전적 의미로는 값이나 상태를 변경할 수 없는 것을 의미
+- 자세한 의미를 알아보기 위해 자바스크립트 타입을 통해서 알아보자
+
+### 자바스크립트 타입을 통한 불변성 의미 살펴보기
+- 원시 타입은 불변성(immutable)을 가지고 있고 참조 타입은 그렇지 않기 때문에(mutable) 둘을 비교하며 불변성의 의미를 더 자세히 알아보면
+  - 원시 타입 : Boolean, String, Number, null, undefined, Symbol(불변성)
+  - 참조 타입 : Object, Array
+  - 기본적으로 Javascript는 원시 타입에 대한 참조 및 값을 저장하기 위해 Call Stack 메모리 공간을 사용하지만 참조 타입의 경우 Heap이라는 별도의 메모리 공간을 사용함. 이 경우 Call Stack은 개체 및 배열 값이 아닌 메모리에만 Heap 메모리 참조 ID를 값으로 저장
+
+#### 한 눈에 보기(원시 / 참조 타입)
+- 원시 타입 : 고정된 크기로 Call Stack 메모리에 저장(실제 데이터가 변수에 할당)
+- 참조 타입 : 데이터 크기가 정해지지 않고 Call Stack 메모리에 저장(데이터의 값이 heap에 저장되며 변수에 heap 메모리의 주소값이 할당)
+
+```javascript
+/* 원시 타입
+아래와 같이 username water를 john으로 대체한 것이 아닌
+메모리 영역 a에 있는 water라는 값을 그대로 두고 메모리 영역 b에 john을 새로 할당한 것
+(이렇게 불변성을 가지고 있기 때문에 리액트에서 불변성을 위해서 따로 신경 써주지 않아도 된다.) */
+let username = "water"
+username = "john"
+
+/* 참조 타입
+아래와 같이 배열에 대한 요소를 추가하거나 객체 속성 값을 변경할 때
+Call Stack의 참조 ID는 동일하게 유지되고 Heap 메모리에서만 변경된다.
+(이렇게 불변성이 유지되지 않기 때문에 리액트에서 따로 신경을 써줘야 한다.) */
+let array = ['1', '2', '3']
+array = ['4', '5', '6']
+```
+
+### 불변성을 지켜야 하는 이유?
+1. 참조 타입에서 객체나 배열의 값이 변할 때 원본 데이터가 변경되기에 이 원본 데이터를 참조하고 있는 다른 객체에서 예상치 못한 오류가 발생할 수 있어 프로그래밍의 복잡도가 올라갈 수 있음
+2. 리액트에서 화면을 업데이트할 때 불변성을 지켜 값을 이전 값과 비교해서 변경된 사항을 확인 후 없데이트하기 때문에 불변성을 지켜줘야 함
+
+### 불변성을 지키는 방법은?
+- 참조 타입에서는 값을 바꿨을 때 Call Stack 주소 값은 같은데 Heap 메모리 값만 바꿔주기에 불변성을 유지할 수 없었으므로 아예 새로운 배열을 반환하는 메소드를 사용하면 된다.
+- spread operator, map, filter, slice, reduce
+- 원본 데이터를 변경하는 메소드 => splice, push
+
+```javascript
+const array = [1, 2, 3, 4];
+const sameArray = array;
+sameArray.push(5);
+
+console.log(array === sameArray); // true
+
+const array = [1, 2, 3, 4];
+const differentArray = [...array, 5];
+console.log(array !== differentArray); // false
+```
+- 불변성의 진짜 의미는?
+  - 메모리 영역에서 값이 변하지 않는다는 것!
+  - 원시 타입의 경우 새로운 value가 새로운 매모리 영역에 등록되게 된다.
 </details>
