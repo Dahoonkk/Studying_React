@@ -391,3 +391,218 @@ console.log(array !== differentArray); // false
   - 메모리 영역에서 값이 변하지 않는다는 것!
   - 원시 타입의 경우 새로운 value가 새로운 매모리 영역에 등록되게 된다.
 </details>
+
+<details>
+<summary>React Hooks란 무엇인가?</summary>
+
+### React Hooks는 무엇인가?
+- React Hooks는 ReactConf2018에서 발표된 class 없이 state를 사용할 수 있는 새로운 기능이다.
+
+### React Hooks가 필요한 이유?
+- React Hooks는 주로 Class Component로 사용되어온 React에서 느껴왔던 불편함이나 문제점들을 해결하기 위해 개발되었다.
+- 원래 React는 주로 Class Component를 사용하고 React Hooks는 Functional Component를 사용하는데 이를 비교해보면
+  - Class Component
+    - 더 많은 기능 제공
+    - 더 긴 코드
+    - 더 복잡한 코드
+    - 더딘 성능
+```javascript
+import React, { Component } from 'react'
+
+export default class Hello extends Component {
+  render() {
+    return (
+      <div>
+        Hello My Project!
+      </div>
+    )
+  }
+}
+```
+
+  - Functional Component
+    - 더 적은 기능 제공
+    - 짧은 코드
+    - 더 심플한 코드
+    - 더 빠른 성능
+```javascript
+import React from 'react'
+
+export default function Hello() {
+  return (
+    <div>
+      Hello My Project!
+    </div>
+  )
+}
+```
+### React 생명주기
+![React 생명주기](image.png)
+- 이러한 생명주기를 함수형 컴포넌트에서는 사용을 못했기 때문에 함수형 컴포넌트가 더 간결하고 빠르더라도 클래스형 컴포넌트를 사용해왔지만
+- React Hooks가 업데이트된 후부터 함수형 컴포넌트에서도 생명주기를 사용할 수 있게 되었고, 데이터를 가져오고 컴포넌트를 시작하자마자 API도 호출하고 많은 부분을 할 수 있게 되었다.
+
+```javascript
+// 기존 Class Component
+import React, { Component } from 'react'
+import Axios from 'axios'
+
+export default class Hello extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: "" };
+
+    componentDidMount() {
+      Axios.get('/api/user/name')
+        .then(response => {
+          this.setState({ name : response.data.name })
+        })
+    }
+
+    render() {
+      return (
+        <div>
+          My name is {this.state.name}
+        </div>
+      )
+    }
+  }
+}
+
+// React Hooks 등장 이후 Functional Component
+import React, { useEffect, useState } from 'react'
+import Axios from 'axios'
+
+export default function Hello() {
+  const [Name, setName] = useState("")
+
+  useEffect(() => {
+    Axios.get('/api/user/name')
+      .then(response => {
+        setName(response.data.name)
+      })
+  }, [])
+
+  return (
+    <div>
+      My name is {Name}
+    </div>
+  )
+}
+```
+
+### Hooks로 인한 또 다른 이점은?
+```javascript
+// Hooks 이전
+componentDidMount() {
+  // 컴포넌트가 마운트 되면 updateLists 함수를 호출
+  this.updateLists[this.props.id]
+}
+componentDidUpdate(prevProps) {
+  if(prevProps.id !== this.props.id) {
+    // updateLists 함수를 호출할 때
+    // 사용되는 id가 달라지면 다시 호출
+    this.updateLists(this.props.id)
+  }
+}
+// updateLists 함수 정의
+updateLists = (id) => {
+  fetchLists(id)
+    .then((lists) => this.setState({
+      lists
+    }))
+}
+
+// Hooks가 업데이트 된 후
+useEffect(() => {
+  fetchLists(id)
+    .then((repos) => {
+      setRepos(repos)
+    })
+}, [id])
+```
+- 위오 같이 선명하게 코드가 간결해진걸 확인할 수 있음
+- 그 이유는 Class Component에서는 생명주기를 이용할 때 componentDidMount와 componentDidUpdate 그리고 componentWillUnmount 이렇게 다르게 처리하지만 리액트 훅을 사용할 때는 useEffect 안에서 다 처리 해줄수 있기 때문이다.
+
+### Hooks로 인한 또 다른 장점
+- HOC 컴포넌트를 Custom React Hooks로 대체해서 너무나 많은 Wrapper 컴포넌트를 줄일 수 있게 된다.
+
+#### HOC(Higher Order Component)란?
+- 화면에서 재사용 가능한 로직만을 분리해서 component로 만들고, 재사용 불가능한 UI와 같은 다른 부분은 parameter로 받아서 처리하는 방법
+```javascript
+function usersHOC(Component) {
+  return class userHOC extends React.Component {
+    state = {
+      users: []
+    }
+
+    componentDidMount() {
+      fetchUsers()
+        .then(users => {
+          this.setState({ users })
+        })
+    }
+
+    render() {
+      return (
+        <Component
+          {...this.props}
+          {...this.state}
+        />
+      )
+    }
+  }
+}
+
+function Apage({users}) {
+  // ...
+}
+export default userHOC(Apage)
+
+function Bpage({users}) {
+  // ...
+}
+export default userHOC(Bpage)
+```
+- 위와 같이 유저 리스트를 가져오는 공통적인 부분은 HOC 컴포넌트에 넣어주고 그 HOC 컴포넌트로 각각의 컴포넌트를 감싸주면 모든 컴포넌트에 따로 인증을 위한 부분은 넣어주지 않아도 된다.
+- Hooks가 나오기 전에는 이러한 방법이 추천되었지만 너무나 많은 Wrapper 컴포넌트가 생길 수 있다는 문제가 있었다.(데이터 흐름을 파악하기 어려워짐)
+
+#### 이러한 문제를 해결하는 방법은? Customs Hooks
+```javascript
+function useAuth() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetchUsers().then(users => {
+      setUser(users);
+    });
+  }, []);
+
+  return [users];
+}
+
+function Apage() {
+  const [users] = useAuth();
+
+  return (
+    <div>
+      A 페이지
+      {users.map(({name, url}) => (
+        <div key={name}>
+          <p>{name}, {url}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+### ❗ Hooks 관련 문제들
+1. HOC란 무엇인가요?
+   - Higher Order Component의 약자로 컴포넌트를 인자로 받아서 새로운 리액트 컴포넌트를 리턴하는 함수입니다.
+2. 너무나 많은 HOC를 사용하게 되면 Wrapper가 너무 많아지게 되는데 그걸 Hooks에서는 어떻게 처리하나요?
+   - React Hooks에서는 HOC 대신 따로 Custom Hooks를 이용해서 컴포넌트를 만들어서 처리해줍니다. 그로인해 Wrapper가 많아지는 일을 방지할 수 있습니다.
+3. 생명주기를 위해 Hooks에서는 어떠한 api를 사용하나요?
+   - useEffect를 활용하여 처리해줍니다.
+4. Hooks에서 state을 업데이트 해주려면 어떻게 해야 하나요?
+   - state를 정의해줄 때 const [name, setName] = useState(""); 와 같이 해줍니다. 여기서 setName을 이용해서 state를 업데이트 시켜줄 수 있습니다.
+</details>
