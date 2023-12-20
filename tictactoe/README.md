@@ -683,3 +683,5 @@ console.log(arr2); // [3, 2, 1]
 - index도 0부터 시작하여 유니크한 값을 가지지만 만약 리스트가 추가되거나 제거되면(변경되면) 해당 리스트들의 key값도 바뀌게 된다.
 
 </details>
+
+![Alt text](image-2.png)
