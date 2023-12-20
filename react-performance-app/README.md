@@ -118,5 +118,101 @@ useEffect(() => {
 </details>
 <details>
 <summary>React.memo를 이용한 성능 최적화</summary>
+![Alt text](image-4.png)
+- 해당 설정을 사용할 경우 랜더링되는 부분을 하이라이팅해주어 바로 확인할 수 있다.
+
+### 현재 앱에서 B 컴포넌트의 문제점
+- 현재 B 컴포넌트는 B, List, ListItem, Message 컴포넌트로 나눠져 있다.
+- 이렇게 나눠준 이유는 재사용성을 위해서도 있지만 각 컴포넌트의 렌더링 최적화를 위해서 이기도 하다. 
+  - 예를 들어 input에서 글을 타이핑 할 때 원래는 Message 컴포넌트와 그 State 값을 가지고 있는 App 컴포넌트만 렌더링 되어야 하는데 현재는 상관이 없는 부분까지 렌더링되고 있다.
+
+### React.memo 적용으로 문제 해결
+- 위의 문제를 해결하기 위해 React.memo로 감싸주면 된다.
+```javascript
+import React from 'react'
+
+const Message = React.memo(({message}) => {
+    return (
+        <p>{message}</p>
+    )
+});
+
+const ListItem = React.memo(({post}) => {
+    return (
+        <li key={post.id}>
+            <p>{post.title}</p>
+        </li>
+    )
+});
+
+const List = React.memo(({posts}) => {
+    return (
+        <ul>
+            {posts.map(post => (
+                <ListItem key={post.id} post={post}/>
+            ))}
+        </ul>
+    )
+});
+
+const B = ({message, posts}) => {
+  return (
+    <div>
+        <h1>B Component</h1>
+        <Message message={message}/>
+        <List posts={posts}/>/
+    </div>
+  )
+}
+
+export default B
+```
+![Alt text](image-5.png)
+- React.memo 적용 결과 이 전과는 다르게 A 컴포넌트보다 B 컴포넌트가 랜더링 속도가 빨라진 것을 볼 수 있음
+
+### React.memo()란?
+- React는 먼저 컴포넌트를 렌더링한 후 이전에 렌더링 된 결과와 비교하여 DOM 업데이트를 결정한다.
+- 만약 렌더링 결과가 이전과 다르다면, React는 DOM을 업데이트한다.
+- 이 과정에서 만약 컴포넌트가 React.memo()로 둘러 쌓여 있다면, React는 컴포넌트를 렌더링하고 결과를 메모이징(Memoizing)한다.
+- 그리고 다음 렌더링이 일어날 때 렌더링하는 컴포넌트의 props가 같다면, React는 메모이징(Memoizing)된 내용을 재사용한다.
+  - props가 같다면 결과 값이 같은 것이기 때문에 굳이 다시 만들지 않고 재사용한다.
+
+#### 메모이제이션(Memoization)이란?
+- 메모이제이션은 주어진 입력값에 대한 결과를 저장함으로써 같은 입력값에 대해 함수가 한 번만 실행되는 것을 보장한다.
+- 처음 렌더링할 때 결과를 메모이징 하고 다음 렌더링 시 props가 같기 때문에 메모이징 된 내용을 재사용한다.
+
+### React.memo가 props를 비교하는 방법은?
+- React.memo()는 props 혹은 props의 객체를 비교할 때 얕은(shallow)비교를 한다.
+
+### React.memo props 비교 방식 수정하기
+- 비교 방식을 원하는 대로 수정하고 싶다면 React.memo()의 두 번째 매개변수로 비교함수를 넣어주면 된다.
+```javascript
+// Example
+React.memo(Component, [compareFunction(prevProps, nextProps)]);
+
+function compareFunction(prevProps, nextProps) {
+    return (
+        prevProps.a === nextProps.a && prevProps.b === nextProps.b
+    )
+}
+```
+
+### React.memo 사용을 지양해야 하는 상황
+- 렌더링 될 때 props가 다른 경우가 대부분인 컴포넌트를 생각해보면 메모이제이션 기법의 이점을 얻기 힘들다.
+- props가 자주 변하는 컴포넌트를 React.memo()로 래핑 할지라도, React는 두 가지 작업을 리 렌더링 할 때마다 수행하게 된다.
+  - 이전 props와 다음 props의 동등 비교를 위해 비교 함수를 수행
+  - 비교 함수는 거의 항상 false를 반환할 것이기 때문에, React는 이전 렌더링 내용과 다음 렌더링 내용을 비교
+  - 비교 함수의 결과는 대부분 false를 반환하기에 props 비교는 불필요하게 된다.
+
+### React.memo()는 리 렌더링을 막기 위한 도구보다 성능 개선의 도구
+- React에서는 성능 개선을 위한 하나의 도구로 메모이제이션을 사용한다.
+- 대부분의 상황에서 React는 메모이징 된 컴포넌트의 리 렌더링을 피할 수 있지만, 렌더링을 막기 위해 메모이제이션에 너무 의존하면 안된다.(버그 유발 가능성이 있음)
+
+### 결론
+- 리액트에서 렌더링 성능 최적화를 위해선 React 컴포넌트를 분리하며, React.memo를 사용하면 된다. 또한 React.memo 사용은 항상 좋은 것은 아니기에 profiler를 이용해서 성능상 이점이 있는지 확인 후 사용하는 것이 좋다.
+
+</details>
+<details>
+<summary>얕은 비교</summary>
 
 </details>
