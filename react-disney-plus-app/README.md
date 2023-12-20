@@ -41,3 +41,21 @@ export default instance;
 ```
 
 </details>
+<details>
+<summary>Styled Component에 대해 알아보기</summary>
+
+### Styled Component란?
+
+- Styled Component란 Css-in-JS라고 하는 Javascript 파일 안에서 CSS를 처리할 수 있게 해주는 대표적인 라이브러리이다.
+
+#### 설치 방법
+
+```bash
+# with npm
+npm install --save styled-components
+
+# with yarn
+yarn add styled-components
+```
+
+</details>
