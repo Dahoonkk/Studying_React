@@ -100,3 +100,22 @@ yarn add styled-components
 ![Alt text](image-1.png)
 
  </details>
+<details>
+<summary>미디어 쿼리</summary>
+
+- 미디어 쿼리는 화면 해상도, 기기 방향 등의 조건으로 HTML에 적용하는 스타일을 전환할 수 있는 CSS3의 속성 중 하나이다.
+- 반응형 웹 디자인에서는 미디어 쿼리를 사용해 적용하는 스타일을 기기마다(화면 크기마다) 저노한할 수 있다.
+
+```css
+@media(조건) {
+    스타일
+}
+```
+
+</details>
+<details>
+<summary>IFrame</summary>
+
+- 아이프레임은 HTML Inline Frame 요소이며 inline frame의 약자이다.
+- 효과적으로 다른 HTML 페이지를 현재 페이지에 포함시키는 중첩된 브라우저로 iframe 요소를 이용하면 해당 웹 페이지 안에 어떠한 제한 없이 다른 페이지를 불러와서 삽입 할 수 있다.
+</details>

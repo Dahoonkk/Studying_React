@@ -45,11 +45,13 @@ const Nav = () => {
   }, []);
   return (
     <NavWrapper show={show}>
-      <img
-        alt="Disney Plus Logo"
-        src="../../public/images/logo.svg "
-        onClick={() => (window.location.href = "/")}
-      />
+      <Logo>
+        <img
+          alt="Disney Plus Logo"
+          src="/images/logo.svg"
+          onClick={() => (window.location.href = "/")}
+        />
+      </Logo>
     </NavWrapper>
   );
 };
