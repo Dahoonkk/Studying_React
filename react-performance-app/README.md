@@ -118,6 +118,7 @@ useEffect(() => {
 </details>
 <details>
 <summary>React.memo를 이용한 성능 최적화</summary>
+
 ![Alt text](image-4.png)
 - 해당 설정을 사용할 경우 랜더링되는 부분을 하이라이팅해주어 바로 확인할 수 있다.
 
