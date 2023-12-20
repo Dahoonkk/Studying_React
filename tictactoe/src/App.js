@@ -31,7 +31,7 @@ function App() {
     return null;
   };
 
-  const current = history(history.length - 1);
+  const current = history[history.length - 1];
   const winner = calculateWinner(current.squares);
 
   let status;
