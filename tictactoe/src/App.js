@@ -5,6 +5,7 @@ import Board from "./components/Board";
 function App() {
   const [history, setHistory] = useState([{ squares: Array(9).fill(null) }]);
   const [xIsNext, setXisNext] = useState(true);
+  const [stepNumber, setStepNumber] = useState(0);
 
   const calculateWinner = (squares) => {
     const lines = [
@@ -31,7 +32,7 @@ function App() {
     return null;
   };
 
-  const current = history[history.length - 1];
+  const current = history[stepNumber];
   const winner = calculateWinner(current.squares);
 
   let status;
@@ -42,14 +43,33 @@ function App() {
   }
 
   const handleClick = (i) => {
-    const newSquares = current.squares.slice();
+    const newHistory = history.slice(0, stepNumber + 1);
+    const newCurrent = newHistory[newHistory.length - 1];
+    const newSquares = newCurrent.squares.slice();
     if (calculateWinner(newSquares) || newSquares[i]) {
       return;
     }
 
     newSquares[i] = xIsNext ? "X" : "O";
-    setHistory([...history, { squares: newSquares }]);
+    setHistory([...newHistory, { squares: newSquares }]);
     setXisNext((prev) => !prev);
+
+    setStepNumber(newHistory.length);
+  };
+
+  const moves = history.map((step, move) => {
+    const desc = move ? 
+    `Go to move #${move}` :'Go to game start';
+    return (
+      <li key={move}>
+        <button className="move-button" onClick={() => jumpTo(move)}>{desc}</button>
+      </li>
+    )
+  });
+
+  const jumpTo = (step) => {
+    setStepNumber(step);
+    setXisNext((step % 2) === 0);
   };
 
   return (
@@ -59,6 +79,7 @@ function App() {
       </div>
       <div className="game-info">
         <div className="status">{status}</div>
+        <ol style={{ listStyle : 'none' }}>{moves}</ol>
       </div>
     </div>
   );
