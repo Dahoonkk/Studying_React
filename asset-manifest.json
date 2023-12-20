@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Studying_React/tictactoe/static/css/main.e78e0bb3.css",
-    "main.js": "/Studying_React/tictactoe/static/js/main.77f5e2a4.js",
-    "static/js/787.32b887b6.chunk.js": "/Studying_React/tictactoe/static/js/787.32b887b6.chunk.js",
-    "index.html": "/Studying_React/tictactoe/index.html",
-    "main.e78e0bb3.css.map": "/Studying_React/tictactoe/static/css/main.e78e0bb3.css.map",
-    "main.77f5e2a4.js.map": "/Studying_React/tictactoe/static/js/main.77f5e2a4.js.map",
-    "787.32b887b6.chunk.js.map": "/Studying_React/tictactoe/static/js/787.32b887b6.chunk.js.map"
+    "main.css": "/Studying_React/static/css/main.e78e0bb3.css",
+    "main.js": "/Studying_React/static/js/main.13ca8015.js",
+    "static/js/787.32b887b6.chunk.js": "/Studying_React/static/js/787.32b887b6.chunk.js",
+    "index.html": "/Studying_React/index.html",
+    "main.e78e0bb3.css.map": "/Studying_React/static/css/main.e78e0bb3.css.map",
+    "main.13ca8015.js.map": "/Studying_React/static/js/main.13ca8015.js.map",
+    "787.32b887b6.chunk.js.map": "/Studying_React/static/js/787.32b887b6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e78e0bb3.css",
-    "static/js/main.77f5e2a4.js"
+    "static/js/main.13ca8015.js"
   ]
 }
