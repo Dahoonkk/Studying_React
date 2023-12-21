@@ -483,3 +483,64 @@ export const useDebounce = (value, delay) => {
 ```
 
 </details>
+
+<details>
+<summary>모달 창 외부 클릭 시 모달 닫게 만드는 Custom Hooks</summary>
+
+### How to 모달 창 외부 -> 클릭 -> 모달 창 닫기
+
+1. 어디를 클릭하는지 구분(모달 창 안 or 밖)
+   - useRef 라는 것을 이용해서 구분할 수 있다.
+     - 특정 DOM을 선택할 때 사용하는 React Hooks
+       - 보통 Javascript에서는 getElementById, querySelector 같은 DOM Selector 함수를 사용해서 DOM을 선택
+       - 리액트에서는 ref라는 것을 이용해서 DOM을 선택
+         - 클래스 컴포넌트 : React.createRef
+         - 함수형 컴포넌트 : useRef
+
+```javascript
+// 클래스형 컴포넌트 : React.createRef
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+  render() {
+    return <div ref={this.myRef} />;
+  }
+}
+
+// 함수형 컴포넌트 : useRef
+function MyComponent {
+  const myRef = useRef(null);
+  return (
+    <div ref={myRef}/>
+  );
+}
+```
+
+2. react hooks 생성
+3. 모달 창 바깥을 클릭하면 Callback 함수를 호출하는 Event를 등록해주기
+4. Callback 함수 안에서 모달 닫아주기
+
+#### Dom을 직접 선택해야 할 경우들
+
+1. 엘리먼트 크기를 가져와야 할 때
+2. 스크롤바 위치를 가져와야 할 때
+3. 엘리먼트에 포커스를 설정 해줘야 할 때 등등
+
+### useRef 사용법
+
+- useRef()를 이용해서 Ref 객체를 만들고, 이 객체를 특정 DOM에 ref 값으로 설정한다.
+- 이렇게 되면 Ref rorcpdml .current 값이 특정 DOM을 가리키게 된다.
+
+```javascript
+const ref = useRef();
+
+<div className="presentation">
+  <div className="wrapper-modal">
+    <div className="modal" ref={ref} />
+  </div>
+</div>;
+```
+
+</details>
