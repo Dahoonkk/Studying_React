@@ -126,14 +126,8 @@ yarn add styled-components
 - 스타일 변경 시 부드럽게 전환하게 한다.(흔히 호버링할 때 사용)
 - 선택자가 변환되는 것을 시간의 흐름을 줘서 변화시키는 속성
 - transition: 속성 시간 속도 지연시간;
-  - 속도 부분의 속성 값들
-    - ease : 기본값, 느리게 시작한 다음 빠르게 전환한 다음 천천히 종료
-    - linear : 처음부터 끝까지 같은 속도로 전환
-    - ease-in : 가속, 느린 시작으로 빠른 끝, 느린 느낌을 받을 수 있다.
-    - ease-out : 감속, 빠른 시작으로 느린 끝, 빠른 느낌을 받을 수 있다.
-    - ease-in-out : 느린 시작과 느린 끝으로 전환 효과 지정
-    - cubic-bezier(n, n, n, n) : 3차 베지어 함수에서 자신의 값을 임의적으로 정함
-</details>
+  - 속도 부분의 속성 값들 - ease : 기본값, 느리게 시작한 다음 빠르게 전환한 다음 천천히 종료 - linear : 처음부터 끝까지 같은 속도로 전환 - ease-in : 가속, 느린 시작으로 빠른 끝, 느린 느낌을 받을 수 있다. - ease-out : 감속, 빠른 시작으로 느린 끝, 빠른 느낌을 받을 수 있다. - ease-in-out : 느린 시작과 느린 끝으로 전환 효과 지정 - cubic-bezier(n, n, n, n) : 3차 베지어 함수에서 자신의 값을 임의적으로 정함
+  </details>
 
 <details>
 <summary>Grid CSS</summary>
@@ -142,19 +136,24 @@ yarn add styled-components
 - 이에 비해 Css Crid는 2차원(행과 열) 레이아웃 시스템을 제고함(god Row와 열 Column을 같이)
   - gap
   - gid-template-column : 공백으로 구분된 값 목록으로 그리드의 열과 행을 정의. 값은 트랙 크기를 나타내고 그 사이의 공간은 grid line 격자선을 나타냄
+
 ```css
 .container {
-  grid-template-columns : 48px 50px auto 50px 40px;
+  grid-template-columns: 48px 50px auto 50px 40px;
   // auto : 남은 부분을 동적으로 차지함
 }
 ```
-  - repeat : 행이나 열을 특정 px만큼 반복
+
+- repeat : 행이나 열을 특정 px만큼 반복
+
 ```css
 .container {
   grid-template-columns: repeat(5, 10px);
 }
 ```
-  - fr : fraction의 약자. 1fr은 사용 가능한 공간의 1 부분을 의미함(사용 가능한 공간에 대한 비율)
+
+- fr : fraction의 약자. 1fr은 사용 가능한 공간의 1 부분을 의미함(사용 가능한 공간에 대한 비율)
+
 ```css
 .container {
   grid-template-columns: repeat(5, 1fr);
@@ -166,6 +165,7 @@ yarn add styled-components
   // 300 80 210 210 픽셀을 가져가게 됨
 }
 ```
+
 </details>
 
 <details>
@@ -178,7 +178,6 @@ yarn add styled-components
   - initial : 기본값으로 설정한다.
   - inherit : 부모 요소의 속성 값을 상속받는다.
 
-
 </details>
 
 <details>
@@ -188,8 +187,8 @@ yarn add styled-components
 - CSS 애니메이션을 사용하려면 먼저 애니메이션에 대한 몇 가지 키프레임 keyframes을 지정해야 한다.
 - 키프레임(keyframe)은 특정 시간에 요소의 스타일을 유지한다.
 
-
 #### animation 속성 값
+
 - animation-name : @keyframes 애니메이션의 이름을 지정한다.
 - animation-duration : 애니메이션이 한 주기를 완료하는 데 걸리는 시간을 지정한다.
 - animation-timing-function : 애니메이션의 속도 곡선을 지정한다.(ex. linear, ease, ease-in...)
@@ -201,4 +200,247 @@ yarn add styled-components
   - alternate : 애니메이션이 먼저 앞으로 재생된 다음 뒤로 재생된다.
   - alternate-reverse : 애니메이션이 먼저 뒤로 재생된 다음 앞으로 재생된다.
 - animation : 모든 애니메이션 속성을 설정하기 위한 약식 속성
+</details>
+
+<details>
+<summary>React Router Dom</summary>
+
+### React Router Dom이란?
+
+- React Router Dom을 사용하면 웹 앱에서 동적 라우팅을 구현할 수 있다.
+- 라우팅이 실행 중인 앱 외부의 구성에서 처리되는 기존 라우팅 아키텍처와 달리 React Router Dom은 앱 및 플랫폼의 요구 사항에 따라 컴포넌트 기반 라윙을 용이하게 한다.
+
+### Single page Application(SPA)
+
+- 리액트는 SPA이기 때문에 하나의 index.html 탬플릿 파일을 가지고 있다.
+- 이 하나의 템플릿에 자바스크립트를 이용해서 다른 컴포넌트를 이 index.html 템플릿에 넣으므로 페이지를 변경해주게 된다.
+- 이때 이 React Router Dom 라이브러리가 새 컴포넌트로 라우팅/탐색을 하고 렌더링하는데 도움을 주게 된다.
+
+#### React Router Dom 설치하기
+
+```bash
+# npm
+npm install react-router-dom --save
+
+# yarn
+yarn add react-router-dom
+```
+
+#### React Router 설정하기
+
+- 설치가 완료된 후 가장 먼저 할 일은 앱 어디에서나 React Router를 사용할 수 있도록 하는 것
+- 이렇게 하려면 src 폴더에서 index.js 파일을 열고 react-router-dom에서 BrowserRouter를 가져온 다음 루트 구성요소(App 구성 요소)를 그 안에 래핑한다.
+
+```javascript
+// 기존
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+  document.getElementById('root')
+);
+
+// BrowserRouter 적용
+import { BrowserRouter } from 'react-router-dom';
+
+ReactDOM.render(
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>
+    document.getElementById('root')
+);
+```
+
+- BrowserRouter : HTML5 History API(pushState, replaceState 및 popstate 이벤트)를 사용하여 UI를 URL과 동기화된 상태로 유지해준다.
+
+#### 여러 컴포넌트 생성 및 라우트 정의학
+
+```javascript
+function App() {
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+      </Routes>
+    </div>
+  );
+}
+```
+
+- Routes : 앱에서 생성될 모든 개별 경로에 대한 컨테이너/상위 역할을 한다. Route로 생성된 자식 컴포넌트 중에서 매칭되는 첫번째 Route를 렌더링 해줌
+- Route : 단일 경로를 만드는 데 사용됨. 두 가지 속성을 취합한다.
+  - path : 원하는 컴포넌트의 URL 경로를 지정. 이 경로 이름을 원하는 대로 정할 수 있다. 위에서 첫 번째 경로 이름이 백슬래시(/)임을 알 수 있다. 경로 이름이 백슬래시인 커모넌트는 앱이 처음 로드되리 때마다 먼저 렌더링된다. 이는 홈 구성 요소가 렌더링되는 첫 번째 구송 요소가 됨을 의미한다.
+  - element : 경로에 맞게 렌더링되어야 하는 컴포넌트를 지정한다.
+
+#### <Link />를 이용해 경로를 이동하기
+
+```javascript
+import { Link } from "react-router-dom";
+
+function Home() {
+  return (
+    <div>
+      <h1>홈페이지</h1>
+      <Link to="about">About 페이지를 보여주기</Link>
+      <Link to="contact">Contact 페이지를 보여주기</Link>
+    </div>
+  );
+}
+
+export default Home;
+```
+
+- Link 구성 요소는 HTML의 앵커 요소(<a/>)와 유사하다. 그것의 to 속성은 링크가 당신을 데려가는 경로를 지정한다.
+- 앱 구성 요소에 나열된 경로 이름을 생성했기 때문에 링크를 클릭하면 경로를 살펴보고 해당 경로 이름으로 구성 요소를 렌더링한다.
+</details>
+
+<details>
+<summary>React Router Dom APIs</summary>
+
+### 중첩 라우팅(Nested Routing)
+
+- React Router의 가장 강력한 기능 중 하나이므로 복잡한 레이아웃 코드를 어지럽힐 필요가 없다.
+- 대부분의 레이아웃은 URL의 세그먼트에 연결되며 React Router는 이를 완전히 수용한다.
+
+```javascript
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<App />}>
+      {/* localhost:3000/ 경로 => Home 컴포넌트 */}
+      <Route index element={<Hoome />} />
+      {/* localhost:3000/teams 경로 => Teams 컴포넌트가 Layout */}
+      <Route path="teams" element={<Teams />}>
+        {/* localhost:3000/teams/26 경로 => Team 컴포넌트 */}
+        <Route path=":teamId" element={<Team />} />
+      </Route>
+    </Route>
+  </Routes>
+</BrowserRouter>
+```
+
+### Outlet
+
+- 자식 경로 요소를 렌더링하려면 부모 경로 요소에서 <Outlet>을 사용해야 한다.
+- 이렇게 하면 하위 경로가 렌더링될 때 중첩된 UI가 표시될 수 있다.
+- 부모 라우트가 정확히 일치하면 자식 인덱스 라우트를 렌더링하거나 인덱스 라우트가 없으면 아무것도 렌더링하지 않는다.
+- react-router-dom에서 가져와서 사용한다.
+
+```javascript
+function App() {
+  return (
+    <div>
+      <h1>Welcome to the app!</h1>
+      <nav>
+        <Link to="/">Home</Link> | <Link to="teams">Teams</Link>
+      </nav>
+      <div className="content">
+        <Outlet />
+      </div>
+    </div>
+  );
+}
+```
+
+### useNavigate
+
+- 경로를 바꿔준다.
+- navigate('/home') ===> localhost:3000/home으로 간다.
+
+```javascript
+import { useNavigate } from "react-router-dom";
+
+function SignupForm() {
+  let navigate = useNavigate();
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await submitForm(event.target);
+    navigate("../success", { replace: true });
+  }
+
+  return <form onSubmit={handleSubmit}>{/*...*/}</form>;
+}
+```
+
+### useParams
+
+- :style 문법을 path 경로에 사용하였다면 useParams()로 읽을 수 있다.
+- 아래는 :invoiceId가 무엇인지 알기위해 useParams를 사용했다.
+
+```javascript
+import { Routes, Route, useParams } from "react-router-dom";
+
+function App() {
+  return (
+    <Routes>
+      <Route path="invoices/:invoiceId" element={<Invoice />} />
+    </Routes>
+  );
+}
+
+function Invoice() {
+  let params = useParams();
+  return <h1>Invoice {params.invoiceId}</h1>;
+}
+```
+
+### useLocation
+
+- 현재 위치 객체를 반환한다.
+- 이것은 현재 위치가 변경될 때마다 일부 side effect를 수행하려는 경우에 유용할 수 있다.
+
+```javascript
+import * as React from "react";
+import { useLocation } from "react-router-dom";
+
+function App() {
+    let location = useLocation();
+
+    React.useEffect(() => {
+        ga('send', 'pageView');
+    }, [location]);
+
+    return (
+        // ...
+    );
+}
+```
+
+### useRoutes
+
+- <Routes>와 기능적으로 동일하지만 <Route>요소 대신 JavaScript 객체를 사욧ㅇ하여 경로를 정의한다.
+- 이러한 객체는 일반 <Route> 요소와 동일한 속성을 갖지만 JSX가 필요하지 않다.
+
+```javascript
+import * as React from "react";
+import { useRoutes } from "react-router-dom";
+
+function App() {
+  let element = useRoutes([
+    {
+      path: "/",
+      element: <Dashboard />,
+      children: [
+        {
+          path: "messages",
+          element: <DashboardMessages />,
+        },
+        {
+          path: "tasks",
+          element: <DashboardTasks />,
+        },
+      ],
+    },
+    {
+      path: "team",
+      element: <AboutPage />,
+    },
+  ]);
+
+  return element;
+}
+```
+
 </details>
