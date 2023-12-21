@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "../api/axios";
 import { useEffect } from "react";
 import { useCallback } from "react";
+import "./Row.css";
 
 const Row = ({ title, id, fetchUrl }) => {
   const [movies, setMovies] = useState([]);
@@ -36,7 +37,7 @@ const Row = ({ title, id, fetchUrl }) => {
             />
           ))}
         </div>
-        <div className='slider_-arrow-right'>
+        <div className='slider__arrow-right'>
           <span className='arrow'>
             {">"}
           </span>
