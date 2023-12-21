@@ -444,3 +444,42 @@ function App() {
 ```
 
 </details>
+
+<details>
+<summary>useDebounce Custom Hooks 만들기</summary>
+
+### Debounce가 무엇인가?
+
+- 검색 입력에 값을 입력할 때 입력 결과가 나타날 때까지 지연이 있다.
+- 이 기능은 debounce라는 Function에 의해 제어된다.
+- debounce function 은 사용자가 미리 결정된 시간 동안 타이핑을 멈출 때까지 keyup 이벤트의 처리를 지연시킨다.
+- 이렇게 하면 UI 코드가 모든 이벤트를 처리할 필요가 없고 서버로 전송되는 API 호출 수도 크게 줄어든다.
+  - 입력된 모든 문자를 처리하면 성능이 저하되고 백엔드에 불필요한 로드가 추가될 수 있다.
+
+#### useDebounce Custom Hooks 적용해보기
+
+1. hooks 폴더 및 파일 생성
+   ![Alt text](image-2.png)
+2. useDebounce Hooks 생성
+
+```javascript
+import { useState, useEffect } from "react";
+
+export const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+};
+```
+
+</details>
