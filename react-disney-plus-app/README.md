@@ -134,3 +134,36 @@ yarn add styled-components
     - ease-in-out : 느린 시작과 느린 끝으로 전환 효과 지정
     - cubic-bezier(n, n, n, n) : 3차 베지어 함수에서 자신의 값을 임의적으로 정함
 </details>
+
+<details>
+<summary>Grid CSS</summary>
+
+- Flexible Box는 단순한 1차원 레이아웃을 제공(행 Row 또는 열 Column 하나씩)
+- 이에 비해 Css Crid는 2차원(행과 열) 레이아웃 시스템을 제고함(god Row와 열 Column을 같이)
+  - gap
+  - gid-template-column : 공백으로 구분된 값 목록으로 그리드의 열과 행을 정의. 값은 트랙 크기를 나타내고 그 사이의 공간은 grid line 격자선을 나타냄
+```css
+.container {
+  grid-template-columns : 48px 50px auto 50px 40px;
+  // auto : 남은 부분을 동적으로 차지함
+}
+```
+  - repeat : 행이나 열을 특정 px만큼 반복
+```css
+.container {
+  grid-template-columns: repeat(5, 10px);
+}
+```
+  - fr : fraction의 약자. 1fr은 사용 가능한 공간의 1 부분을 의미함(사용 가능한 공간에 대한 비율)
+```css
+.container {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.container {
+  width: 800px
+  grid-template-columns: 300px 10% 1fr 1fr;
+  // 300 80 210 210 픽셀을 가져가게 됨
+}
+```
+</details>
