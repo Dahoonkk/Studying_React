@@ -14,7 +14,7 @@ const MovieModal = ({
   return (
     <div className="presentation" role="presentation">
       <div className="wrapper-modal">
-        <div className='modal'>
+        <div className="modal">
           <span onClick={() => setModalOpen(false)} className="modal-close">
             X
           </span>
@@ -29,7 +29,7 @@ const MovieModal = ({
               {release_date ? release_date : first_air_date}
             </p>
             <h2 className="modal__title">{title ? title : name}</h2>
-            <p className="modal__overview">평점: {vote_average}</p>
+            <p className="modal__overview">평점: {vote_average.toFixed(1)}</p>
             <p className="modal__overview">{overview}</p>
           </div>
         </div>
