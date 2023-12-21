@@ -180,3 +180,25 @@ yarn add styled-components
 
 
 </details>
+
+<details>
+<summary>animation CSS</summary>
+
+- 애니메이션을 사용하려면 요소를 한 스타일에서 다른 스타일로 점진적으로 변경할 수 있다.
+- CSS 애니메이션을 사용하려면 먼저 애니메이션에 대한 몇 가지 키프레임 keyframes을 지정해야 한다.
+- 키프레임(keyframe)은 특정 시간에 요소의 스타일을 유지한다.
+
+
+#### animation 속성 값
+- animation-name : @keyframes 애니메이션의 이름을 지정한다.
+- animation-duration : 애니메이션이 한 주기를 완료하는 데 걸리는 시간을 지정한다.
+- animation-timing-function : 애니메이션의 속도 곡선을 지정한다.(ex. linear, ease, ease-in...)
+- animation-delay : 애니메이션 시작 지연을 지정한다.
+- animation-iteration-count : 애니메이션을 재생해야 하는 횟수를 지정한다.
+- animation-direction : 애니메이션을 앞으로, 뒤로 또는 번갈아 재생해야 하는지 여부를 지정한다.(ex. normal, alternate, reverse...)
+  - normal : 기본값. 애니메이션이 정상적으로 재생된다.(forwards)
+  - reverse : 애니메이션이 역방향으로 재생된다.(backwards)
+  - alternate : 애니메이션이 먼저 앞으로 재생된 다음 뒤로 재생된다.
+  - alternate-reverse : 애니메이션이 먼저 뒤로 재생된 다음 앞으로 재생된다.
+- animation : 모든 애니메이션 속성을 설정하기 위한 약식 속성
+</details>
