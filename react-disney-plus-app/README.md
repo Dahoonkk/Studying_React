@@ -531,7 +531,7 @@ function MyComponent {
 ### useRef 사용법
 
 - useRef()를 이용해서 Ref 객체를 만들고, 이 객체를 특정 DOM에 ref 값으로 설정한다.
-- 이렇게 되면 Ref rorcpdml .current 값이 특정 DOM을 가리키게 된다.
+- 이렇게 되면 Ref 객체는 .current 값이 특정 DOM을 가리키게 된다.
 
 ```javascript
 const ref = useRef();
@@ -541,6 +541,18 @@ const ref = useRef();
     <div className="modal" ref={ref} />
   </div>
 </div>;
+```
+
+</details>
+
+<details>
+<summary>swiper 모듈을 이용한 터치 슬라이드 구현하기</summary>
+
+### Swiper 설치하기
+
+```bash
+# npm
+npm install swiper --save
 ```
 
 </details>
