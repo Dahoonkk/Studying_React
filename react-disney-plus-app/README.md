@@ -119,3 +119,18 @@ yarn add styled-components
 - 아이프레임은 HTML Inline Frame 요소이며 inline frame의 약자이다.
 - 효과적으로 다른 HTML 페이지를 현재 페이지에 포함시키는 중첩된 브라우저로 iframe 요소를 이용하면 해당 웹 페이지 안에 어떠한 제한 없이 다른 페이지를 불러와서 삽입 할 수 있다.
 </details>
+
+<details>
+<summary>transition 속성</summary>
+
+- 스타일 변경 시 부드럽게 전환하게 한다.(흔히 호버링할 때 사용)
+- 선택자가 변환되는 것을 시간의 흐름을 줘서 변화시키는 속성
+- transition: 속성 시간 속도 지연시간;
+  - 속도 부분의 속성 값들
+    - ease : 기본값, 느리게 시작한 다음 빠르게 전환한 다음 천천히 종료
+    - linear : 처음부터 끝까지 같은 속도로 전환
+    - ease-in : 가속, 느린 시작으로 빠른 끝, 느린 느낌을 받을 수 있다.
+    - ease-out : 감속, 빠른 시작으로 느린 끝, 빠른 느낌을 받을 수 있다.
+    - ease-in-out : 느린 시작과 느린 끝으로 전환 효과 지정
+    - cubic-bezier(n, n, n, n) : 3차 베지어 함수에서 자신의 값을 임의적으로 정함
+</details>
