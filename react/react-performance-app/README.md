@@ -1,4 +1,4 @@
-# 리액트 앱 성틍 개선하는 방법
+# 리액트 앱 성능 개선하는 방법
 
 <details>
 <summary>React Profiler</summary>
