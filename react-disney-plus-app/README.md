@@ -556,3 +556,14 @@ npm install swiper --save
 ```
 
 </details>
+
+<details>
+<summary>localStorage에 userData 담기</summary>
+
+- localStorage에 userData 값을 담아서 페이지를 refresh 해도 userData가 계속 남아 있을 수 있게 할 수 있다.
+
+### local storage를 사용해서 데이터를 저장하기
+[localStorage](https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage)
+
+
+</details>
