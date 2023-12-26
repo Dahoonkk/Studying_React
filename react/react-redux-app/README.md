@@ -173,3 +173,31 @@ ReactDOM.render(
 )
 ```
 </details>
+
+<details>
+<summary>useSelector & useDispatch</summary>
+
+### Provider로 둘러 쌓인 컴포넌트에서 store 접근하는 방법
+- 리액트에 Hooks가 있듯이 리덕스에도 Hooks가 있다.
+  - 그것이 바로 useSelector와 useDispatch이다.
+  - 이 두개를 이용해서 provider로 둘러싸인 컴포넌트에서 store에 접근 가능하다.
+
+### useSelector
+- useSelector Hooks를 이용해서 스토어의 값을 가져올 수 있다.
+```typescript
+const result:any = useSelector(selector: Function, equalityFn?: Function)
+
+// Example
+const counter = useSelector((state) => state.counter)
+```
+
+### useDispatch
+- store에 있는 dispatch 함수에 접근하는 hooks이다.
+```typescript
+const addTodo = (e: React.FormEvent<HTMLFormElement>) : void => {
+  e.preventDefault();
+  dispatch({ type: 'ADD_TODO', text: todoValue })
+  setTodoValue("");
+}
+```
+</details>
