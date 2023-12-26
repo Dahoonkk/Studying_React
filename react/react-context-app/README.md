@@ -157,3 +157,26 @@ function ThemedButton() {
 - 2 : context value를 공유하기 원하는 Component를 Context.Provider로 감싸주기, 또한 공유하기 원하는 value를 value props으로 전달하기
 - 3 : 해당 컴포넌트에서 context value를 사용하기 위해 useContext hook을 이용해주기
 </details>
+
+<details>
+<summary>Context를 사용해서 데이터 제공하기</summary>
+
+- 이번 프로젝트에서 Context를 사용해서 해야할 일
+  1. 어떠한 컴포넌트에서 총 가격을 Update해주는 것
+  2. 어떠한 컴포넌트에서 총 가격을 보여주는 것
+
+#### Context를 사용하는 방법
+1. Context를 생성
+  - react 제공 (createContext 사용)
+  - const OrderContext = createContext();
+2. Context는 Provider안에서 사용 가능하기 때문에 Provider 생성
+  - <OrderContext.Provider value={???}><App /></OrderContext.Provider>
+  - value에 들어갈 값 : App 컴포넌트에서 사용할 데이터 혹은, 데이터를 업데이트하는 함수
+3. 더 복잡한 로직을 구현하기 위해 Provider를 위한 함수 생성(OrderContextProvider)
+  - 함수 생성 후 Provider 리턴
+    - value로 넣을 데이터를 만들어조기(필요한 데이터와, 데이터를 업데이트 해줄 함수)
+  - 상품 Count를 이용한 가격 계산
+
+4. OrderContextProvider 함수로 orderContext 사용할 컴포넌트 감싸기
+5. orderContext 사용하기
+</details>
