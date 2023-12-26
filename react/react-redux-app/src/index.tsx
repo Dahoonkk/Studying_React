@@ -18,7 +18,6 @@ const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
 };
 
 const middleware = applyMiddleware(loggerMiddleware);
-
 const store = createStore(rootReducer, middleware);
 
 const render = () =>
