@@ -201,3 +201,41 @@ const addTodo = (e: React.FormEvent<HTMLFormElement>) : void => {
 }
 ```
 </details>
+
+<details>
+<summary>리덕스 미들웨어</summary>
+
+### 리덕스 미들웨어란?
+- Redux 미들웨어는 액션을 dispatch에 전달하고 리듀서에 도달하는 순간 사이에 사전에 지정된 작업을 실행할 수 있게 해주는 중간자이다.
+- 로깅, 충돌 보고, 비동기 API와 통신, 라우팅 등을 위해 Redux 미들웨어를 사용한다.
+
+### 리덕스 로깅 미들웨어 생성해보기
+- 리덕스를 이용할 때 나오는 로그를 찍어주는 미들웨어를 생성해보자
+```typescript
+const loggerMiddleware = (store) => (next) => (action) => {
+  // your code
+}
+
+// 위 함수를 풀어 표현하면 아래와 같다.
+const loggerMiddleware = function (store) {
+  return function(next) {
+    return function (action) {
+      // your code
+    }
+  };
+}
+```
+
+#### 미들웨어 함수를 applyMiddleware 함수에 넣어주기
+```typescript
+const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
+  console.log("store", store);
+  console.log("action", action);
+  next(action);
+}
+
+const middleware = applyMiddleware(loggerMiddleware);
+```
+- applyMiddleware는 하나 혹은 더 많은 미들웨어를 받은 후 함수를 리턴하는 함수이다.
+![Alt text](image-3.png)
+</details>
