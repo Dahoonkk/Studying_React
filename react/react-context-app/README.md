@@ -206,3 +206,6 @@ function ThemedButton() {
 3. 주문 완료 페이지에서 완료 확인
 
 </details>
+
+![Alt text](image.png)
+![Alt text](image-1.png)
