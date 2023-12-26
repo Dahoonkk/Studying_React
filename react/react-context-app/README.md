@@ -180,3 +180,13 @@ function ThemedButton() {
 4. OrderContextProvider 함수로 orderContext 사용할 컴포넌트 감싸기
 5. orderContext 사용하기
 </details>
+
+<details>
+<summary>Context를 사용해서 가격 계산하기</summary>
+
+### 해야 할 일
+- 여행 상품의 총 가격, 옵션의 총 가격 구하기
+  - 여행 가격은 각 상품의 숫자를 올리거나 내릴 때 : Products 컴포넌트
+  - 옵션은 각 옵션의 체크 박스를 체크하거나 제거할 때 : Options 컴포넌트
+- 여행 상품의 총 가격, 옵션의 총 가격 보여주기
+</details>
