@@ -61,5 +61,67 @@ state = {
 <details>
 <summary>미들웨어 없이 리덕스 카운터 앱 만들기</summary>
 
+### Reducer 생성
+![Alt text](image-1.png)
+```typescript
+const counter = (state = 0, action: { type: string }) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return state + 1;
+    case "DECREMENT":
+      return state - 1;
+    default:
+      break;
+  }
+};
+
+export default counter;
+```
+
+### Store 생성 및 Action 전달
+- CreateStore()
+  - 앱의 전체 상태 트리를 보유하는 Redux 저장소를 만든다.
+  - 앱에는 하나의 스토어만 있어야 한다.
+```typescript
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import {createStore} from 'redux';
+import counter from './reducers'
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+const store = createStore(counter);
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+reportWebVitals();
+
+```
+- [getState()](https://redux.js.org/api/store#getstate)
+  - 애플리케이션의 현재 상태 트리를 반환한다. 스토어의 리듀서가 반환한 마지막 값과 같다.
+```typescript
+const render = () => ReactDOM.render(
+  <React.StrictMode>
+    <App
+      value={store.getState()}
+      onIncrement={() => store.dispatch({ type:'INCREMENT' })}
+      onDecrement={() => store.dispatch({ type:'DECREMENT' })}
+    />
+  </React.StrictMode>
+  document.getElementById('root')
+);
+
+render()
+store.subscribe(render)
+```
 
 </details>
