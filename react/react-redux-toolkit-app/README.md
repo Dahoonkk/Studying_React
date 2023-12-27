@@ -433,4 +433,14 @@ export const fetchUsersAsync = createAsyncThunk(
 ```bash
 npm i redux-persist
 ```
+
+#### SerializableCheck
+- action에 직렬화가 불가능한 값(non-serializable value)를 전달했기에 나오는 에러
+  - 직렬화(serialize) : object 값을 string 값으로 변환(JSON.stringify)
+  - 역직렬화(deserialize) : string 값을 object 값으로 변환(JSON.parse)
+- Redux는 state, action에 직렬화가 불가능한 값을 전달할 수 없는데 전달하려고 하니 나온 에러
+- 그래서 직렬화가 불가능한 값 전달을 허락하면 된다.
+
+#### React로 직렬화 가능 값만 허용하는 이유
+- 리덕스는 예상한대로 UI에 반영되게 하거나 Time Travel 기능( 복원 기능)이나 올바른 디버깅을 위해서 직렬화 가능한 값만 저장하는 걸 추천한다.
 </details>
