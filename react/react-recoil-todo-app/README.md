@@ -7,8 +7,33 @@
 
 - 새로운 todo 아이템을 생성하기 위해 우리는 todoListState 내용을 업데이트하는 setter 함수에 접근해야 한다.
 - 우리는 TodoItemCreator 컴포넌트의 setter 함수를 얻기 위해 useSetRecoilState() 훅을 사용할 수 있다.
+
   - useRecoilState() : useState()와 유사하며 [state, setState] 튜플을 반환한다. 인자에 Atoms 혹은 Selector를 넣어준다.
   - useRecoilValue() : 전역 상태의 state 상태 값만을 참조하기 위해 사용된다. 선언된 변수에 할당하여 사용하면 된다.
   - useSetRecoilState() : 전역 상태의 setter 함수만을 활용하기 위해 사용된다. 선언된 함수 변수에 할당하여 사용하면 된다.
   - useResetRecoilState() : 전역 상태를 default(초기값)으로 Reset 하기 위해 사용된다. 선언된 함수 변수에 할당하여 사용하면 된다.
-  </details>
+
+### todoList Data
+
+- 우리는 useRecoilValue() 훅을 사용해서 todoListState 값을 읽을 수 있다.
+
+```javascript
+function App() {
+    const todoList = useRecoilValue(todoListState);
+    return (
+        <div className="App">
+            <TodoItemCreator />
+            {todoList.map((todoItem) => (
+                <TodoItem key={todoItem.id} item={todoItem}>
+            ))}
+        </div>
+    )
+}
+```
+
+### TodoItem
+
+- TodoItem 컴포넌트는 todo 리스트의 값을 표시하는 동시에 텍스트를 변경하고 항목을 삭제할 수 있다.
+- 우리는 todoListState를 읽고 항목 텍스트를 업데이트하고, 완료된 것으로 표시하고, 삭제하는 데 사용하는 setter 함수를 얻기 위해 useRecoilState()를 사용한다.
+
+</details>
