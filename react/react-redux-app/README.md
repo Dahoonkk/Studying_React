@@ -10,7 +10,7 @@
 ### Props vs State
 1. Props
    - properties의 줄임말
-   - Props는 구성 요소가 서로 통시하는 방법이다.
+   - Props는 구성 요소가 서로 통신하는 방법이다.
    - Props는 상위 구성 요소에서 아래쪽으로 흐른다.
    - 해당 값을 변경하려면 자식 관점에서 Props을 변경 할 수 있는지? -> 부모는 내부 상태를 변경해야 한다.
 ```javascript
@@ -238,4 +238,71 @@ const middleware = applyMiddleware(loggerMiddleware);
 ```
 - applyMiddleware는 하나 혹은 더 많은 미들웨어를 받은 후 함수를 리턴하는 함수이다.
 ![Alt text](image-3.png)
+</details>
+
+<details>
+<summary>Redux Thunk</summary>
+
+### Redux Thunk란?
+- 리덕스를 사용하는 앱에서 비동기 작업을 할 때 많이 사용하는 방법이 Redux-Thunk이다.
+- 이것도 앞서 만들어본 logger 미들웨어 처럼 리덕스 미들웨어이며, 리덕스를 갭라한 Dan Abramov가 만들었다.
+
+### Thunk 용어는?
+- "thunk"라는 단어는 "일부 지연된 작업을 수행하는 코드 조각"을 의미하는 프로그래밍 용어이다.
+- 지금 일부 논리(logic)을 실행하는 대신 나중에 작업을 수행하는 데 사용할 수 있는 함수 본문이나 코드를 작성할 수 있다.
+```javascript
+// calculation of 1 + 2 is immediate
+let x = 1 + 2
+
+// calculation of 1 + 2 is delayed
+// function can be called later to perform the calculation
+// function is a thunk!
+let testFunction = () => 1 + 2
+```
+
+#### 비동기 작업을 해야 할 때는?
+- 여러 경우가 있지만 대표적으로 서버에 요청을 보내서 데이터를 가져올 때 주로 비동기 요청을 보낸다.
+- 비동기로 https://jsonplaceholder.typicode.com 에 요청을 보내면 Dummy 데이터를 받을 수 있는데 이를 활용해 포스트를 만들어 보자.
+
+1. axios 모듈 생성(npm install axios --save)
+2. posts 리듀서 생성
+```javascript
+enum ActionType {
+  FETCH_POSTS = "FETCH_POSTS",
+  DELETE_POSTS = "DELETE_POSTS"
+}
+
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+}
+
+interface Action {
+  type: ActionType;
+  payload: Post[];
+}
+
+const posts = (state=[], action: Action) => {
+  switch(action.type) {
+    case "FETCH_POSTS" :
+      return [...state, ...action.payload]
+    default:
+      return state
+  }
+}
+
+export default posts;
+```
+
+![Alt text](image-4.png)
+
+### 결론
+- Redux Thunk를 사용함으로써 액션 생성자가 그저 하나의 액션 객체를 생성할 뿐 아니라 그 내부 안에서 여러 가지 작업도 할 수 있게 만들 수 있다.
+</details>
+
+<details>
+<summary>리덕스 툴킷(Redux Toolkit)</summary>
+
+
 </details>
