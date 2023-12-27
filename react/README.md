@@ -7,3 +7,4 @@
 5. [react-context-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-context-app)
 6. [react-redux-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-redux-app) / [react-redux-toolkit-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-redux-toolkit-app)
 7. [react-mobx-counter-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-mobx-counter-app) / [react-mobx-counter-decorator-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-mobx-counter-decorator-app) / [react-mobx-todo-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-mobx-todo-app)
+8. [react-recoil-basic-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-recoil-basic-app) / [react-recoil-todo-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-recoil-todo-app)
