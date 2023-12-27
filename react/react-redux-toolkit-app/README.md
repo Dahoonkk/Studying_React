@@ -419,4 +419,18 @@ export const fetchUsersAsync = createAsyncThunk(
 ```
 </details>
 
-<details></details>
+<details>
+<summary>Disney 앱에 Redux 적용하기</summary>
+🚗[Go to react-disney-plus-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-disney-plus-app)
+</details>
+
+<details>
+<summary>Redux-Persist</summary>
+
+- 리덕스 스토어에 있는 State들은 페이지를 새로고침 하면 초기화되는 것을 볼 수 있다.
+- 하지만 Redux Persist를 이용하면 페이지 새로고침 후에도 상태를 유지할 수 있게 된다.
+
+```bash
+npm i redux-persist
+```
+</details>
