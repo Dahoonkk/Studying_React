@@ -52,3 +52,48 @@ export class App extends Component {
 export default App
 ```
 </details>
+
+<details>
+<summary>React Context를 이용한 Observable 공유하기</summary>
+
+- React Context는 전체 하위 트리와 observable을 공유하는 훌륭항 메커니즘이다.
+- 현재 상태에서 mobx의 observable 값을 여러 컴포넌트에 주려면 아래와 같이 하면 된다.
+```javascript
+root.render(
+  <React.StrictMode>
+    <App myCounter={store} />
+    <BComponent myCounter={store} />
+    <CComponent myCounter={store} />
+  </React.StrictMode>
+)
+```
+
+- 하지만 위의 방법은 필요할 때마다 추가해줘야한다는 번거로움이 있다.
+- 따라서 이러한 방법 대신 React Context를 이용하면 Provider로 감싼 전체 하위 트리의 컴포넌트에 observable을 공유할 수 있다.
+```javascript
+import { observer } from 'mobx-react-lite'
+import { createContext, useContext } from "react"
+
+const TimerContext = createContext<Timer>() // Context 생성
+
+const TimerView = observer(() => { // Context에 있는 값을 가져와서 사용하기
+  // 컨텍스트에서 타이머를 가져옴
+  const timer = useContext(TimerContext) // 위의 타이머 정의를 참고
+  return (
+    <span>Seconds passed: {timer.secondsPassed}</span>
+  )
+})
+
+ReactDOM.render( // Context Provider로 감싸주기
+  <TimerContext.Provider value={new Timer()}> // 공유할 value 넣어주기
+    <TimerView />
+  </TimerContext.Provider>
+)
+
+/*
+Provider의 값을 다른 값으로 바꾸지 않는 것이 좋다.
+Mobx를 사용하면 공유되는 observable이 자동으로 업데이트 되므로 Provider의 값을 다른 값으로 바꿀 필요가 없다.
+*/
+```
+[실습은 react-mobx-counter-app에서 진행](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-mobx-counter-app)
+</details>
