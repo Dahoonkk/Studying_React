@@ -37,3 +37,66 @@ function App() {
 - 우리는 todoListState를 읽고 항목 텍스트를 업데이트하고, 완료된 것으로 표시하고, 삭제하는 데 사용하는 setter 함수를 얻기 위해 useRecoilState()를 사용한다.
 
 </details>
+
+<details>
+<summary>Todo List 필터링하기</summary>
+
+### Filtering 된 Todo 리스트 구현
+- 필터링된 todo 리스트를 구현하기 위해서 우리는 atom에 저장될 수 있는 필터 기준을 선택해야 한다.
+- 우리가 사용하게 될 필터 옵션은 "Show All", "Show Completed"와 "Show Uncompleted"가 있다.
+- 기본값은 "Show All"이 될 것이다.
+
+#### atom 구성
+```javascript
+import { atom } from "recoil";
+
+export const todoListState = atom({
+  key: "todoListState",
+  defaultValue: [],
+});
+
+export const todoListFilterState = atom({
+  key: "todoListFilterState",
+  defaultValue: 'Show All'
+})
+```
+
+- todoListFilterState와 todoListState를 사용해서 우리는 필터링된 리스트를 파생하는 filterdTodoListState selector를 구성할 수 있다.
+
+```javascript
+export const filteredTodoListState = atom({
+    key: 'filteredTodoListState',
+    get: ({get}) => {
+        const filter = get(todoListFilterState);
+        const list = get(todoListState);
+
+        switch(filter) {
+            case 'Show Completed':
+                return list.filter((item) => item.isComplete);
+            case 'Show Uncompleted':
+                return list.filter((item) => !item.isComplete);
+            default:
+                return list;
+        };
+    }
+})
+```
+- filteredTodoListState는 내부적으로 2개의 의존성 todoListFilterState와 todoListState을 추적한다.
+- 그래서 둘 중 하나라도 변하면 filteredTodoListState는 재 실행된다.
+
+#### Filtering 된 Todo 리스트를 보여주기
+```javascript
+function App() {
+    const todoList = useRecoilValue(filteredTodoListState);
+
+    return (
+        <div className="App">
+            <TodoItemCreator />
+            {todoList.map((todoItem) => {
+                <TodoItem key={todoItem.id} item={todoItem} />
+            })}
+        </div>
+    )
+}
+```
+</details>
