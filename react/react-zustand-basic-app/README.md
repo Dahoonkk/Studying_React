@@ -59,3 +59,42 @@ function App() {
 }
 ```
 </details>
+
+<details>
+<summary>Zustand로 Todo App 구현하기(store 생성)</summary>
+
+### useTodoStore 생성
+```javascript
+export const useTodoStore = create((set) => ({
+    todos: [],
+    addTodo: (todoText) => set((state) => ({
+        todos: [
+            ...state.todos,
+            {
+                text: todoText,
+                id: getId(),
+                isCompleted: false
+            }
+        ]
+    })),
+    deleteTodo: (todoId) => set((state) => ({
+        todos: state.todos.filter((todo) => todo.id !== todoId)
+    })),
+    completeTodo: (todoId) => set((state) => ({
+        todos: state.todos.map((todo) => {
+            if(todo.id === todoId) {
+                return {
+                    ...todo,
+                    isCompleted: true
+                }
+            }
+        })
+    }))
+}));
+
+let id = 0;
+function getId() {
+    return id++;
+}
+```
+</details>
