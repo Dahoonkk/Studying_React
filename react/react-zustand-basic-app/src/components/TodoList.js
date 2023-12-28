@@ -4,7 +4,7 @@ import { useTodoStore } from "../store/useTodoStore";
 const TodoList = () => {
   const [todoValue, setTodoValue] = useState("");
 
-  const {todos, addTodo, deleteTodo, completeTodo} = useTodoStore();
+  const { todos, addTodo, deleteTodo, completeTodo } = useTodoStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,13 +27,19 @@ const TodoList = () => {
       </form>
       <ul>
         {todos.map((todo) => (
-            <li key={todo.id}>
-                <span style={{textDecoration: todo.isCompleted ? "line-through" : "unset"}}>
-                    {todo.text}{" "}
-                </span>
-                {!todo.isCompleted ? (<button onClick={() => completeTodo(todo.id)}>✅</button>) : null}
-                <button onClick={() => deleteTodo(todo.id)}>❌</button>
-            </li>
+          <li key={todo.id}>
+            <span
+              style={{
+                textDecoration: todo.isCompleted ? "line-through" : "unset",
+              }}
+            >
+              {todo.text}{" "}
+            </span>
+            {!todo.isCompleted ? (
+              <button onClick={() => completeTodo(todo.id)}>✅</button>
+            ) : null}
+            <button onClick={() => deleteTodo(todo.id)}>❌</button>
+          </li>
         ))}
       </ul>
     </div>
