@@ -98,3 +98,34 @@ function getId() {
 }
 ```
 </details>
+
+<details>
+<summary>저장소의 데이터 유지하기(Persist Middleware)</summary>
+
+### 카운터 데이터를 localStorage에 저장하기
+```javascript
+import { persist } from 'zustand/middleware';
+
+export const useCounterStore = create(
+    persist(
+        (set) => ({
+            count: 1,
+            inc: () => set((state) => ({ count : state.count + 1}))
+        })
+    )
+)
+```
+
+### Key 이름을 바꾸는 옵션 주기
+```javascript
+export const useCounterStore = create(
+    persist(
+        (set) => ({
+            count: 1,
+            inc: () => set((state) => ({ count : state.count + 1})),
+        }),
+        { name: 'counter' }
+    )
+)
+```
+</details>
