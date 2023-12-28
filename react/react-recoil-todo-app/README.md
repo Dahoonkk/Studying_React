@@ -159,3 +159,84 @@ const TodoListStats = () => {
 export default TodoListStats
 ```
 </details>
+
+<details>
+<summary>비동기 데이터 쿼리</summary>
+
+### Selector를 이용해서 비동기 요청을 한 데이터를 전역 상태에 넣어주기
+- selector는 기본적으로 값을 자체적으로 캐싱한다.
+- 만약 입력된 적 있는 값이라면 그 값을 기억하고, 이 값이 다시 호출되면 이전에 캐싱된 결과를 바로 보여주기 때문에 비동기 데이터를 다루는 측면에서 유리하다.
+- 유저 데이터 같은 데이터는 애플리케이션을 만들 때 많은 컴포넌트에서 사용되기 때문에 전역 상태로 관리하면 좋다.
+- 그래서 유저 데이터를 데이터베이스에서 가져올 때 Selector를 이용해서 전역 상태에 넣어줘보자.
+
+#### User를 위한 Atom 파일 생성
+```javascript
+import {atom, selector} from "recoil";
+import axios from "axios";
+
+export const currentUserIdState = atom({
+    key: 'currentUserIdState',
+    default: 1
+})
+
+export const currentUserNameQuery = selector({
+    key: 'currentUserName',
+    get: async({get}) => {
+        const path = "https://jsonplaceholder.typicode.com/users/"
+        const response = await axios.get(`${path}~{get(currentUserIdState)}`)
+        return response.data.name;
+    }
+})
+```
+- 만약 user의 이름이 쿼리 해야 하는 데이터베이스에 저장되어 있었다면, Promise를 리턴하거나 혹은 async 함수를 사용하기만 하면 된다.
+- 의존성에 하나라도 변경점이 생긴다면, selector는 새로운 쿼리를 재평가하고 다시 실행시킬 것이다.
+- 그리고 결과는 쿼리가 유니크한 인풋이 있을 때에만 실행되도록 캐시 된다.
+
+#### 비동기 요청의 결과 보여주기
+```javascript
+import React from "react";
+import { useRecoilValue } from "recoil";
+import "./App.css";
+import TodoItemCreator from "./components/TodoItemCreator";
+import { filteredTodoListState, todoListState } from "./todoAtoms";
+import TodoItem from "./components/TodoItem";
+import TodoListFilters from "./components/TodoListFilters";
+import TodoListStats from "./components/TodoListStats";
+import { currentUserNameQuery } from "./userAtoms";
+
+function App() {
+  // const todoList = useRecoilValue(todoListState);
+  const filteredTodoList = useRecoilValue(filteredTodoListState);
+  console.log(filteredTodoList);
+
+  return (
+    <div className="App">
+      <CurrentUserInfo />
+      <TodoListStats />
+      <TodoListFilters />
+      <TodoItemCreator />
+      {filteredTodoList.map((item) => (
+        <TodoItem key={item.id} item={item} />
+      ))}
+    </div>
+  );
+}
+
+export default App;
+
+function CurrentUserInfo() {
+  const userName = useRecoilValue(currentUserNameQuery);
+  return <div>{userName}</div>
+}
+```
+
+### React Suspense와 함께 사용
+- React 렌더 함수가 동기인데 promise가 resolve 되기 전에 무엇을 렌더 할 수 있을까?
+  - Recoil은 보류 중인 데이터를 다루기 위해 React Suspense와 함께 동작하도록 디자인되어 있다.
+  - 컴포넌트를 Suspense의 경계로 감싸는 것으로 아직 보류 중인 하위 항목들을 잡아내고 대체하기 위한 UI를 렌더 한다.
+```javascript
+<Suspense fallback={<div>Loading...</div>}>
+    <CurrentUserInfo />
+</Suspense>
+```
+</details>
