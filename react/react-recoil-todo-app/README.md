@@ -100,3 +100,62 @@ function App() {
 }
 ```
 </details>
+
+<details>
+<summary>통계 기능 추가하기</summary>
+
+### 몇 가지 통계 기능 추가하기
+- todo 항목들의 총 개수
+- 완료된 todo 항목들의 총 개수
+- 완료되지 않은 todo 항목들의 총 개수
+- 완료된 항목의 백분율
+- 각 통계에 대해 selector를 만들 수 있지만, 필요한 데이터를 포함하는 객체를 반환하는 selector 하나를 만드는 것이 더 쉬운 방법일 수 있다.
+- 우리는 이 selector를 'todoListStatsState'라고 부를 것이다.
+```javascript
+export const todoListStatsState = selector({
+    key: 'todoLIstStateState',
+    get: ({get}) => {
+        const todoList = get(todoListState);
+        const totalNum = todoList.length;
+        const totalCompletedNum = todoList.filter((item) => item.isComplete).length;
+        const totalUnCompletedNum = totalNum - totalCompletedNum
+        const percentCompleted = totalNum === 0 ? 0 : totalCompletedNum / totalNum;
+
+        return {
+            totalNum,
+            totalCompletedNum,
+            totalUnCompletedNum,
+            percentCompleted,
+        }
+    }
+})
+```
+
+#### 통계 데이터 표시하기
+```javascript
+import React from 'react'
+import { useRecoilValue } from 'recoil';
+import { todoListStatsState } from '../todoAtoms';
+
+const TodoListStats = () => {
+    const {
+        totalNum,
+        totalCompletedNum,
+        totalUnCompletedNum,
+        percentCompleted,
+      } = useRecoilValue(todoListStatsState);
+
+      const formattedPercentCompleted = Math.round(percentCompleted * 100);
+  return (
+    <ul>
+        <li>Total items: {totalNum}</li>
+        <li>Items completed: {totalCompletedNum}</li>
+        <li>Items not completed: {totalUnCompletedNum}</li>
+        <li>Percent completed: {formattedPercentCompleted}</li>
+    </ul>
+  )
+}
+
+export default TodoListStats
+```
+</details>
