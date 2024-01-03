@@ -465,3 +465,55 @@ console.log(speech); // Output: undefined
 - Never 유형을 사용하는 경우 void는 Never에 할당할 수 없기 때문에 speech:never는 컴파일 시간 오류를 발생시킨다.
 
 </details>
+
+<details>
+<summary>type annotation, type inference</summary>
+
+### Type Annotation과 Type Inference
+![Alt text](image-3.png)
+
+#### Type Annotation
+- 개발자가 타입을 타입스크립트에게 직접 말해주는 것
+```typescript
+const rate: number = 5 // number 타입 지정
+```
+
+#### Type Inference
+- 타입스크립트가 알아서 타입을 추론하는 것
+```typescript
+const rate = 5 // **변수 선언과 동시에 초기화할 경우** 타입을 알아서 추론한다.
+```
+
+### 타입을 추론하지 못해서 타입 annotation을 꼭 해줘야 하는 경우
+#### any 타입을 리턴하는 경우
+- coordinates에 hover해보면 const coordinates: any라고 뜨는 것을 볼 수 있을 것이다.
+- JSON.parse는 json을 파싱해주는데 인풋으로 들어가는 json을 확인하면 개발자는 어떤 타입이 리턴될지 예상할 수 있지만, 타입스크립트는 여기까지 지원하지 않는다.
+- 리턴 타입이 일정하지 않으므로 any를 리턴한다고 추론해버린다.
+- 그러므로 이러한 경우에는 타입 애노테이션을 해주어야 한다.
+```typescript
+const json = '{"x": 4, "y": 7}'
+const coordinates = JSON.parse(json)
+console.log(coordinates)
+```
+
+#### 변수 선언을 먼저하고 나중에 초기화하는 경우
+- 변수 선언과 동시에 초기화하면 타입을 추론하지만, 선언을 먼저하고 나중에 값을 초기화할 때에는 추론하지 못한다.
+```typescript
+let greeting
+greeting = 'hello' // let greeting: any
+```
+
+#### 변수에 대입될 값이 일정치 못하는 경우
+- 여러 타입이 지정되어야 할 때는 | (or statement)로 여러 타입을 애노테이션 해준다.
+```typescript
+let num = [-7, -2, 10]
+let numAboveZero: boolean | number = false
+
+for(let i = 0; i < num.length; i++) {
+  if(num[i] > 0) {
+    numAboveZero = num[i]
+  }
+}
+```
+
+</details>
