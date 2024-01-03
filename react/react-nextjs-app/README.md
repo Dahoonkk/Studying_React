@@ -517,3 +517,71 @@ for(let i = 0; i < num.length; i++) {
 ```
 
 </details>
+
+<details>
+<summary>Type Assertion</summary>
+
+### TypeAssertion이란?
+- TypeScript에서는 시스템이 추론 및 분석한 타입 내용을 우리가 원하는 대로 얼마든지 바꿀 수 있다.
+- 이때 "타입 표명(Type Assertion)"이라 불리는 메커니즘이 사용된다.
+- TypeScript의 타입 표명은 프로그래머가 컴파일러에게 내가 너보다 타입에 더 잘 알고 있고, 나의 주장에 대해 의심하지 말라고 하는 것과 같다.
+- Type Assertion을 사용하면 값의 type을 설정하고 컴파일러에 이를 유추하지 않도록 지시할 수 있다.
+- 이것은 프로그래머로서 TypeScript가 자체적으로 추론할 수 있는 것보다 변수 유형에 대해 더 잘 이해하고 있을 때이다.
+```typescript
+var foo = {};
+foo.bar = 123; // 오류: 속성 'bar'가 '{}'에 존재하지 않음
+foo.bas = 'hello'; // 오류: 속성 'bas'가 '{}'에 존재하지 않음
+```
+
+<br/>
+
+- 컴파일러는 foo type이 속성이 없는 {}라고 가정하기 때문에 위의 예에서는 컴파일러 오류가 발생한다.
+- 그러나 아래와 같이 type assertion을 사용하면 이러한 상황을 피할 수 있다.
+```typescript
+interface Foo {
+  bar: number;
+  bas: string;
+}
+
+var foo = {} as Foo;
+foo.bar = 123;
+foo.bas = 'hello';
+```
+
+### as Foo, <Foo>
+- 타입 표명은 위에 두 가지 방식으로 표현할 수 있다.
+- 하지만 리액트를 사용할 때는 <Foo> 키워드는 JSX의 문법과 겹치기 때문에 as Foo를 공통적으로 사용하는게 추천된다.
+```typescript
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+
+const postDirectory = path.join(process.cwd(), 'posts')
+
+export function getSortedPostsData() {
+  const fileNames = fs.readDirSync(postsDirectory)
+
+  const allPostsData = fileNames.map(fileName => {
+    const id = fileName.replace(/\.md$/, '')
+
+    const fullPath = path.join(postsDirectory, fileName)
+    const fileContents = fs.readFileSync(fullPath, 'utf-8')
+
+    const matterResult = matter(fileContents)
+
+    return {
+      id, 
+      ...(matterResult.data as {date: string; title: string})
+    }
+  })
+
+  return allPostsData.sort((a, b) => {
+    if (a.date < b.date) {
+      return 1
+    } else {
+      return -1
+    }
+  })
+}
+```
+</details>
