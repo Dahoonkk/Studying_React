@@ -605,5 +605,101 @@ export function getSortedPostsData() {
 > pages/[username]/settings.js → /:username/settings (/foo/settings)
 > pages/post/[...all].js → /post/* (/post/2020/id/title)
 
+</details>
 
+<details>
+<summary>포스트 데이터를 가져와서 보여주기(remark)</summary>
+
+### getStaticPaths
+- 동적 라우팅이 필요할 때 getStaticPaths로 경로 리스트를 정의하고, HTML에  build 시간에 렌더 된다.
+- Nextjs는 pre-render에서 정적으로 getStaticPaths에서 호출하는 경로들을 가져온다.
+
+#### Post 데이터를 가져와야 하는 경로 목록을 가져오기
+```typescript
+export const getStaticPaths: GetStaticPath = async() => {
+  const paths = getAllPostIds()
+  console.log('paths', paths)
+
+  return {
+    paths,
+    fallback: false
+  }
+}
+```
+
+### fallback
+- false라면 getStaticPaths로 리턴되지 않는 것은 모두 404페이지가 뜬다.
+- true라면 getStaticPaths로 리턴되지 않는 것은 404로 뜨지 않고, fallback 페이지가 뜨게 된다.
+```typescript
+export function getAllPostIds() {
+  const fileNames = fs.readDirSync(postsDirectory)
+  return fileNames.map(fileName => {
+    return {
+      params: {
+        id: fileName.replace(/\.md$/, '')
+      }
+    }
+  })
+}
+```
+
+#### 전달받은 아이디를 이용해서 해당 포스트의 데이터 가져오기
+```typescript
+export const getStaticProps: GetStaticProps = async({ params }) => {
+  console.log('params', params);
+  const postData = await getPostData(params.id as string)
+  return {
+    props: {
+      postData
+    }
+  }
+}
+```
+```typescript
+export async function getPostData(id: string) {
+  const fullPath = path.join(postsDirectory, `${id}.md`)
+  const fileContents = fs.readFileSync(fullPath, 'utf-8')
+
+  const matterResult = matter(fileContents)
+
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content)
+  const contentHtml = processedContent.toString()
+
+  return {
+    id,
+    contentHtml,
+    ...(matterResult.data as {date: string; title: string})
+  }
+}
+```
+
+#### 가져온 데이터 화면에서 보여주기
+```typescript
+export default function Post({
+  postData
+} : {
+  postData: {
+    title: string
+    date: string
+    contentHtml: string
+  }
+}) {
+  return (
+    <div>
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
+      <article>
+        <h1 className={homeStyles.headingXl}>{postData.title}</h1>
+        <div className={homeStyles.lightText}>
+          {postData.date}
+        </div>
+        <div dangerouslySetInnerHTML = {{ __html: postData.contentHtml }} />
+      </article>
+    </div>
+  )
+}
+```
 </details>
