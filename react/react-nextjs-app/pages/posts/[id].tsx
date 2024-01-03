@@ -3,6 +3,7 @@ import React from 'react'
 import { getAllPostIds, getPostData } from '../../lib/post'
 import Head from 'next/head'
 import homeStyles from '../../styles/Home.module.css'
+import postStyle from '../../styles/Post.module.css'
 
 const Post = ({ postData } : {
     postData : {
@@ -12,7 +13,7 @@ const Post = ({ postData } : {
     }
 }) => {
     return (
-        <div>
+        <div className={postStyle.container}>
           <Head>
             <title>{postData.title}</title>
           </Head>
