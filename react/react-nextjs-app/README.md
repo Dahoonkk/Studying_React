@@ -250,7 +250,7 @@ export default Page
 ### TypeScript란?
 - 타입스크립트는 자바스크립트에 타입을 부여한 언어이다.
 - 자바스크립트의 확장된 언어라고 볼 수 있다.
-- 타입스크립트는 자바스크립트와 달리 브라우저에서 실행하려면 파일을 한번 변환해주어ㅑㅇ 한다.
+- 타입스크립트는 자바스크립트와 달리 브라우저에서 실행하려면 파일을 한번 변환해주어야 한다.
 - 이 변환 과정을 우리는 컴파일(compile)이라고 부른다.
 
 ### Type System
@@ -267,5 +267,201 @@ export default Page
 - TypeScript를 사용하면 일반 JavaScript보다 크게 개선할 수 있다.
 - TypeScript는 ES6(ECMAScript 6)의 모든 이점과 더 많은 생산성을 제공한다.
 - TypeScript는 코드 유형 검사를 통해 JavaScript를 작성할 때 개발자가 일반적으로 겪는 고통스러운 버그를 피하는 데 도움이 될 수 있다.
+
+</details>
+
+<details>
+<summary>Typescript Type</summary>
+
+### Typescript Type
+- In Typescript, a type is a convenient way to refer to the different properties and functions that a value has.
+- 타입이란, 그 value가 가지고 있는 프로퍼티나 함수를 추론할 수 있는 방법이다.
+- TypeScript는 JavaScript에서 기본으로 제공하는 기본 제공 유형(built-in types)을 상속한다.
+- TypeScript 유형은 다음과 같이 분류된다.
+  - Primitive Types
+  - Object Types
+
+#### Primitive Types
+- string : 문자열
+- number : 숫자 값
+- boolean : true와 false
+- null : 하나의 값을 가진다 - null
+- undefined : 하나의 값을 가진다 - undefined(초기화되지 않은 변수의 기본값)
+- symbol : 고유한 상수 값을 나타냄
+
+#### Object Types
+- function : 함수
+- array : 배열
+- classes : 클래스
+- object : 객체
+</details>
+
+<details>
+<summary>Typescript 추가 제공 타입</summary>
+
+### 추가 제공 타입
+#### Any
+  - 애플리케이션을 만들 때 잘 알지 못하는 타입을 표현해야 할 수가 있다. 
+  - 이 값들은 사용자로부터 받은 데이터나 서드 파티 라이브러리 같은 동적인 컨텐츠에서 올 수도 있다. 
+  - 이 경우 타입 검사를 하지 않고, 
+  - 그 값들이 컴파일 시간에 검사를 토오가하길 원한다. 
+  - 이를 위해 any 타입을 사용할 수 있다.
+  - 하지만 이 타입을 최대한 쓰지 않는 것이 좋다.
+  - 그래서 noImplicitAny라는 옵션을 주면 any를 썻을 때 오류가 나오게 할 수 있다. 
+```typescript
+let something: any = "Hello World!";
+something = 23;
+something = true;
+
+let arr: any[] = ["John", 212, true];
+arr.push("Smith");
+console.log(arr); // Output : ['John', 212, true, 'Smith']
+```
+
+<br/>
+
+#### Union
+  - Typescript를 사용하면 변수 또는 함수 매개변수에 대해 둘 이사으이 데이터 유형을 사용할 수 있다.
+  - 이것을 유니온타입이라고 한다.
+```typescript
+let code: (string | number);
+code = 123; // ok
+code = "ABC" // ok
+code = false; //Compiler Error
+```
+
+<br/>
+
+#### Tuple
+  - TypeScript에서는 배열 타입을 보다 특수한 형태로 사용할 수 있는 tuple 타입을 지원한다.
+  - tupe에 명시적으로 지정된 형식에 따라 아이템 순서를 설정해야 되며, 추가되는 아이템 또한 tuple에 명시된 타입만 사용 가능하다.
+```typescript
+var employee: [number, string] = [1, "Steve"];
+var person: [number, string, boolean] = [1, "Steve", true];
+
+var user: [number, string, boolean, number, string]; // declare tuple variable
+user = [1, "Steve", true, 20, "Admin"] // initialize tuple variable
+
+// 배열 Tuple
+var employee: [number, string][];
+employee = [[1, "Steve"], [2, "Bill"]]
+
+// Tuple에 요소 추가
+var employee: [number, string] = [1, "Steve"]
+employee.push(2, "Bill");
+console.log(employee); // Output: [1, 'Steve', 2, 'Bill']
+
+// 에러가 나는 경우
+employee.push(true);
+```
+
+<br/>
+
+#### Enum
+  - enum은 enumerated type(열거형)을 의미한다.
+  - enum은 값들의 집합을 명명하고 이를 사용하도록 만든다.
+  - 여기서는 PrintMedia라 불리는 집합을 기억하기 어려운 숫자 대신 친숙한 이름으로 사용하기 위해 enum을 활용할 수 있다.
+  - 열거된 각 PrintMedia는 별도의 값이 설정되지 않은 경우 기본적으로 0부터 시작한다.
+```typescript
+enum PrintMedia {
+  Newspaper,  // 0
+  Newsletter, // 1
+  Magazine,   // 2
+  Book        // 3
+}
+```
+- 아래 코드에서 mediaType 변수에 할당된 값은 3이다. 설정된 PrintMedia 열거형 데이터의 Book의 값이 숫자 3이기 때문이다.
+```typescript
+let mediaType: number = PrintMedia.Book // 3
+```
+
+- enum에 설정된 아이템에 값을 할당할 수도 있다. 값이 할당되지 않은 아이템은 이전 아이템의 값에 +1된 값이 설정된다.
+```typescript
+enum PrintMedia {
+  Newspaper = 1,
+  Newsletter = 30, 
+  Magazine = 45,    
+  Book // 45 + 1        
+}
+```
+
+- enum 타입의 편리한 기능으로 숫자 값을 통해 enum 값의 멤버 이름을 도출할 수 있다.
+```typescript
+let type: string = PrintMedia[45] // 'Magazine'
+```
+
+- 또한 어떠한 언어 코드를 정의하는 코드를 작성할 때 언어의 집합을 만들 때도 enum을 사용할 수 있다.
+```typescript
+export enum LanguageCode {
+  korean = 'ko',
+  english = 'en',
+  japanese = 'ja',
+  chinese = 'zh',
+  spanish = 'es',
+}
+
+const code: LanguageCode = LanguageCode.english
+```
+- 이렇게 enum을 이용해서 언어 집합을 만들어주면 어떠한 코드가 어떠한 나라의 언어 코드가 무엇인지 알지 못해도 쉽게 코드를 작성해줄 수 있고 코드를 읽는 사람 입장에서도 가독성이 높아지게 된다.
+
+##### enum과 객체의 차이점
+- object는 코드 내에서 새로운 속성을 자유롭게 추가할 수 있지만, enum은 선언할 때 이후에 변경할 수 없다.
+- object의 속성값은 JS가 허용하는 모든 타입이 올 수 있지만, enum의 속성 값으로는 문자열 혹은 숫자만 허용된다.
+
+<br/>
+
+#### Void
+  - Java와 같은 언어와 유사하게 데이터가 없는 경우 void가 사용된다. 
+  - 예를 들어 함수가 값을 반환하지 않으면 반환 유형으로 void를 지정할 수 있다.
+  - 타입이 없는 상태이며, any와 반대의 의미를 가진다.
+  - void 소문자로 사용해야하며, 주로 함수의 리턴이 없을 때 사용하면 된다.
+```typescript
+function sayHi(): void {
+  console.log("Hi!");
+}
+
+let speech: void = sayHi();
+console.log(speech); // Output: undefined
+```
+
+<br/>
+
+#### Never
+  - TypeScript는 절대 발생하지 않을 값을 나타내는 새 Type never를 도입했다.
+  - Nerver 유형은 어떤 일이 절대 일어나지 않을 것이라고 확신할 때 사용된다.
+  - 일반적으로 함수의 리턴 타입으로 사용된다.
+  - 함수의 리턴 타입으로 never가 사용될 경우, 항상 오류를 리턴하거나 리턴 값을 절대로 내보내지 않음을 의미한다.
+    - 이는 무한 루프(loop)에 빠지는 것과 같다.
+```typescript
+function throwError(errorMsg: string): never {
+  throw new Error(errorMsg);
+}
+
+function keepProcessing(): never {
+  while(true) {
+    console.log('I always does something and never ends.')
+  }
+}
+```
+
+##### Void와 Never의 차이
+- Void 유형은 값으로 undefined나 null 값을 가질 수 있지만 Never는 어떠한 값도 가질 수 없다.
+
+```typescript
+let something: void = null;
+let nothing: never = null; // Error: Type 'null' is not assignable to type 'never'
+```
+
+- TypeScript에서 값을 Return하지 않는 함수는 실제로 undefined를 반환한다.
+```typescript
+function sayHi(): void {
+  console.log("Hi!");
+}
+
+let speech: void = sayHi();
+console.log(speech); // Output: undefined
+```
+- 위의 예에서 볼 수 있듯이 sayHi 함수는 반환 유형이 void인 경우에도 내부적으로 undefined를 반환하기 때문에 speech는 undefined가 된다.
+- Never 유형을 사용하는 경우 void는 Never에 할당할 수 없기 때문에 speech:never는 컴파일 시간 오류를 발생시킨다.
 
 </details>
