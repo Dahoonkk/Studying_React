@@ -33,5 +33,207 @@ yarn create next-app
 <details>
 <summary>NextJS 기본 파일 구조</summary>
 
+### pages
+- 이 폴더 안에 페이지들을 생성한다.
+- index.tsx가 처음 "/" 페이지로 된다.
+- _app.tsx는 공통되는 레이아웃을 작성한다. 모든 페이지에 공통으로 들어가는 걸 넣어주려면 여기에 넣어주면 된다.
+  - url을 통해 특정 페이지에 진입하기 전 통과하는 인터셉터 페이지이다.
+- 만약 about이라는 페이지를 만들 경우 pages 폴더 안에 about.tsx를 생성해주면 된다.
 
+### public
+- 이미지 같은 정적(static) 에셋들을 보관한다.
+
+### styles
+- 말 그대로 스타일링을 처리해주는 폴더이다.
+- 모듈(module) css는 컴포넌트 종속적으로 스타일링하기 위한 것이며, 확장자 앞에 module을 붙여줘야 한다.
+
+### next.config.js
+- NextJS는 웹팩을 기본 번들러로 사용한다.
+- 그래서 웹팩에 관한 설정들을 이 파일에서 해줄 수 있다.
+</details>
+
+<details>
+<summary>Pre-rendering</summary>
+
+### NextJS는
+- 모든 페이지를 pre-rendering한다. 
+- 이 pre-rendering한다는 의미는 모든 페이지를 위한 HTML을 Client 사이드에서 자바스크립트로 처리하기 전 사전에 생성한다는 것이다.
+- 이렇게 하기 때문에 SEO 검색엔진 최적화가 좋아진다.
+
+#### Pre-render 테스트
+1. [자바스크립트 Disable](https://developer.chrome.com/docs/devtools/javascript/disable)
+2. [보통 React 사이트 들어가기](https://create-react-app.examples.vercel.com/)
+3. [NextJS 사이트 들어가기](https://next-learn-starter.vercel.app/)
+
+![Alt text](image-1.png)
+![Alt text](image-2.png)
+</details>
+
+<details>
+<summary>Data Fetching</summary>
+
+### NextJS에서 데이터를 가져오는 방법
+- NextJS에서 데이터를 가져오는 방법은 여러가지가 있는데 애플리케이션의 사용 용도에 따라 다른 방법을 사용해야 한다.
+- 보통 리액트에서는 데이터를 가져올 때 useEffect안에서 가져온다. 
+- 하지만 NextJS에서는 다른 방법을 사용해서 가져오는데 하나씩 살펴보면
+  - getStaticProps : Static Generation으로 빌드(build)할 때 데이터를 불러온다.(미리 만들어준다.)
+  - getStaticPaths : Static Generation으로 데이터를 기반하여 pre-render 시 특정한 동적 라우팅을 구현한다.(pages/post/[id].js)
+  - getServerSideProps : Server Side Rendering으로 요청이 있을 때 데이터를 불러온다.
+
+#### getStaticProps
+```typescript
+export async function getStaticProps(context) {
+  return {
+    props: {}, // will be passed to the page component as props
+  }
+}
+```
+
+- getStaticProps 함수를 async로 export하면, getStaticProps에서 리턴되는 props를 가지고 페이지를 pre-render한다.
+- build time에 페이지를 렌더링 한다.
+
+```typescript
+function Blog({posts}) {
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li>{post.title}</li>
+      ))}
+    </ul>
+  )
+};
+
+export async function getStaticProps() {
+  const res = await fetch('https://.../posts')
+  const posts = await res.json()
+
+  return {
+    props: {
+      posts,
+    }
+  }
+}
+```
+
+##### getStaticProps를 사용해야 할 때 
+- 페이지를 렌더링하는 데 필요한 데이터는 사용자의 요청보다 먼저 build 시간에 필요한 데이터를 가져올 때
+- 데이터는 Headless CMS에서 데이터를 가져올 때
+- 데이터를 공개적으로 캐시할 수 있을 때(사용자별 X)
+- 페이지는 미리 렌더링되어야 하고(SEO의 경우) 매우 빨라야할 때(getStaticProps는 성능을 위해 CDN에서 캐시할 수 있는 HTML 및 JSON 파일을 생성한다.)
+
+#### getStaticPaths
+```typescript
+export async function getStaticPaths() {
+  return {
+    paths: [
+      {params: { ... }}
+    ],
+    fallback: true // false or 'blocking'
+  }
+}
+```
+- 동적 라우팅이 필요할 때 getStaticPaths로 경로 리스트를 정의하고, HTML에 build 시간에 렌더된다.
+- NextJS는 pre-render에서 정적으로 getStaticPaths에서 호출하는 경로들을 가져온다.
+
+<br/>
+
+- paths
+  - 어떠한 경로가 pre-render될지를 결정한다.
+  - 만약 pages/posts/[id].js 이라는 이름의 동적 라우팅을 사용하는 페이지가 있다면 아래와 같이 된다.
+  - 빌드하는 동안 /posts/1과 /posts/2를 생성하게 된다.
+```typescript
+return {
+  paths: [
+    { params: { id: '1' } },
+    { params: { id: '2' } },
+  ],
+  fallback: ...
+}
+```
+
+<br/>
+
+- params
+  - 페이지 이름이 pages/posts/[postId]/[commentId]라면, params은 postId와 commentId이다.
+  - 만약 페이지 이름이 pages/[...slug]와 같이 모든 경로를 사용한다면, params는 slug가 담긴 배열이어야 한다.
+  - ['postId', 'commentId']
+
+<br/>
+
+- fallback 
+  - false라면 getStaticPaths로 리턴되지 않는 것은 모두 404페이지가 뜬다.
+  - true라면 getStaticPaths로 리턴되지 않는 것은 404로 뜨지 않고, fallback 페이지가 뜨게 된다.
+```typescript
+if (router.isFallback) {
+  return <div>Loading...</div>
+}
+```
+```typescript
+// pages/posts/[id].js
+
+function Post({ post }) {
+  // Rendering post...
+
+}
+
+// This function gets called at build time
+export async function getStaticPaths() {
+  const res = await('https://.../posts')
+  const posts = await res.json()
+
+  // Get the paths we want to pre-render based on posts
+  const paths = posts.map((post) => ({
+    params: { id: post.id },
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404
+  return { paths, fallback: false }
+};
+
+// This also gets called at build time
+export async function getStaticProps({ params }) {
+  // params contains the post 'id'.
+  // If the route is like /posts/1, then params.id is 1
+  const res = await fetch(`https://.../posts/${params.id}`)
+  const post = await res.json()
+
+  // Pass post data to the page via props
+  return { props: { post } }
+}
+
+export default Post
+```
+
+#### getServerSideProps
+```typescript
+export async function getServerSideProps(context) {
+  return {
+    props: {}, // will be passed to the page component as props
+  }
+}
+```
+- getSErverSideProps 함수를 async로 export 하면, Next는 각 요청마다 리턴되는 데이터를 getServerSideProps로 pre-render한다.
+
+```typescript
+function Page({ data }) {
+  // Render data...
+}
+
+// This gets called on every request
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch('https://.../data')
+  const data = await res.json()
+
+  // Pass data to the page via props
+  return { props: { data } }
+}
+
+export default Page
+```
+
+##### getServerSideProps를 사용해야 할 때
+- 요청할 때 데이터를 가져와야하는 페이지를 미리 렌더해야 할 때 사용한다.
+- 서버가 모든 요청에 대한 결과를 개선하고, 추가 구성없이 CDN에 의해 결과를 캐시할 수 없기 때문에 첫번째 바이트까지의 시간은 getStaticProps보다 느리다.
 </details>
