@@ -10,3 +10,5 @@
 8. [react-recoil-basic-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-recoil-basic-app) / [react-recoil-todo-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-recoil-todo-app)
 9. [react-zustand-basic-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-zustand-basic-app)
 10. [react-ver-18](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-ver-18)
+11. [react-nextjs-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/react-nextjs-app)
+12. [nextjs13-app](https://github.com/Dahoonkk/Studying_React/tree/main/react/nextjs13-app)
