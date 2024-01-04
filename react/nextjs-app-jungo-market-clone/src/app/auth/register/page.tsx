@@ -53,7 +53,7 @@ const RegisterPage = () => {
         />
         <Input
           id="name"
-          label="Namne"
+          label="Name"
           disabled={isLoading}
           register={register}
           errors={errors}
