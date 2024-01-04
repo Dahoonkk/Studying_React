@@ -131,7 +131,7 @@ client
 - 최고 수준의 추상화이다.
 - ORM으로 작업할 때 일반적으로 더 많은 설정을 사전에 수행해야 한다.
 - ORM의 요점은 이름(object relational mapping)에서 알 수 있듯이 관계형 데이터베이스의 데이터를 애플리케이션의 객체(클래스 인스턴스)에 매핑하는 것이다.
-- 종류로는 다음과 같이 있다.
+- 많이 사용하는 ORM으로는 다음과 같이 있다.
   -  typeorm
   -  sequelize
   -  prisma
@@ -148,4 +148,20 @@ client
 - SQL 인젝션 취약점으로부터 보호
 - 모델 유효성 검사 지원
 - TypeScript 지원
+</details>
+
+<details>
+<summary>pgAdmin 사용법</summary>
+
+> pgAdmin은 데이터베이스를 보는 툴(Tool)이다.
+
+### Window에서 PostgresSQL 설치하기(이 프로젝트에서는 Docker 사용)
+[Link](https://www.postgresql.org/download/windows/)
+
+### Mac에서 PostgresSQL 설치하기(이 프로젝트에서는 Docker 사용)
+[Link](https://postgresapp.com/downloads.html)
+
+### Window & Mac에서 pgAdmin 설치하기
+[Link](https://www.pgadmin.org/download/)
+
 </details>
