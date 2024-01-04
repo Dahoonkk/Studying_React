@@ -53,6 +53,9 @@ export const authOptions: NextAuthOptions = {
     secret: process.env.JWT_SECRET,
     maxAge: 30 * 24 * 60 * 60, // 30days
   },
+  pages: {
+    signIn: "/auth/login",
+  },
   callbacks: {
     // session token data 얻을 수 있음
     async jwt({ token, user }) {
