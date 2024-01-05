@@ -19,7 +19,7 @@ export default async function Home({ searchParams }: HomeProps) {
     <Container>
       <Categories />
       {products?.data.length === 0 ? (
-        <EmptyState />
+        <EmptyState showReset/>
       ) : (
         <>
           <div className="grid gid-cols-1 gap-8 pt-12 sm:grid-cols-2 md:grid-cols-3 lg:gird-cols-4 2xl:gird-cols-6">
