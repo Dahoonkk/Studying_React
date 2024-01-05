@@ -7,11 +7,14 @@ import ImageUpload from "@/components/ImageUpload";
 import Input from "@/components/Input";
 import { categories } from "@/components/categories/Categories";
 import CategoryInput from "@/components/categories/CategoryInput";
+import axios from "axios";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 const ProductUploadPage = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -39,12 +42,24 @@ const ProductUploadPage = () => {
   const latitude = watch("latitude");
   const longitude = watch("longitude");
 
-  const KakaoMap = dynamic(() => import('../../../components/KakaoMap'), {
-    ssr: false
-  })
+  const KakaoMap = dynamic(() => import("../../../components/KakaoMap"), {
+    ssr: false,
+  });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
+    setIsLoading(true);
+
+    axios.post("/api/products/", data)
+      .then((response) => {
+        router.push(`/products/${response.data.id}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   };
 
   const setCustomValues = (id: string, value: any) => {
@@ -110,7 +125,7 @@ const ProductUploadPage = () => {
             ))}
           </div>
           <hr />
-          <KakaoMap 
+          <KakaoMap
             setCustomValues={setCustomValues}
             latitude={latitude}
             longitude={longitude}
