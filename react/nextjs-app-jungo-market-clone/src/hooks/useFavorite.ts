@@ -14,7 +14,7 @@ const useFavorite = ({productId, currentUser}: UseFavoriteProps) => {
 
     const hasFavorite = useMemo(() => {
         const list = currentUser?.favoriteIds || [];
-
+        console.log(currentUser?.name, ': Favorite Product @@@@@@', list)
         return list.includes(productId);
     }, [currentUser, productId]);
 
@@ -31,7 +31,7 @@ const useFavorite = ({productId, currentUser}: UseFavoriteProps) => {
             if(hasFavorite) {
                 request = () => axios.delete(`/api/favorites/${productId}`);
             } else {
-                request = () => axios.post(`/api/favorites/${productId}}`)
+                request = () => axios.post(`/api/favorites/${productId}`)
             }
 
             await request();
@@ -39,7 +39,7 @@ const useFavorite = ({productId, currentUser}: UseFavoriteProps) => {
             router.refresh(); // 좋아요가 사라지거나 생긴 것을 바로 반영하기 위해
 
         } catch(error) {
-
+            console.log(error);
         }
     }
 
