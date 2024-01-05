@@ -35,6 +35,7 @@ const ProductUploadPage = () => {
     <Container>
       <div className="max-w-screen-lg mx-auto">
         <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
+          <Heading title="Product Upload" subtitle="upload your product" />
           <Input
             id="title"
             label="Title"
@@ -42,10 +43,6 @@ const ProductUploadPage = () => {
             register={register}
             errors={errors}
             required
-          />
-          <Heading 
-            title="Product Upload"
-            subtitle="upload your product"
           />
           <Input
             id="description"
