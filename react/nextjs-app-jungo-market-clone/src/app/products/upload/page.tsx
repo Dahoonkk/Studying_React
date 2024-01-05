@@ -5,8 +5,9 @@ import Container from "@/components/Container";
 import Heading from "@/components/Heading";
 import ImageUpload from "@/components/ImageUpload";
 import Input from "@/components/Input";
-import {categories} from "@/components/categories/Categories";
+import { categories } from "@/components/categories/Categories";
 import CategoryInput from "@/components/categories/CategoryInput";
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
@@ -25,15 +26,22 @@ const ProductUploadPage = () => {
       title: "",
       description: "",
       category: "",
-      latitude: 33.5563,
-      longitude: 126.79581,
+      latitude: 37.5589,
+      longitude: 126.8101,
       imageSrc: "",
       price: 1,
     },
   });
 
-  const imageSrc = watch('imageSrc');
-  const category = watch('category');
+  const imageSrc = watch("imageSrc");
+  const category = watch("category");
+
+  const latitude = watch("latitude");
+  const longitude = watch("longitude");
+
+  const KakaoMap = dynamic(() => import('../../../components/KakaoMap'), {
+    ssr: false
+  })
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
@@ -41,7 +49,7 @@ const ProductUploadPage = () => {
 
   const setCustomValues = (id: string, value: any) => {
     setValue(id, value);
-  }
+  };
 
   return (
     <Container>
@@ -49,7 +57,7 @@ const ProductUploadPage = () => {
         <form className="flex flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
           <Heading title="Product Upload" subtitle="upload your product" />
           <ImageUpload
-            onChange = {(value) => setCustomValues('imageSrc', value)}
+            onChange={(value) => setCustomValues("imageSrc", value)}
             value={imageSrc}
           />
           <Input
@@ -91,8 +99,8 @@ const ProductUploadPage = () => {
           >
             {categories.map((item) => (
               <div key={item.label} className="col-span-1">
-                <CategoryInput 
-                  onClick={(category) => setCustomValues('category', category)}
+                <CategoryInput
+                  onClick={(category) => setCustomValues("category", category)}
                   selected={category === item.path}
                   label={item.label}
                   path={item.path}
@@ -102,7 +110,11 @@ const ProductUploadPage = () => {
             ))}
           </div>
           <hr />
-          {/* KakaoMap */}
+          <KakaoMap 
+            setCustomValues={setCustomValues}
+            latitude={latitude}
+            longitude={longitude}
+          />
           <Button label="상품 생성하기" />
         </form>
       </div>
