@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 interface UseFavoriteProps {
     productId: string;
-    currentUser?: User | null;
+    currentUser?: User | null; 
 }
 
 const useFavorite = ({productId, currentUser}: UseFavoriteProps) => {
