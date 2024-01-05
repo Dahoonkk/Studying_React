@@ -34,4 +34,6 @@ export default async function POST(
         favoriteIds: favoriteIds
     }
   })
+
+  return NextResponse.json(user);
 }
