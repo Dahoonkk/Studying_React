@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar"; // src 폴더 기준으로 경로 추적(@ alias)
 import getCurrentUser from "./actions/getCurrentUser";
 import Script from "next/script";
+import ToastProvider from "@/components/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar currentUser={currentUser} />
+        <ToastProvider />
         {children}
         <Script
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0b2a502a3605abc83752b7207af3a13e&libraries=services,clusterer&autoload=false"
