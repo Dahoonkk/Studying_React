@@ -81,7 +81,7 @@ const Input = ({ receiverId, currentUserId }: InputProps) => {
       className="relative flex items-center justify-between w-full gap-4 p-2 pl-4 border-[1px] border-gray-300 rounded-md shadow-small"
       onSubmit={handleSubmit}
     >
-      {imagePreviewForm && (
+      {imagePreview && (
         <div className="absolute right-0 w-full overflow-hidden rounded-md bottom-[4.2rem] max-w-[300px] shadow-md">
           <img src={imagePreview} alt="" />
           <span

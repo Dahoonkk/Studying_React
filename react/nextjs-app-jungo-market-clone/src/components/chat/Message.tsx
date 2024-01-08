@@ -51,7 +51,7 @@ const Message = ({
                     ${
                       isSender
                         ? "bg-orange-500 rounded-tr-none"
-                        : "br-gray-400 rounded-tl-none"
+                        : "bg-gray-400 rounded-tl-none"
                     }
                 `}
           >
