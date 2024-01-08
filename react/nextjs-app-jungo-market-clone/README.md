@@ -165,3 +165,72 @@ client
 [Link](https://www.pgadmin.org/download/)
 
 </details>
+
+<details>
+<summary>채팅을 구현하는 여러 가지 방법</summary>
+
+#### http polling(이번 강의에서는 http polling 활용 예정)
+
+#### websocket
+
+#### redis
+
+#### pusher ....등등
+
+</details>
+<details>
+<summary>Rest vs WebSocket</summary>
+- 두 가지를 활용하여 채팅앱을 구현할 때 어떻게 다른지 비교하며 Websocket이 무엇인지 알아보자.
+
+### REST API vs WebSocket
+![Alt text](image-3.png)
+![Alt text](image-4.png)
+![Alt text](image-5.png)
+
+- REST API같은 경우는 계속 한 방향으로 손님이 서버에 드라이버가 어디에 있는지 지속해서 요청을 보내 드라이버의 위치를 알 수가 있다.
+- 하지만 Web Socket 같은 경우는 양방향으로 드라이버가 자신의 위치를 나타내서 바로 손님에게 그 정보가 가게 할 수 있다.
+
+</details>
+
+<details>
+<summary>Polling에 대해서</summary>
+
+![Alt text](image-6.png)
+
+### Polling(폴링)이란
+- 클라이언트가 일정한 간격으로 서버에 요청을 보내서 결과를 전달받는 방식이다.
+```typescript
+const POLL_TIME = 1000;
+setInterval(() => {
+    fetch('https://text.com/location');
+}, POLL_TIME); // 이렇게 일정한 간격으로 요청을 보내서 택시의 위치가 어딘지 알 수 있다.
+```
+
+- 이러한 방법은 구현이 쉽다는 장점이 있지만 서버의 상태가 변하지 않았을 때도 계속 요청을 보내서 받아와야 하기에 필요 없는 요청이 많아지며, 또한 요청 간격을 정하기도 쉽지 않다.
+- 또한 폴링의 주기가 짧으면 서버의 성능에 부담을 줄 수 있다.
+- 또한 주기가 길면 실시간성이 떨어지게 된다.
+- 그리고 서버에서 바뀐 데이터가 없어도 계속 요청을 해야하고 결과를 줘야 한다.
+
+
+#### Long Polling(폴링)이란?
+- Polling의 단점으로 인해 새롭게 고안해 낸 것이 Long Polling이다.
+- 롱 폴링도 폴링처럼 계속 요청을 보내지만 차이점은 일반 폴링은 주기적으로 요청을 보낸다면 롱 폴링은 요청을 보내면 서버가 대기하고 있다가 이벤트가 발생했거나 타임아웃이 발생할 때까지 기다린 후에 응답을 주게 된다.
+- 이렇게 클라이언트는 응답을 받자마자 다시 요청을 보내게 된다.
+- 서버의 상태 변화가 많이 없다면 폴링 방식보다 서버의 부담이 줄어들게 된다.
+- 이러한 특징으로 롱 폴링은 실시간 메시지 전달이 중요하지만, 서버의 상태 변화가 자주 발생하지 않는 서비스에 적합하다.
+![Alt text](image-7.png)
+
+#### Streaming 이란?
+- 클라이언트에서 서버에 요청을 보내고 끊기지 않는 연결상태에서 계속 데이터를 수신한다.
+- 양방향 소통보다는 서버에서 계속 요청을 받는 것에 더 유용하다.
+![Alt text](image-8.png)
+
+- Polling, Long Polling, HTTP Streaming 이 세가지의 공통점은 결국 HTTP 프로토콜을 이용하며 이 HTTP 요청과 응답에 Header가 같이 전달되는데 이 Header에 많은 데이터가 들어 있어서 너무 ㅁ낳은 요청과 응답의 교환은 부담을 주게 된다는 것이다.
+![Alt text](image-9.png)
+
+#### HTTP 통신 방법과 WebSocket의 차이점
+- Websocket은 처음에 접속 확립(Handshake)을 위해서만 HTTP 프로토콜을 이용하고 그 이후 부터는 독립적인 프로토콜 ws를 사용하게 된다.
+- 또한 HTTP 요청은 응답이 온 후 연결이 끊기게 되지만 Websocket은 핸드 쉐이크가 완료되고 임의로 연결을 끊기 전까지는 계속 연결이 되어 있다.
+![Alt text](image-10.png)
+
+</details>
