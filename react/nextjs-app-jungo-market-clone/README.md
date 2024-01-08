@@ -316,3 +316,76 @@ if (error) return <p>Error!</p>;
 ```
 
 </details>
+
+<details>
+<summary>useSWRMutation</summary>
+
+```javascript
+import { useSWrConfig } from "swr";
+
+function App() {
+  const { mutate } = useSWRConfig();
+  mutate(key, data, options);
+}
+```
+
+```javascript
+import { mutate } from "swr";
+
+function App() {
+  mutate(key, data, options);
+}
+```
+
+- 위 두 개의 mutate는 key가 필요하지만 아래의 mutate는 이미 bound되어 있기 때문에 key가 필요 없음
+
+```javascript
+function Profile() {
+  const { data, mutate } = useSWR("/api/user", fetcher);
+
+  return (
+    <div>
+      <h1>My name is {data.name}.</h1>
+      <button
+        onClick={async () => {
+          const newName = data.name.toUpperCase();
+          await requestUpdateUsername(newName);
+
+          mutate({ ...data, name: newName });
+        }}
+      >
+        Uppercase my name?
+      </button>
+    </div>
+  );
+}
+```
+
+<br />
+
+### useSWRMutation
+
+```javascript
+import useSWRMutation from 'swr/mutation'
+
+async function updateUser(url, { arg } : {arg: string}) {
+  await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${arg}`
+    }
+  })
+}
+
+function Profile() {
+  const { trigger } = useSWRMutation('/api/user', updateUser, options?)
+
+  return <button onClick={() => {
+    trigger('my_token')
+  }}>Update User</button>
+}
+```
+
+- useSWRMutation은 useSWR + mutate API와 같지만, 다른 점은 처음에 자동으로 요청을 보내는 것이 아닌 trigger가 있어야 요청을 보낸다.
+
+</details>
