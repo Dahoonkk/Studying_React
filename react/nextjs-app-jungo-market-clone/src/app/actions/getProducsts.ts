@@ -1,14 +1,17 @@
+import { PRODUCTS_PER_PAGE } from '@/constants';
 import prisma from '@/helpers/prismadb';
 
 export interface ProductsParams {
     latitude?: number;
     longitude?: number;
     category: string;
+    skip?: number;
+    page?: number;
 }
 
 export default async function getProducts(params: ProductsParams) {
     try {
-        const { latitude, longitude, category} = params;
+        const { latitude, longitude, category, skip} = params;
 
         let query: any = {};
 
@@ -31,11 +34,16 @@ export default async function getProducts(params: ProductsParams) {
             where: query,
             orderBy: {
                 createdAt: 'desc'
-            }
+            },
+            skip:skip ? Number(skip) : 0,
+            take: PRODUCTS_PER_PAGE,
         })
 
+        const totalItems = await prisma.product.count({ where: query})
+
         return {
-            data: products
+            data: products,
+            totalItems
         }
 
     } catch(error: any) {
