@@ -12,8 +12,6 @@ const ProductPage = async ({ params } : {params: Params}) => {
   const product = await getProductById(params);
   const currentUser = await getCurrentUser();
 
-  console.log('currentUser @@@@ ', currentUser);
-
   if(!product) {
     return (
       <EmptyState />

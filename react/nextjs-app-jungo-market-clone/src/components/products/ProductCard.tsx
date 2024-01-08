@@ -19,7 +19,7 @@ const ProductCard = ({ data, currentUser }: ProductCardProps) => {
 
   return (
     <div
-      onClick={() => router.push(`/products/${data.id}}`)}
+      onClick={() => router.push(`/products/${data.id}`)}
       className="col-span-1 cursor-pointer group"
     >
       <div className="flex flex-col w-full gap-2">

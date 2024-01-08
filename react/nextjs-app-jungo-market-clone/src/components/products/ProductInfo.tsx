@@ -11,12 +11,14 @@ interface ProductInfoProps {
         icon: IconType,
         label: string,
         description: string;
-    };
+    } | undefined;
     createdAt: Date;
     description: string;
 }
 
 const ProductInfo = ({user, category, createdAt, description} : ProductInfoProps) => {
+    console.log('--------------------detail product page------------------------------')
+    console.log('product detail @@@ ', user);
   return (
     <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">

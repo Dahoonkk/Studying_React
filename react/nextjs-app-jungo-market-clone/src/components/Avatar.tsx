@@ -12,7 +12,7 @@ const Avatar = ({src} : AvatarProps) => {
         height={30}
         width={30}
         alt="Avater"
-        src={src || 'https://via.placeholder.com/400x400?text=no+user+Image'}
+        src={src || 'https://via.placeholder.com/30x30?text=no+user+Image'}
     />
   )
 }

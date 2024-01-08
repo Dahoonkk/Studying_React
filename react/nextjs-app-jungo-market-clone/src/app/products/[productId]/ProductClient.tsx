@@ -22,7 +22,7 @@ const ProductClient = ({ product, currentUser }: ProductClient) => {
     ssr: false,
   });
 
-  const category = categories.find((item) => item.path === product.category)
+  const category = categories.find((items) => items.path === product.category)
 
   return (
     <Container>
