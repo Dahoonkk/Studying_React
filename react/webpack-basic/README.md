@@ -120,3 +120,31 @@ npm i -D css-loader style-loader sass sass-loader
 
 ![Alt text](image-6.png)
 </details>
+
+<details>
+<summary>HTML Webpack Plugin</summary>
+
+### PlugIn
+- 웹팩은 로더와 플러그인의 확장 기능이 있다.
+- 웹팩의 플러그인은 로더가 할 수 없는 다른 작업을 수행할 목적으로 제공된다.
+- 로더는 모듈을 output으로 만들어가는 과정에서 사용한다.
+- 플러그인은 webpack으로 변환한 파일에 추가적인 기능을 더하고 싶을 때 사용한다. (최종적인 결과물을 변형시킨다.)
+- 플러그인은 웹팩의 기본적인 동작에 추가적인 기능을 제공하는 속성이다.
+
+### HTML Webpack [Plugin](https://webpack.js.org/plugins/) 종류
+- HtmlWebpackPlugin : webpack 번들을 제공하는 HTML 파일 생성을 단순화한다.
+- CleanWebpackPlugin : 빌드 이전의 결과물을 제거한다.
+- MiniCssExtractPlugin : CSS가 필요한 JS 파일별로 CSS 파일을 생성한다.
+
+#### HTML Webpack Plugin
+- HtmlWebPackPlugin은 웹팩이 HTML 파일을 읽어서 html 파일을 빌드할 수 있게 해 준다.
+```bash
+npm i -D html-webpack-plugin
+```
+![Alt text](image-7.png)
+- 플러그인을 다양한 용도로 Configuration에서 여러 번 사용할 수 있으므로 new 연산자로 호출하여 플러그인의 인스턴스를 생성해서 사용한다.
+
+![Alt text](image-8.png)
+- 이제는 template에 있는 src/index.html에 있는 소스코드가 filename에 있는 dist/index.html로 만들어진다.
+
+</details>
