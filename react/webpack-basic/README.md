@@ -247,6 +247,23 @@ npm install -D babel-loader @babel/core @babel/preset-env
 <details>
 <summary>bundle analyzer</summary>
 
+#### 설치
+```bash
+# npm
+npm install --save-dev webpack-bundle-analyzer
 
+# yarn
+yarn add -D webpack-bundle-analyzer
+```
+
+![Alt text](/react/webpack-basic/img/image-19.png)
+
+#### 이 모듈 사용의 장점
+- 번들 내부에 무엇이 있는지 파악 가능
+- 크기를 가장 많이 차지하는 모듈 알아보기
+- 최적화
+- 축소된 번들을 지원
+- 번들 모듈의 실제 크기를 얻기 위해 구문 분석
+- gzipped 크기를 확인
 
 </details>
