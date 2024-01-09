@@ -158,3 +158,11 @@ npm i -D html-webpack-plugin
 
 ![Alt text](/react/webpack-basic/img/image-9.png)
 </details>
+
+<details>
+<summary>Webpack development server</summary>
+
+> 이전까지 Live Server 확장 프로그램을 이용해서 개발 서버를 실행화고 있었는데 이제는 webpack을 이용해서 실행해보자.;
+
+![Alt text](/react/webpack-basic/img/image-10.png)
+</details>
