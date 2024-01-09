@@ -74,3 +74,19 @@
 
 
 </details>
+
+<details>
+<summary>import 하는 방법</summary>
+
+> webpack 설치 없이 함수나 클래스 등을 import하게 되면 다음과 같은 에러가 발생하게 된다.
+> ![Alt text](image-5.png)
+
+### 위 문제를 해결하기 위해 webpack 설치
+```bash
+npm init -y
+
+npm i -D webpack webpack-cli
+
+npm run build
+```
+</details>
