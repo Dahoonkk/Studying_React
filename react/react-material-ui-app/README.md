@@ -32,3 +32,36 @@ npm install @mui/material @mui/styled-engine-sc styled-components
 npm install @mui/icons-material
 ```
 </details>
+
+<details>
+<summary>MUI 기본 사용법</summary>
+
+### 버튼 사용법
+![Alt text](/react/react-material-ui-app/readme_img/image.png)
+- MUI에서 제공하는 버튼을 사용하고 싶은 경우 Button을 import 해서 사용하면 된다.
+
+![Alt text](readme_img/image-1.png)
+![Alt text](readme_img/image-2.png)
+- variant props에 따라서 스타일링이 차이가 난다.
+- variant뿐 아니라 아주 많은 props가 존재하는데 그것은 페이지 아래로 내려가보면 API에 자세히 나와있다. [...Go!](https://mui.com/material-ui/api/button/#props)
+
+### [버튼에 아이콘](https://mui.com/material-ui/react-button/#buttons-with-icons-and-label)을 넣으려면?
+
+### 버튼 색깔 바꾸기
+![Alt text](readme_img/image-3.png)
+
+> 커스텀 버튼을 만드려면?
+>![Alt text](readme_img/image-4.png)
+
+### TypoGraphy 사용법
+- 한 번에 너무 많은 유형의 크기와 스타일을 사용하면 레이아웃이 손상될 수 있다.
+- Typographic scale에는 레이아웃 그리드와 함께 잘 작동하는 제한된 유형 크기 세트가 있다.
+```javascript
+<Typography variant="h1" component="div" gutterBottom>
+    h1. Heading
+</Typography>
+```
+- h1 스타일을 사용하고 div 태그를 사용한다.
+![Alt text](readme_img/image-5.png)
+
+</details>
