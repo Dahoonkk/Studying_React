@@ -10,7 +10,7 @@
 - 여러 파일의 자바스크립트 코드를 압축하여 최적화할 수 있기 때문에 로딩에 대한 네트워크 비용을 줄일 수 있다.
 - 모듈 단위로 개발이 가능하여, 가독성과 유지보수가 쉽다.
 - 많은 자바스크립트 파일과 module, sass 파일이든지 이미지 에셋들을 배포를 위한 정적인 에셋들로 만들어 준다.
-![Alt text](image.png)
+![Alt text](/react/webpack-basic/img/image.png)
 
 #### Create-React-App 패키지를 이용하면
 - 리액트를 설치할 때 내부에서 이미 웹팩을 사용해서 Development Environment 개발 환경을 생성한다.
@@ -20,7 +20,7 @@
 #### 이번 프로젝트에서는 
 - Create-React-App을 이용하지 않고 웹팩을 처음부터 이용해서 개발환경을 만들어 보자
 
-![Alt text](image-1.png)
+![Alt text](/react/webpack-basic/img/image-1.png)
 - Entry
   - 의존성 그래프의 시작점을 웹팩에서는 엔트리(Entry)라고 한다.
   - 웹팩은 엔트리를 통해서 필요한 모듈을 로딩하고 하나의 파일로 묶는다.
@@ -56,7 +56,7 @@
 
 <details>
 <summary>폴더 및 파일 구조 생성</summary>
-![Alt text](image-2.png)
+![Alt text](/react/webpack-basic/img/image-2.png)
 
 #### dist
 - src에 들어 있는 코드들이 배포를 위해서 정적인 에셋들로 모이게 되는 공간이다.
@@ -66,10 +66,10 @@
 #### src
 - 애플리케이션을 위해 작성해야하는 코드는 이 source 폴더 안으로 들어간다.
 
-![Alt text](image-3.png)
+![Alt text](/react/webpack-basic/img/image-3.png)
 
 #### Live Server 확장 프로그램으로 브라우저로 실행하기
-![Alt text](image-4.png)
+![Alt text](/react/webpack-basic/img/image-4.png)
 > 나중에는 live server 없이 webpack을 이용해서 실행을 해줍니다.
 
 
@@ -79,7 +79,7 @@
 <summary>import 하는 방법</summary>
 
 > webpack 설치 없이 함수나 클래스 등을 import하게 되면 다음과 같은 에러가 발생하게 된다.
-> ![Alt text](image-5.png)
+> ![Alt text](/react/webpack-basic/img/image-5.png)
 
 ### 위 문제를 해결하기 위해 webpack 설치
 ```bash
@@ -104,7 +104,7 @@ npm run build
 <details>
 <summary>Webpack Loader</summary>
 
-> 로더(loader)는 웹팩이 웹 애플리케이션을 해석할 때 자바스크립트 파일이 아닌 웹 자원(HTML, CSS, Image, 폰트 등)들을 변환할 수 있도록 도와주는 속성이다.
+> 로더(loader)는 웹팩이 웹 애플리케이션을 해석할 때 자바스크립트 파일이 아닌 웹 자원(HTML, CSS, /react/webpack-basic/img/image, 폰트 등)들을 변환할 수 있도록 도와주는 속성이다.
 
 ```bash
 npm i -D css-loader style-loader sass sass-loader
@@ -118,7 +118,7 @@ npm i -D css-loader style-loader sass sass-loader
 - [postcss-loader](https://webpack.kr/loaders/postcss-loader)는 [PostCSS](https://postcss.org/)를 사용해 CSS/SSS 파일을 로드하고 변환한다.
 - [stylus-loader](https://webpack.kr/loaders/stylus-loader/)는 Styleus 파일을 로드하고 컴파일한다.
 
-![Alt text](image-6.png)
+![Alt text](/react/webpack-basic/img/image-6.png)
 </details>
 
 <details>
@@ -141,10 +141,20 @@ npm i -D css-loader style-loader sass sass-loader
 ```bash
 npm i -D html-webpack-plugin
 ```
-![Alt text](image-7.png)
+![Alt text](/react/webpack-basic/img/image-7.png)
 - 플러그인을 다양한 용도로 Configuration에서 여러 번 사용할 수 있으므로 new 연산자로 호출하여 플러그인의 인스턴스를 생성해서 사용한다.
 
-![Alt text](image-8.png)
+![Alt text](/react/webpack-basic/img/image-8.png)
 - 이제는 template에 있는 src/index.html에 있는 소스코드가 filename에 있는 dist/index.html로 만들어진다.
 
+</details>
+
+<details>
+<summary>Webpack Caching</summary>
+
+> 웹팩(Webpack) 컴파일로 생성된 파일에서 변경된 내용이 없다면 브라우저는 캐시 상태를 유지하고 그대로 사용하게 된다.
+> 여기서 브라우저가 변경 사항을 확인하는 방법 중 하나는 파일 이름이다.
+> 그렇기 때문에 파일을 생성할 때 해쉬값을 줄 수 있다.
+
+![Alt text](/react/webpack-basic/img/image-9.png)
 </details>
