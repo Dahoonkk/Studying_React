@@ -168,6 +168,44 @@ npm i -D html-webpack-plugin
 </details>
 
 <details>
+<summary>Webpack Devtool</summary>
+
+### Devtool
+- 이 옵션은 소스 맵(source map)이 생성되는지 여부와 생성 방법을 제어한다.
+
+### Source Map
+- 웹 사이트에서 얻을 수 있는 가장 쉬운 성능 향상 중 하나는 JavaScript 및 CSS 파일을 결합하고 압축하는 것이다.
+- 하지만 이러한 압축 파일 내에서 코드를 디버그해야 하는 경우에는 어떻게 될까?
+  - 소스 맵을 이용하여 디버그 할 수 있다.
+  - 소스 맵(Source Map)은 압축 파일 내의 코드를 소스 파일의 원래 위치로 다시 매핑하는 방법을 제공한다.
+  - Chrome 및 Firefox 개발자 도구는 모두 소스 맵에 대한 기본 제공 지원과 함께 제공된다.
+    - 배포용으로 빌드한 파일 <--연결--> 원본 파일
+
+#### 웹팩에서 소스맵을 사용하는 방법
+- 아래와 같이 아주 많은 옵션들이 존재한다.
+![Alt text](/react/webpack-basic/img/image-13.png)
+![Alt text](/react/webpack-basic/img/image-14.png)
+![Alt text](/react/webpack-basic/img/image-15.png)
+</details>
+
+<details>
+<summary>Babel Loader</summary>
+
+### Babel Loader
+- ES6 이상의 자바스크립트 코드는 인터넷 익스플로러 혹은 구버전 브라우저에서 지원이 안되는 경우가 있다.
+- 그렇기 때문에 이러한 구버전 브라우저에서도 최신 자바스크립트 코드로 이루어진 앱을 이용할 수 있게 ES5 이하의 코드로 프랜스파일링 하도록 하는 기능이 바벨이다.
+- 그리고 웹팩으로 파일을 번들링(bundling)할 때도 바벨을 사용할 수 있게 해주는 것이 babel-loader이다.
+
+#### 설치
+```bash
+npm install -D babel-loader @babel/core @babel/preset-env
+```
+
+![Alt text](/react/webpack-basic/img/image-16.png)
+
+</details>
+
+<details>
 <summary>gzip 압축</summary>
 
 > 압축은 대역폭을 절약하고 사이트 속도를 높이는 간단하고 효과적인 방법이다.
@@ -192,27 +230,6 @@ npm i -D html-webpack-plugin
 - 서버에서는 파일을 찾으면 해당 파일을 압축하여 전송한다.
 - 브라우저에서는 해당 파일을 압축을 풀어 사용자에게 보여주게 된다.
 
-- 일반 이전 index.html 대신 .zip 파일을 브라우저(index.html.zip)로 보낼 수 있다면 대역폭과 다운로드 시간을 절약할 수 있다. 브라우저는 압축 파일을 다운로드하고 압축을 풀고 페이지가 빠르게 로드되어 사용자에게 보여줄 수 있다.;
+- 일반 이전 index.html 대신 .zip 파일을 브라우저(index.html.zip)로 보낼 수 있다면 대역폭과 다운로드 시간을 절약할 수 있다. 브라우저는 압축 파일을 다운로드하고 압축을 풀고 페이지가 빠르게 로드되어 사용자에게 보여줄 수 있다.
 
-</details>
-
-<details>
-<summary>Webpack Devtool</summary>
-
-### Devtool
-- 이 옵션은 소스 맵(source map)이 생성되는지 여부와 생성 방법을 제어한다.
-
-### Source Map
-- 웹 사이트에서 얻을 수 있는 가장 쉬운 성능 향상 중 하나는 JavaScript 및 CSS 파일을 결합하고 압축하는 것이다.
-- 하지만 이러한 압축 파일 내에서 코드를 디버그해야 하는 경우에는 어떻게 될까?
-  - 소스 맵을 이용하여 디버그 할 수 있다.
-  - 소스 맵(Source Map)은 압축 파일 내의 코드를 소스 파일의 원래 위치로 다시 매핑하는 방법을 제공한다.
-  - Chrome 및 Firefox 개발자 도구는 모두 소스 맵에 대한 기본 제공 지원과 함께 제공된다.
-    - 배포용으로 빌드한 파일 <--연결--> 원본 파일
-
-#### 웹팩에서 소스맵을 사용하는 방법
-- 아래와 같이 아주 많은 옵션들이 존재한다.
-![Alt text](/react/webpack-basic/img/image-13.png)
-![Alt text](/react/webpack-basic/img/image-14.png)
-![Alt text](/react/webpack-basic/img/image-15.png)
 </details>
