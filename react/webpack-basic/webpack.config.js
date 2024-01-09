@@ -14,6 +14,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name][contenthash].js",
     clean: true,
+    assetModuleFilename: '[name][ext]',
   },
 
   devtool: "source-map",
@@ -34,6 +35,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
+        type: 'asset/resource',
+      }
     ],
   },
 
