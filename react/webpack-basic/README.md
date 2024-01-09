@@ -100,3 +100,23 @@ npm run build
 - resolve()를 이용해서 경로를 만들 수 있다.
   - ex) path.resolve("Users", "john", "index.html") => 'Users/john/index.html'
 </details>
+
+<details>
+<summary>Webpack Loader</summary>
+
+> 로더(loader)는 웹팩이 웹 애플리케이션을 해석할 때 자바스크립트 파일이 아닌 웹 자원(HTML, CSS, Image, 폰트 등)들을 변환할 수 있도록 도와주는 속성이다.
+
+```bash
+npm i -D css-loader style-loader sass sass-loader
+```
+
+### [Styling](https://webpack.kr/loaders/#styling)
+- [style-loader](https://webpack.kr/loaders/style-loader)는 DOM에 스타일로 모듈 내보내기를 추가한다.
+- [css-loader](https://webpack.kr/loaders/css-loader)는 리졸브된 가져오기로 CSS 파일을 로드하고 CSS 코드를 반환한다.
+- [less-loader](https://webpack.kr/loaders/less-loader)는 LESS 파일을 로드하고 컴파일한다.
+- [sass-loader](https://webpack.kr/loaders/sass-loader)는 SASS/SCSS 파일을 로드하고 컴파일한다.
+- [postcss-loader](https://webpack.kr/loaders/postcss-loader)는 [PostCSS](https://postcss.org/)를 사용해 CSS/SSS 파일을 로드하고 변환한다.
+- [stylus-loader](https://webpack.kr/loaders/stylus-loader/)는 Styleus 파일을 로드하고 컴파일한다.
+
+![Alt text](image-6.png)
+</details>
