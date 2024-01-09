@@ -48,3 +48,5 @@
   - 하지만 타입 checking 기능은 없다. 
   - 그 이유는 이미 에디터 내에서 다른 것들이 타입 체킹을 하기 때문에 transpiling 만 제공한다.
 </details>
+
+![Alt text](image-5.png)
