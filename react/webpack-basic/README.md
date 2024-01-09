@@ -90,3 +90,13 @@ npm i -D webpack webpack-cli
 npm run build
 ```
 </details>
+
+<details>
+<summary>webpack 설정 파일 생성</summary>
+
+### webpack.config.js
+- 파일이나 디렉터리의 경로를 다룰 때 Node.js에서 있는 path 모듈을 사용할 수 있다.
+- path 모듈은 node.js에 내장되어 있기 때문에 별도의 라이브러리 설치 없이 바로 불러와서 사용할 수 있다.
+- resolve()를 이용해서 경로를 만들 수 있다.
+  - ex) path.resolve("Users", "john", "index.html") => 'Users/john/index.html'
+</details>
