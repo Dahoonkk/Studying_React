@@ -570,3 +570,37 @@ export default function BasicModal() {
 ```
 
 </details>
+
+<details>
+<summary>Dark Mode</summary>
+
+### [Dark Mode](https://mui.com/material-ui/customization/dark-mode/#main-content)
+- 머티리얼 UI에서는 라이트(기본값)와 다크의 두 가지 팔레트 모드가 있다.
+- createTheme 도우미에 mode: 'dark'를 추가하여 애플리케이션이 사용자의 기본 설정과 상관없이 기본 테마로 어두운 테마를 사용하도록 할 수 있다.
+
+```javascript
+// Example
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+function App() {
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <main>This app is using the dark mode</main>
+    </ThemeProvider>
+  );
+}
+
+export default App;
+
+```
+- createTheme 도우미에 모드: 'dark'를 추가하면 다음 데모와 같이 여러 팔레트 값이 수정된다.
+
+
+</details>
