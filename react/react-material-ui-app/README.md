@@ -140,6 +140,11 @@ const theme = createTheme({
 - Box 구성 요소는 대부분의 CSS 유틸리티 요구 사항에 대한 래퍼 구성 요소 역할을 한다.
 ![Alt text](readme_img/image-12.png)
 
-
+#### flex
+- 이것은 flex-grow, flex-shrink 및 flex-basis가 결합된 약어이다.
+- 두 번째 및 세 번째 매개변수(flex-shrink 및 flex-basis)는 선택 사항이다.
+- 기본값은 0 1 auto이지만 flex: 5;와 같이 단일 숫자 값으로 설정하면 flex-basis가 0%로 변경되므로 flex-grow: 5를 설정하는 것과 같다.
+- 플렉스 수축: 1; 플렉스 기반: 0%;
+![Alt text](readme_img/image-13.png)
 
 </details>
