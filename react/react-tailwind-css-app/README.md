@@ -123,3 +123,10 @@ npm install react-icons --save
 ```
 
 </details>
+
+<details>
+<summary>Navbar 컴포넌트 생성하기</summary>
+
+![Alt text](readme_img/image-9.png)
+
+</details>
