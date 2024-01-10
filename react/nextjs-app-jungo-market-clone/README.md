@@ -389,3 +389,5 @@ function Profile() {
 - useSWRMutation은 useSWR + mutate API와 같지만, 다른 점은 처음에 자동으로 요청을 보내는 것이 아닌 trigger가 있어야 요청을 보낸다.
 
 </details>
+
+![Alt text](image-11.png)

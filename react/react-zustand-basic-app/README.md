@@ -129,3 +129,5 @@ export const useCounterStore = create(
 )
 ```
 </details>
+
+![Alt text](image.png)

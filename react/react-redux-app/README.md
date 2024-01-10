@@ -300,3 +300,5 @@ export default posts;
 ### 결론
 - Redux Thunk를 사용함으로써 액션 생성자가 그저 하나의 액션 객체를 생성할 뿐 아니라 그 내부 안에서 여러 가지 작업도 할 수 있게 만들 수 있다.
 </details>
+
+![Alt text](image-5.png)
