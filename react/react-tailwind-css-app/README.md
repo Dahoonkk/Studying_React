@@ -130,3 +130,10 @@ npm install react-icons --save
 ![Alt text](readme_img/image-9.png)
 
 </details>
+
+<details>
+<summary>Home 컴포넌트 생성하기</summary>
+
+![Alt text](readme_img/image-10.png)
+
+</details>
