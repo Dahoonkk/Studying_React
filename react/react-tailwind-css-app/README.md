@@ -58,4 +58,22 @@ module.exports = {
 @tailwind utilities;
 ```
 
+### 전체 구조 생성하기
+![Alt text](readme_img/image.png)
+
+### 필요한 에셋 가져오기
+![Alt text](readme_img/image-1.png)
+
+### [React/icons](https://react-icons.github.io/react-icons/) 설치
+```bash
+npm install react-icons --save
+```
+
+</details>
+
+<details>
+<summary>PostCSS & AutoFixer</summary>
+
+
+
 </details>

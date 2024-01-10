@@ -1,10 +1,25 @@
-import './App.css';
+import "./App.css";
+import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+import About from "./components/About";
+import Support from "./components/Support";
+import Feature from "./components/Feature";
+import Feedback from "./components/Feedback";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div >
-      
-    </div>
+    <>
+      <Navbar />
+      <Home />
+      <About />
+      <Support />
+      <Feature />
+      <Feedback />
+      <Contact />
+      <Footer />
+    </>
   );
 }
 
