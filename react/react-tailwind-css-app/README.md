@@ -144,3 +144,10 @@ npm install react-icons --save
 ![Alt text](readme_img/image-11.png)
 
 </details>
+
+<details>
+<summary>Support 컴포넌트 생성하기</summary>
+
+![Alt text](readme_img/image-12.png)
+
+</details>
