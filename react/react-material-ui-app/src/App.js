@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import { useState } from "react";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
+import Create from "./components/Create";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -27,6 +28,7 @@ function App() {
           <CenterBody />
           <RightBody mode={mode} setMode={setMode} />
         </Stack>
+        <Create />
         <Footer />
       </Box>
     </ThemeProvider>

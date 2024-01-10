@@ -497,3 +497,76 @@ const itemData = [
 
 ```
 </details>
+
+<details>
+<summary>Tooltip & Modal</summary>
+
+### [Tooltip](https://mui.com/material-ui/react-tooltip/#main-content)
+- Tooltip은 사용자가 요소 위에 마우스를 올리거나, 초점을 맞추거나, 탭할 때 정보 텍스트를 표시한다.
+```javascript
+// Example
+
+<Tooltip title="Delete">
+  <IconButton>
+    <DeleteIcon />
+  </IconButton>
+</Tooltip>
+```
+
+### [Floating Action Button](https://mui.com/material-ui/api/fab/#main-content)
+- FAB(플로팅 작업 버튼)은 화면에서 기본 또는 가장 일반적인 작업을 수행한다.
+```javascript
+// Example
+<Fab color="secondary" aria-label="edit">
+  <EditIcon />
+</Fab>
+
+```
+![Alt text](readme_img/image-16.png)
+
+### [Modal](https://mui.com/material-ui/react-modal/#main-content)
+- 모달 구성 요소는 대화 상자, 팝오버, 라이트박스 등을 만들기 위한 견고한 기반을 제공한다.
+```javascript
+// Example 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+export default function BasicModal() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  return (
+    <div>
+      <Button onClick={handleOpen}>Open modal</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+  );
+}
+
+```
+
+</details>
