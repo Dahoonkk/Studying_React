@@ -241,3 +241,57 @@ export default function PositionedMenu() {
 ![Alt text](readme_img/image-15.png)
 
 </details>
+
+<details>
+<summary>Lists</summary>
+
+### [List](https://mui.com/material-ui/react-list/#main-content)
+- 목록은 연속적인 텍스트 또는 이미지 그룹이다. 아이콘과 텍스트로 표시되는 기본 및 추가 작업을 포함하는 항목으로 구성된다.
+
+```javascript
+// Example
+
+export default function BasicList() {
+  return (
+    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <nav aria-label="main mailbox folders">
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Inbox" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <DraftsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Drafts" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </nav>
+      <Divider />
+      <nav aria-label="secondary mailbox folders">
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText primary="Trash" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component="a" href="#simple-list">
+              <ListItemText primary="Spam" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </nav>
+    </Box>
+  );
+}
+```
+
+</details>

@@ -1,5 +1,13 @@
+import { AddShoppingCart, Drafts, Home, Inbox } from "@mui/icons-material";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import React from "react";
-import { Box } from "@mui/material";
 
 const LeftBody = () => {
   return (
@@ -7,11 +15,45 @@ const LeftBody = () => {
       flex={1}
       p={2}
       sx={{
-        display: { sx: "none", sm: "block" },
-        backgroundColor: 'primary.main'
+        display: { xs: "none", sm: "block" },
       }}
     >
-      LeftBody
+      <Box position="fixed">
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <Home />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <Inbox />
+              </ListItemIcon>
+              <ListItemText primary="Inbox" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <Drafts />
+              </ListItemIcon>
+              <ListItemText primary="Drafts" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <AddShoppingCart />
+              </ListItemIcon>
+              <ListItemText primary="Shopping" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Box>
     </Box>
   );
 };
