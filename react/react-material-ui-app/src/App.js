@@ -30,7 +30,9 @@ function App() {
       >
         Custom Style
       </Button>
+      <Button color="secondary" variant="contained">secondary theme button</Button>
       <CustomButton>Custom Button</CustomButton>
+      <CustomButtonTheme>Custom Theme Button</CustomButtonTheme>
       <Typography variant='h1' gutterBottom>h1. Heading</Typography>
     </div>
   );
@@ -48,5 +50,18 @@ const CustomButton = styled(Button)({
     color: "black",
   },
 });
+
+const CustomButtonTheme = styled(Button)(({theme}) => ({
+  backgroundColor: theme.palette.primary.main,
+  color: 'white',
+  margin: 10,
+  "&:hover": {
+    backgroundColor: theme.palette.secondary.main
+  },
+  "&:disabled": {
+    backgroundColor: 'white',
+    color: 'black'
+  }
+}))
 
 export default App;
