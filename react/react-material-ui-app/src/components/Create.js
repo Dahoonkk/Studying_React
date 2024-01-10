@@ -10,16 +10,30 @@ import {
 import React, { useState } from "react";
 
 const Create = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
-    <Tooltip title="Create"
-        sx={{ position: "fixed", bottom: 20, right: 30}}
-    >
-    <IconButton>
-      <Fab color="#00bcd4">
-        <Edit />
-      </Fab>
-    </IconButton>
-    </Tooltip>
+    <>
+      <Tooltip title="Create" sx={{ position: "fixed", bottom: 20, right: 30 }}>
+        <IconButton>
+          <Fab color="#00bcd4">
+            <Edit onClick={handleOpen} />
+          </Fab>
+        </IconButton>
+      </Tooltip>
+      <Modal open={open} onClose={handleClose}>
+        <Box sx={style}>
+          <Typography id="modal-title" variant="h6">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-description" sx={{ mt: 2 }}>
+            This is a modal. Welcome and Hello!
+          </Typography>
+        </Box>
+      </Modal>
+    </>
   );
 };
 
