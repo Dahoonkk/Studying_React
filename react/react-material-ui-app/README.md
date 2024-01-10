@@ -148,3 +148,34 @@ const theme = createTheme({
 ![Alt text](readme_img/image-13.png)
 
 </details>
+
+<details>
+<summary>App Bar(Header)</summary>
+
+> 상단 앱 바는 현재 화면과 관련된 콘텐츠 및 작업을 제공한다. 브랜딩, 화면 제목, 탐색 및 작업에 사용된다.;
+
+[AppBar](https://mui.com/material-ui/react-app-bar/#main-content)
+
+```javascript
+// Example
+<Box sx={{ flexGrow: 1 }}>
+  <AppBar position="static">
+    <Toolbar>
+      <IconButton
+        size="large"
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        sx={{ mr: 2 }}
+      >
+        <MenuIcon />
+      </IconButton>
+      <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        News
+      </Typography>
+      <Button color="inherit">Login</Button>
+    </Toolbar>
+  </AppBar>
+</Box>
+```
+</details>
