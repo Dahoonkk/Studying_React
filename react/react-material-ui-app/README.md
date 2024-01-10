@@ -93,4 +93,53 @@ export const theme = createTheme({
 
 #### 커스텀 버튼에 테마 적용
 ![Alt text](readme_img/image-7.png)
+
+</details>
+
+<details>
+<summary>BreakPoints & Grid & Stack & Box</summary>
+
+### [Breakpoints](https://mui.com/material-ui/customization/breakpoints/)를 이용한 반응형 구현하기
+- 최적의 사용자 경험을 위해 MUI 인터페이스는 다양한 중단점에서 레이아웃을 조정할 수 있어야 한다.
+- 중단점은 반응형으로 만들기 위해 다양한 구성 요소에서 내부적으로 사용되지만 Grid 구성 요소를 통해 응용 프로그램의 레이아웃을 제어하는 데 사용할 수도 있다.
+![Alt text](readme_img/image-8.png)
+
+#### 테마를 이용한 커스텀 breakpoint 생성
+```javascript
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    }
+  }
+})
+```
+
+<br />
+
+### [Grid](https://mui.com/material-ui/react-grid/#main-content)
+- MUI 디자인 반응형 레이아웃 그리드는 화면 크기와 방향에 맞게 조정되어 레이아웃 전체에서 일관성을 보장한다.
+![Alt text](readme_img/image-9.png)
+![Alt text](readme_img/image-10.png)
+
+<br />
+
+### [Stack](https://mui.com/material-ui/react-stack/)
+- Stack 구성 요소는 각 자식 사이에 선택적 간격 또는 구분선을 사용하여 수직 또는 수평 축을 따라 직계 자식의 레이아웃을 관리한다.
+- 스택은 1차원 레이아웃과 관련된 반면 그리드는 2차원 레이아웃을 처리한다.
+- 기본 방향은 자식을 세트로 쌓는 열이다.
+[Title](.gitignore)
+
+<br />
+
+### [Box](https://mui.com/material-ui/react-box/)
+- Box 구성 요소는 대부분의 CSS 유틸리티 요구 사항에 대한 래퍼 구성 요소 역할을 한다.
+![Alt text](readme_img/image-12.png)
+
+
+
 </details>

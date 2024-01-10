@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import styled from "@emotion/styled";
 import { Typography } from '@mui/material';
+import { red, green, blue} from "@mui/material/colors";
 
 function App() {
   return (
@@ -34,6 +35,11 @@ function App() {
       <CustomButton>Custom Button</CustomButton>
       <CustomButtonTheme>Custom Theme Button</CustomButtonTheme>
       <Typography variant='h1' gutterBottom>h1. Heading</Typography>
+      <Root>
+        <Typography>down(md):red</Typography>
+        <Typography>up(md):blue</Typography>
+        <Typography>up(lg):green</Typography>
+      </Root>
     </div>
   );
 }
@@ -61,6 +67,19 @@ const CustomButtonTheme = styled(Button)(({theme}) => ({
   "&:disabled": {
     backgroundColor: 'white',
     color: 'black'
+  }
+}))
+
+const Root = styled(`div`)(({theme}) => ({
+  padding: theme.spacing(1),
+  [theme.breakpoints.down('md')]: {
+    backgroundColor: red[500],
+  },
+  [theme.breakpoints.up('md')]: {
+    backgroundColor: blue[500],
+  },
+  [theme.breakpoints.up('lg')]: {
+    backgroundColor: green[500],
   }
 }))
 
