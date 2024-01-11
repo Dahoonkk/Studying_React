@@ -157,3 +157,40 @@ npm install react-icons --save
 ![Alt text](readme_img/image-13.png)
 
 </details>
+
+<details>
+<summary>Feedback 컴포넌트 생성하기</summary>
+
+![Alt text](readme_img/image-14.png)
+
+</details>
+
+<details>
+<summary>Contact 컴포넌트 생성하기</summary>
+
+![Alt text](readme_img/image-15.png)
+
+</details>
+
+<details>
+<summary>Footer 컴포넌트 생성하기</summary>
+
+![Alt text](readme_img/image-16.png)
+
+</details>
+
+<details>
+<summary>React Scroll</summary>
+
+> 수직 스크롤 애니메이션을 위한 React 컴포넌트;
+
+#### 모듀 설치
+```bash
+npm install react-scroll
+```
+
+#### 모듈 사용해보기
+- [Link1](https://codesandbox.io/s/basic-6t84k?file=/src/index.js:1917-1920)
+- [Link2](https://6t84k.csb.app/)
+
+</details>
