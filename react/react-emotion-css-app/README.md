@@ -546,5 +546,103 @@ export default BookSearchForm;
 
 </details>
 
+<details>
+<summary>책 리스트 UI 작성하기</summary>
+
+### 책 데이터 가져올 때 loader 보여주기
+```javascript
+// Loader.js
+/** @jsxImportSource @emotion/react */
+
+import { useTheme } from "@emotion/react";
+import React from "react";
+import { css } from "@emotion/react";
+
+const Loader = ({ loading, children }) => {
+  const theme = useTheme();
+
+  return (
+    <>
+      {loading ? (
+        <div
+          css={css`
+            color: ${theme.text};
+            text-align: center;
+            padding: 20px 0;
+          `}
+        >
+          {children}
+        </div>
+      ) : null}
+    </>
+  );
+};
+
+export default Loader;
+```
+
+### BookList UI 생성하기
+```javascript
+import React from "react";
+import { Link } from "react-router-dom";
+import formatAuthors from "../helpers/formatAuthors";
+
+const Book = ({ book }) => {
+  return (
+    <li>
+      <div>
+        <img
+          alt={`${book.volumeInfo.title} book`}
+          src={`http://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api`}
+        />
+        <div>
+          <Link to={`/book${book.id}`}>
+            <h3>{book.volumeInfo.title}</h3>
+          </Link>
+          <p>{formatAuthors(book.volumeInfo.authors)}</p>
+          <p>{book.volumeInfo.publishedDate}</p>
+        </div>
+      </div>
+    </li>
+  );
+};
+
+const BookList = ({ books }) => {
+  if (!books.totalItems) {
+    return <div>책 이름을 검색해주세요.</div>;
+  } else if (books.totalItems === 0) {
+    return <div>찾고 있는 책이 없습니다.</div>;
+  } else {
+    return (
+      <ul>
+        {books.items.map((book, index) => {
+          return <Book book={book} key={index} />;
+        })}
+      </ul>
+    );
+  }
+};
+
+export default BookList;
+
+```
+![Alt text](welcom_readme_image/image-6.png)
+
+
+### formatAuthors 함수 작성하기
+```javascript
+const formatAuthors = authors => {
+    if(!authors){
+        authors = '';
+    } else {
+        authors = authors.join(', ')
+    }
+    return authors;
+}
+
+export default formatAuthors;
+```
+
+</details>
 
 ![Alt text](result.png)

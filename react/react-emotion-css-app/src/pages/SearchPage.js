@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
-import BookSearchForm from './../components/BookSearchForm';
-import {useState} from "react";
-import axios from 'axios';
+import BookSearchForm from "./../components/BookSearchForm";
+import { useState } from "react";
+import axios from "axios";
+import Loader from "../components/Loader";
+import BookList from "../components/BookList";
 
 export const LogoText = styled.h3`
   margin: 0;
@@ -41,32 +43,45 @@ const SearchPage = () => {
   const fetchBooks = async () => {
     setLoading(true);
     try {
-      const result = await axios.get(`${API_BASE_URL}/v1/volumes?q=${searchTerm}`);
+      const result = await axios.get(
+        `${API_BASE_URL}/v1/volumes?q=${searchTerm}`
+      );
       setBooks(result.data);
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
+  };
 
-  }
-
-  const handleChange = e => {
+  const handleChange = (e) => {
     setSearchTerm(e.target.value);
-  }
+  };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     fetchBooks();
-  }
+  };
 
   return (
-    <Header>
-      <HeaderContainer>
-        <LogoText>Book List</LogoText>
-        <HeaderSearchForm>
-          <BookSearchForm onChange={handleChange} onSubmit={handleSubmit} searchTerm={searchTerm}/>
-        </HeaderSearchForm>
-      </HeaderContainer>
-    </Header>
+    <>
+      <Header>
+        <HeaderContainer>
+          <LogoText>Book List</LogoText>
+          <HeaderSearchForm>
+            <BookSearchForm
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+              searchTerm={searchTerm}
+            />
+          </HeaderSearchForm>
+        </HeaderContainer>
+      </Header>
+      <Container>
+        <Loader loading={loading}>
+          "<strong>{searchTerm}</strong>" 책을 찾고 있습니다.
+        </Loader>
+        <BookList books={books}/>
+      </Container>
+    </>
   );
 };
 
