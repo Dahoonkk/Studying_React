@@ -306,13 +306,241 @@ export default Footer;
 <details>
 <summary>Search Page 생성하기</summary>
 
-### Header UI 생성
+### Header UI(SearchPage) 생성
 ```javascript
+import React from "react";
+import styled from "@emotion/styled";
+import BookSearchForm from './../components/BookSearchForm';
+
+export const LogoText = styled.h3`
+  margin: 0;
+`;
+
+const Container = styled.div`
+  max-width: 960px;
+  padding: 15px;
+  margin: 0 auto;
+`;
+
+const Header = styled.header`
+  border-bottom: 1px solid gray;
+`;
+
+const HeaderContainer = styled(Container)`
+  display: flex;
+  align-items: center;
+  @media (max-width: 778px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+const HeaderSearchForm = styled.div`
+  margin-left: auto;
+`;
+
+const SearchPage = () => {
+  console.log("hello search");
+  return (
+    <Header>
+      <HeaderContainer>
+        <LogoText>Book List</LogoText>
+        <HeaderSearchForm>
+          <BookSearchForm />
+        </HeaderSearchForm>
+      </HeaderContainer>
+    </Header>
+  );
+};
+
+export default SearchPage;
 
 ```
 
 ### BookSearch Form 컴포넌트 생성
 ```javascript
+import React from "react";
+import styled from "@emotion/styled";
+
+const Input = styled.input`
+  outline: 0;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(34, 36, 38, 0.5);
+  border-radius: 3px;
+  min-width: 280px;
+  &:focus,
+  &:active {
+    border-color: #85b7d9;
+  }
+  @media (max-width: 778px) {
+    margin-top: 10px;
+  }
+`;
+
+const Button = styled.button`
+  background-color: #fcfcfd;
+  color: 36395a;
+  border: 1px solid rgba(34, 36, 38, 0.5);
+  padding: 0.6rem 1.5rem;
+  margin-left: 15px;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+`;
+
+const Form = styled.form``;
+
+const BookSearchForm = () => {
+  return (
+    <Form>
+      <Input type="search" placeholder="책 이름을 검색해주세요." />
+      <Button type="submit">Search</Button>
+    </Form>
+  );
+};
+
+export default BookSearchForm;
+
+```
+
+</details>
+
+<details>
+<summary>Google API를 통해 책 데이터 가져오기</summary>
+
+### 검색 로직 작성(SearchPage)
+```javascript
+// SearchPage.js
+import React from "react";
+import styled from "@emotion/styled";
+import BookSearchForm from './../components/BookSearchForm';
+import {useState} from "react";
+import axios from 'axios';
+
+export const LogoText = styled.h3`
+  margin: 0;
+`;
+
+const Container = styled.div`
+  max-width: 960px;
+  padding: 15px;
+  margin: 0 auto;
+`;
+
+const Header = styled.header`
+  border-bottom: 1px solid gray;
+`;
+
+const HeaderContainer = styled(Container)`
+  display: flex;
+  align-items: center;
+  @media (max-width: 778px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+const HeaderSearchForm = styled.div`
+  margin-left: auto;
+`;
+
+const SearchPage = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [books, setBooks] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const API_BASE_URL = `https://www.googleapis.com/books`;
+
+  const fetchBooks = async () => {
+    setLoading(true);
+    try {
+      const result = await axios.get(`${API_BASE_URL}/v1/volumes?q=${searchTerm}`);
+      setBooks(result.data);
+    } catch(error) {
+      console.log(error);
+    }
+
+  }
+
+  const handleChange = e => {
+    setSearchTerm(e.target.value);
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    fetchBooks();
+  }
+
+  return (
+    <Header>
+      <HeaderContainer>
+        <LogoText>Book List</LogoText>
+        <HeaderSearchForm>
+          <BookSearchForm onChange={handleChange} onSubmit={handleSubmit} searchTerm={searchTerm}/>
+        </HeaderSearchForm>
+      </HeaderContainer>
+    </Header>
+  );
+};
+
+export default SearchPage;
+
+```
+
+```javascript
+// BookSearchForm.js
+import React from "react";
+import styled from "@emotion/styled";
+
+const Input = styled.input`
+  outline: 0;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(34, 36, 38, 0.5);
+  border-radius: 3px;
+  min-width: 280px;
+  &:focus,
+  &:active {
+    border-color: #85b7d9;
+  }
+  @media (max-width: 778px) {
+    margin-top: 10px;
+  }
+`;
+
+const Button = styled.button`
+  background-color: #fcfcfd;
+  color: 36395a;
+  border: 1px solid rgba(34, 36, 38, 0.5);
+  padding: 0.6rem 1.5rem;
+  margin-left: 15px;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+`;
+
+const Form = styled.form``;
+
+const BookSearchForm = ({ onChange, onSubmit, searchTerm }) => {
+  return (
+    <Form onSubmit={onSubmit}>
+      <Input
+        type="search"
+        placeholder="책 이름을 검색해주세요."
+        onChange={onChange}
+        value={searchTerm}
+      />
+      <Button type="submit">Search</Button>
+    </Form>
+  );
+};
+
+export default BookSearchForm;
 
 ```
 
