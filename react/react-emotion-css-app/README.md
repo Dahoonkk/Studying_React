@@ -645,4 +645,120 @@ export default formatAuthors;
 
 </details>
 
+<details>
+<summary>Book Detail Page 생성하기</summary>
+
+### 책 ID를 이용해서 데이터 가져오기
+```javascript
+const { bookId } = useParams();
+const [ book, setBook] = useState(null);
+const [loading, setLoading] = useState(false);
+
+useEffect(() => {
+  const API_BASE_URL = `https://www.googleapis.com/books`;
+  const fetchBook = async () => {
+    setLoading(true)
+    try {
+      const result = await axios.get(`${API_BASE_URL}/v1/volumes/${bookId}`);
+      setBook(result.data);
+    } catch(error) {
+      console.log(error);
+    }
+
+    setLoading(false);
+  };
+  fetchBook();
+}, [bookId]);
+```
+
+### UI 작성하기
+```javascript
+<>
+  <Header>
+    <HeaderContainer>
+      <Link to={`/`}>
+        <LogoText>Book List</LogoText>
+      </Link>
+    </HeaderContainer>
+  </Header>
+  <Container>
+    <Loader loading={loading}>
+      <strong>{bookId}</strong>라는 ID를 가진 북 정보를 가져오고 있습니다.
+    </Loader>
+    {/* Book Detail */}
+  </Container>
+</>
+```
+
+### Shared.js 파일로 옮겨주기
+```javascript
+// Shared.js
+import styled from "@emotion/styled";
+
+export const LogoText = styled.h3`
+  margin: 0;
+`
+
+export const Container = styled.div`
+  max-width: 960px;
+  padding: 15px;
+  margin: 0 auto;
+`
+
+export const Header = styled.header`
+  border-bottom: 1px solid gray;
+`;
+
+export const HeaderContainer = styled(Container)`
+  display: flex;
+  align-items: center;
+  @media (max-width: 778px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`
+
+```
+
+### BookDetail 컴포넌트 생성
+```javascript
+import React from 'react'
+import formatAuthors from '../helpers/formatAuthors';
+
+const BookDetail = ({ book }) => {
+  const IMG_BASE_URL = `http://books.google.com/books`;
+  return (
+    <section>
+      <div>
+        <img
+            src={`${IMG_BASE_URL}/content?id=${book.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api`}
+            alt={`${book.volumeInfo.title} book`}
+        />
+        <div>
+          <h3>
+            <strong>책 이름:</strong>{book.volumeInfo.title}
+          </h3>
+          <p>
+             <strong>저자:</strong>{formatAuthors(book.volumeInfo.authors)}
+          </p>
+          <p>
+             <strong>출판 날짜:</strong>{book.volumeInfo.publishedDate}
+          </p>
+          <p>
+             <strong>출판사:</strong>{book.volumeInfo.publisher}
+          </p>
+          <p>
+             <strong>설명:</strong>{book.volumeInfo.description}
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default BookDetail
+```
+
+</details>
+
 ![Alt text](result.png)
