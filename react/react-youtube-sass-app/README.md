@@ -135,3 +135,10 @@
 ![Alt text](welcom_readme_img/image-11.png)
 
 </details>
+
+<details>
+<summary>Grid를 이용한 Layout</summary>
+
+![Alt text](welcom_readme_img/image-12.png)
+
+</details>
