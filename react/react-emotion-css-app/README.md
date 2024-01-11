@@ -135,7 +135,7 @@ const Layout = () => {
 
 </details>
 
-<detilas>
+<details>
 <summary>Footer 컴포넌트 생성 및 Theme 적용하기</summary>
 
 ```javascript
@@ -301,7 +301,22 @@ export default Footer;
 ```
 
 
-</detilas>
+</details>
+
+<details>
+<summary>Search Page 생성하기</summary>
+
+### Header UI 생성
+```javascript
+
+```
+
+### BookSearch Form 컴포넌트 생성
+```javascript
+
+```
+
+</details>
 
 
 ![Alt text](result.png)
