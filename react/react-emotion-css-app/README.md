@@ -135,5 +135,173 @@ const Layout = () => {
 
 </details>
 
+<detilas>
+<summary>Footer 컴포넌트 생성 및 Theme 적용하기</summary>
+
+```javascript
+/** @jsxImportSource @emotion/react */
+
+import React from "react";
+import { css } from "@emotion/react";
+
+const Footer = () => {
+  return (
+    <div
+      css={css`
+        margin: 1rem 0;
+        display: flex;
+        justify-content: center;
+      `}
+    >
+      <p>Book List Inc, All rights reserved.</p>
+
+      <button
+        css={css`
+          background-color: #fcfcfd;
+          color: #36395a;
+          border: 1px solid rgba(34, 36, 38, 0.5);
+          padding: 0.6rem 1.5rem;
+          margin-left: 15px;
+          border-radius: 3px;
+          cursor: pointer;
+
+          &:hover {
+            transform: translateY(-2px);
+          }
+        `}
+      >
+        dark
+      </button>
+    </div>
+  );
+};
+
+export default Footer;
+
+```
+#### 에러 및 해결방법
+![Alt text](welcom_readme_image/image-5.png)
+- App.js / Footer.js에 /** @jsxImportSource @emotion/react */ 추가
+  
+<br />
+
+### 버튼을 눌렀을 때 테마 변경하기
+#### [테마](https://emotion.sh/docs/theming) 생성
+```javascript
+export const themeLight = {
+  text: "#000",
+  background: "#fff",
+};
+
+export const themeDark = {
+  text: "#fff",
+  background: "#121212",
+}
+```
+
+#### ThemeProvider로 감싸주기
+```javascript
+function App() {
+  const [isDark, setIsDark] = useState(false);
+  return (
+    <BrowserRouter>
+      <ThemeProvider theme={isDark ? themeDark : themeLight}>
+        <Routes>
+          <Route path="/" element={<Layout isDark={isDark} setIsDark={setIsDark} />}>
+            <Route index element={<SearchPage />} />
+            <Route path="/book:bookId" element={<BookDetailPage />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
+  );
+}
+```
+
+#### Theme 사용하기
+```javascript
+const Layout = ({isDark, setIsDark}) => {
+  const theme = useTheme();
+  
+  return (
+    <div>
+      <Global
+        styles={css`
+          body {
+            background-color: ${theme.background};
+            color: ${theme.text};
+            transition-duration: 0.2s;
+            transition-property: background-color, color;
+          }
+          a {
+            color: ${theme.text};
+            text-decoration: none;
+          }
+          ul {
+            list-style: none;
+            padding: 0;
+          }
+        `}
+      />
+      <div
+        css={css`
+          min-height: 90vh;
+        `}
+      >
+        <Outlet />
+      </div>
+      <Footer isDark={isDark} setIsDark={setIsDark} />
+    </div>
+  );
+};
+```
+
+#### 버튼 눌러서 테마 변경하기
+```javascript
+/** @jsxImportSource @emotion/react */
+
+import React from "react";
+import { css } from "@emotion/react";
+
+const Footer = ({isDark, setIsDark}) => {
+  return (
+    <div
+      css={css`
+        margin: 1rem 0;
+        display: flex;
+        justify-content: center;
+      `}
+    >
+      <p>Book List Inc, All rights reserved.</p>
+
+      <button
+        css={css`
+          background-color: #fcfcfd;
+          color: #36395a;
+          border: 1px solid rgba(34, 36, 38, 0.5);
+          padding: 0.6rem 1.5rem;
+          margin-left: 15px;
+          border-radius: 3px;
+          cursor: pointer;
+
+          &:hover {
+            transform: translateY(-2px);
+          }
+        `}
+        onClick={() => setIsDark(!isDark)}
+      >
+        {isDark ? "dark" : "light"}
+      </button>
+    </div>
+  );
+};
+
+export default Footer;
+
+```
+
+
+</detilas>
+
 
 ![Alt text](result.png)
