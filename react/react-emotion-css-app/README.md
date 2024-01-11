@@ -54,5 +54,50 @@ npm install @emotion/react @emotion/styled axios react-router-dom
 
 </details>
 
+<details>
+<summary> React Router Dom 적용하기</summary>
+
+### React Router Dom 이란?
+- 리액트를 사용할 때 페이지를 이동할 수 있도록 도와주는 라이브러리이다.
+- 리액트는 SPA(Single Page Application)를 기본으로 하기 때문에 하나의 페이지에서 동적으로 화면을 바꿔간다.
+- BrowserRouter : History API를 사용해 URL과 UI를 동기화하는 라우터
+- Routes : Route에 매치되는 첫번째 요소를 렌더링
+- Route : 컴포넌트 속성에 설정된 URL과 현재 경로가 일치하면 해당하는 컴포넌트를 렌더링
+- Link : a 태그와 비슷하며 to 속성에 설정된 링크로 이동, 기록이 history 객체에 저장된다.
+
+```javascript
+import './App.css';
+import { BrowserRouter, Outlet } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import SearchPage from './pages/SearchPage';
+import BookDetailPage from './pages/BookDetailPage';
+
+const Layout = () => {
+  <div>
+    <Outlet />
+  </div>
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<SearchPage />} />
+          <Route path='/book:bookId' element={<BookDetailPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+```
+
+</details>
+
+
 
 ![Alt text](result.png)
