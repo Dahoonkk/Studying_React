@@ -98,6 +98,42 @@ export default App;
 
 </details>
 
+<details>
+<summary>Global Style 적용하기</summary>
+
+### [Global Style](https://emotion.sh/docs/globals)
+- 우리는 폰트 설정과 같은 글로벌 CSS를 삽입하고 싶을 때가 있을 수 있다.
+- 이를 위해 Global 컴포넌트를 사용할 수 있다. 
+- 이 컴포넌트는 동일한 값들을 받는 styles 프롭을 허용하며, css 프롭과 동일한 값을 받지만 전역적으로 스타일을 삽입한다. 
+- 전역 스타일은 스타일이 변경되거나 Global 컴포넌트가 언마운트될 때 제거된다.
+
+```javascript
+const Layout = () => {
+  <div>
+    <Global 
+      styles={css`
+        body {
+          background-color: white;
+          color: black;
+          transition-duration: 0.2s;
+          transition-property: background-color, color;
+        }
+        a {
+          color: black;
+          text-decoration: none;
+        }
+        ul {
+          list-style:none;
+          padding: 0;
+        }
+      `}
+    />
+    <Outlet />
+  </div>
+}
+```
+
+</details>
 
 
 ![Alt text](result.png)
