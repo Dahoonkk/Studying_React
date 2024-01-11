@@ -1,0 +1,17 @@
+// @import하는 방법은 deprecated 되었지만 그 동안 많이 사용했던 방식이었음
+// 현재는 @use와 @forward 사용을 권장
+@import './abstracts/variables';
+@import './abstracts/mixins';
+
+@import './layout/navBar/navBar';
+@import './layout/navBar/leftNav';
+@import './layout/navBar/rightNav';
+@import './layout/navBar/searchBar';
+
+@import './layout/sideBar/sideBar';
+@import './layout/sideBar/bigSideBar';
+@import './layout/sideBar/smallSideBar';
+
+@import './pages/mainPage';
+@import './pages/searchedVideosPage';
+@import './pages/videoPage';
