@@ -142,3 +142,24 @@
 ![Alt text](welcom_readme_img/image-12.png)
 
 </details>
+
+<details>
+<summary>스크롤바 스타일링</summary>
+
+![Alt text](welcom_readme_img/image-13.png)
+
+```scss
+body {
+
+}
+```
+
+### -webkit 이란?
+- 웹킷은 웹 브라우저를 만드는 데 기반을 제공하는 오픈 소스 응용 프로그램 프레임워크이다.
+- -webkit-이라는 표준화가 되지 않은 새로운 기능들의 속성일 경우 -webkit-이라는 prefix를 이용해서 사용한다.
+  - -webkit- : 구글, 사파리 브라우저에 적용
+  - -moz- : 파이어폭스 브라우저에 적용
+  - -ms- : 익스플로러에 적용
+  - -o- : 오페라 브라우저에 적용
+
+</details>
