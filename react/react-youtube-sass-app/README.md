@@ -99,3 +99,18 @@
 - 선택자간의 연광성이 존재한다면 extend를 사용하고, 연관성은 없지만 코드가 겹치는 선택자들이라면 mixin으로 소스코드의 중복을 없애기 위해 사용해야 한다.
 
 </details>
+
+<details>
+<summary>Sass 파일 구조</summary>
+
+### 보편적인 Sass 파일 구조
+![Alt text](welcom_readme_img/image-8.png)
+- Abstracts : Sass 도구, helper 파일, 변수, 함수, 믹스인 및 기타 구성 파일을 보유한다. 이 파일은 컴파일할 때 CSS를 출력하지 않는 도우미일뿐이다.
+- vendor : Normalize, Bootstrap, jQeuryUI 등과 같은 외부 라이브러리 및 프레임워크의 모든 타사 코드를 포함한다.
+- 참고 : 가져올 때 _ 또는 .scss 파일 확장자를 포함할 필요가 없다.
+
+### 만드는 앱을 위한 Scss 구조
+![Alt text](welcom_readme_img/image-9.png)
+
+
+</details>
