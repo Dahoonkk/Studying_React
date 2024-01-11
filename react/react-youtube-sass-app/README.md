@@ -114,3 +114,24 @@
 
 
 </details>
+
+<details>
+<summary>@use, @forward를 이용한 partial 구현</summary>
+
+![Alt text](welcom_readme_img/image-10.png)
+- Sass 팀은 @import 규칙을 계속 사용하는 것을 권장하지 않는다.
+- Sass는 향후 몇 년 동안 점차적으로 이를 단계적으로 제거하고 결국 언어에서 완전히 제거할 것이다.
+- 대신 @use 규칙을 사용을 권장한다. (현재 Dart Sass만 @use를 지원한다. 다른 구현의 사용자는 대신 @import 규칙을 사용해야 한다.)
+
+### @import 보다 @use를 사용해야 하는 이유
+- @import는 모든 변수, 믹스인 및 함수를 전역적으로 액세스할 수 있도록 한다.
+  - 이로 인해 어떠한 것이 어디에 정의되었는지 위치를 말하기가 어렵다.
+- 모든 것이 전역적이기 때문에 라이브러리는 이름 충돌을 피하기 위해 모든 멤버에 접두사를 붙여야 한다.
+- @extend 규칙도 전역적이므로 어떤 스타일 규칙이 확장될지 예측하기 어렵다.
+- 각 스타일시트는 @import할 때마다 실행되고 CSS가 내보내지므로 컴파일 시간이 늘어나고 출력이 부풀려진다.
+- 새로운 모듈 시스템과 @use 규칙은 이러한 모든 문제를 해결한다.
+
+### @import에서 @use로 변환하기
+![Alt text](welcom_readme_img/image-11.png)
+
+</details>

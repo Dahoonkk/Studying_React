@@ -1,20 +1,32 @@
 // @import하는 방법은 deprecated 되었지만 그 동안 많이 사용했던 방식이었음
 // 현재는 @use와 @forward 사용을 권장
-@import "./abstracts/variables";
-@import "./abstracts/mixins";
+// @import "./abstracts/variables";
+// use는 최상단에서 사용해줘야 한다.
 
-@import "./layout/navBar/navBar";
-@import "./layout/navBar/leftNav";
-@import "./layout/navBar/rightNav";
-@import "./layout/navBar/searchBar";
+// *을 하면 as 별칭을 없애고 사용할 수 있음
+// @use "./abstracts/variables" as *; 
 
-@import "./layout/sideBar/sideBar";
-@import "./layout/sideBar/bigSideBar";
-@import "./layout/sideBar/smallSideBar";
+// 하지만 use를 사용하게 되면 다른 scss 파일에서도 참조할 경우 구조가 복잡해질 수 있게 된다.
+// 이럴 경우 @forward를 사용하여 해결할 수 있다.
 
-@import "./pages/mainPage";
-@import "./pages/searchedVideosPage";
-@import "./pages/videoPage";
+// @import "./abstracts/mixins";
+
+// @import "./layout/navBar/navBar";
+// @import "./layout/navBar/leftNav";
+// @import "./layout/navBar/rightNav";
+// @import "./layout/navBar/searchBar";
+
+// @import "./layout/sideBar/sideBar";
+// @import "./layout/sideBar/bigSideBar";
+// @import "./layout/sideBar/smallSideBar";
+
+// @import "./pages/mainPage";
+// @import "./pages/searchedVideosPage";
+// @import "./pages/videoPage";
+
+@use 'abstracts' as *;
+@use 'layout';
+@use 'pages';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;0,700;1,400&display=swap');
 
