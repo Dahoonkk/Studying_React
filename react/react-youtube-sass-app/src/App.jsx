@@ -1,9 +1,32 @@
+import { Outlet, Routes, Route } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import SearchedVideosPage from "./pages/SearchedVideosPage";
+import VideoPage from "./pages/VideoPage";
+import NavigationBar from "./components/NavigationBar/index";
+import SideBar from './components/SideBar';
+
+const Layout = () => {
+  return (
+    <>
+      <NavigationBar />
+      <SideBar />
+      <main>
+        <Outlet />
+      </main>
+    </>
+  );
+};
+
 function App() {
   return (
     <>
-      <div className="App">
-        <h1>Hello World!</h1>
-      </div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<MainPage />} />
+          <Route path="/results/:input" element={<SearchedVideosPage />} />
+          <Route path="/video/:videoId" element={<VideoPage />} />
+        </Route>
+      </Routes>
     </>
   );
 }
