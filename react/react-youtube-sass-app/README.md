@@ -150,7 +150,24 @@
 
 ```scss
 body {
+  &::-webkit-scrollbar {
+    width: 16px;
+  }
 
+  &::-webkit-scrollbar-track {
+    background-color: $bg-color;
+    box-shadow: inset 0 0 200px $bg-color;
+    -webkit-box-shadow: inset 0 0 200px $bg-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgb(151, 151, 151);
+    border: 4.5px solid $bg-color;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0);
+    -webkit-box-shadow: inset 0 0 20px rgba(0, 0, 0, 0);
+  }
 }
 ```
 
