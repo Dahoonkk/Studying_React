@@ -1,35 +1,39 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/", function (req, res, next) {
+  res.render("index", { title: "Express" });
 });
 
-router.get('/api/get/nodjs-api', function(req, res) {
+router.get("/api/get/nodjs-api", function (req, res) {
   res.status(200).json({
-    "message" : "hello get api nodejs-api"
+    message: "hello get api nodejs-api",
   });
 });
 
-router.post('/kakao/apitest/user', function(req, res) {
+router.post("/kakao/apitest/user", function (req, res) {
   const userId = req.query.userId;
   console.log("userId Post Start-----");
-  console.log("userId : ", userId)
-  res.send(`your id is ${userId}`)
-})
+  console.log("userId : ", userId);
+  res.send(`your id is ${userId}`);
+});
 
-router.post('/kakao/apitest/user/kakao_account/profile', function(req, res) {
+router.post("/kakao/apitest/user/kakao_account/profile", function (req, res) {
   const userName = req.query.userName;
   console.log("userName Post Start-----");
   console.log("userName : ", userName);
   res.status(200).json({
-    "message" : "Hello Kakao UserName"
-  })
-})
+    message: "Hello Kakao UserName",
+  });
+});
 
-router.post('/kakao/apitest/user', function(req, res) {
+router.post("/kakao/apitest/user/user_account", function (req, res) {
   /* user 객체 받아오기 */
-})
+  console.log("User Account : ", req.body);
+  console.log("req.params : ", typeof req.body);
+  console.log("result : ", Object.entries(req.body));
+  res.send("success", 200);
+});
 
 module.exports = router;
