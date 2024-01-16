@@ -13,6 +13,7 @@
     position: fixed;
     top: 0;
     z-index: 100;
+
     .icon-container {
         padding: .5rem;
         color: $text-color;
@@ -22,11 +23,13 @@
         cursor: pointer;
         @include center;
     }
+
     .special_searchbar {
         width: 100%;
         padding: 0 .5rem;
         @include center;
         z-index: 99999;
+
         button {
             padding: .5rem;
             color: white;
@@ -35,11 +38,13 @@
             outline: none;
             @include center;
         }
+
         form {
             width: 100%;
             height: 100%;
             padding: 0 .5rem;
             @include center;
+
             input {
                 width: 100%;
                 padding: .6rem 1.5rem;
@@ -50,10 +55,12 @@
                 border-top-left-radius: .25rem;
                 border-bottom-left-radius: .25rem;
                 outline: none;
+
                 &:focus {
                     border-color: rgb(0, 140, 255);
                 }
             }
+
             button {
                 height: 100%;
                 padding: .6rem 2rem;
@@ -65,6 +72,7 @@
                 border-bottom-right-radius: .25rem;
                 @include center;
                 cursor: pointer;
+
                 &:hover {
                     color: $subtext-color;
                 }

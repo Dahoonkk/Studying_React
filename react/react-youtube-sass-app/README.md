@@ -180,3 +180,52 @@ body {
   - -o- : 오페라 브라우저에 적용
 
 </details>
+
+
+<details>
+<summary>useWindowSize Hooks 생성하기</summary>
+
+> 화면을 줄일 때 그에 따라 스타일링을 변경하기 위해서는 여러 방법을 사용할 수 있지만 useWindowSize Hooks라는 것을 사용하면 innerWidth 사이즈에 맞게 스타일링 해줄 수 있다.
+
+### useWindowSize Hooks 생성
+
+![Alt text](welcom_readme_img/image-14.png)
+
+```javascript
+import { useEffect, useState } from "react";
+
+const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    // window resize를 위한 핸들러
+    const handleResize = () => {
+        setWindowSize({
+            width: windowSize.innerWidth,
+            height: windowSize.innerHeight,
+        });
+    }
+
+    // 이벤트 리스너 생성
+    window.addEventListener("resize", handleResize);
+
+    // 핸들러를 바로 불러 state가 초기 window size로 업데이트 될 수 있도록 한다.
+    handleResize();
+
+    // 이벤트 리스터 제거
+    return () => {
+        window.removeEventListener("resize", handleResize);
+    }
+  }, [])
+
+  return windowSize;
+};
+
+export default useWindowSize;
+
+```
+
+</details>
