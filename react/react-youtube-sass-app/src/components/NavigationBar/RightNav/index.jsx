@@ -1,5 +1,6 @@
 import { MdVideoCall, MdApps, MdNotifications } from "react-icons/md";
-import { Tooltip } from 'react-tooltip'
+import { Tooltip as ReactTooltip } from 'react-tooltip'
+// import ReactTooltip from "react-tooltip";
 
 const RightNav = () => {
   return (
@@ -16,7 +17,7 @@ const RightNav = () => {
         <MdNotifications size={25} />
       </button>
 
-      <Tooltip
+      <ReactTooltip
         id="navbar"
         backgroundColor="gray"
         effect="solid"
