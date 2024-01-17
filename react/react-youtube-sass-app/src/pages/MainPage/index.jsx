@@ -1,11 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import axios from "../../api/axios";
 import { getVideoInfo } from "../../context/fetchingData";
 import VideoCard from "../../components/VideoCard";
+import { SideBarContext } from "../../context/SideBarContext";
 
 const MainPage = () => {
   const storedVideos = JSON.parse(localStorage.getItem("mainVideos"));
   const [mainVideos, setMainVideos] = useState(storedVideos || []);
+  const { setIsToggled } = useContext(SideBarContext);
+
+  useEffect(() => {
+    setIsToggled(true);
+  }, []);
 
   const getMainVideos = useCallback(async () => {
     try {
