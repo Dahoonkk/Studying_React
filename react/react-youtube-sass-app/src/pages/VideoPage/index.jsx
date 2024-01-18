@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Youtube from "react-youtube";
@@ -10,8 +10,11 @@ import dayjs from "dayjs";
 import formatNumber from "../../helpers/formatNumber";
 import formatViews from "../../helpers/formatViews";
 import formattedText from "../../helpers/formatText";
+import axios from "../../api/axios";
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 const VideoPage = () => {
+  dayjs.extend(relativeTime);
   const { videoId } = useParams();
   let location = useLocation();
   const { state: currentVideo } = location;
@@ -26,13 +29,21 @@ const VideoPage = () => {
 
   const videoDescription = formattedText(currentVideo.snippet.description)
 
-  useEffect(() => {
-    setIsToggled(false);
-  }, []);
+  const [videoComments, setVideoComments] = useState([]);
 
   const onPlayerReady = (e) => {
     e.target.playVideo();
   };
+
+  const loadComment = useCallback(async() => {
+    setIsToggled(false);
+    const response = await axios.get(`/commentThreads?part=snippet&videoId=${videoId}`)
+    setVideoComments(response.data.items);
+  }, [setIsToggled, videoId])
+
+  useEffect(() => {
+    loadComment();
+  }, [])
 
   const opts = {
     height: "390",
@@ -41,6 +52,40 @@ const VideoPage = () => {
       autoplay: 1,
     },
   };
+
+  const videoCommentsMarkUp = videoComments?.map(item => {
+    const { id, snippet } = item.snippet.topLevelComment
+    return (
+      <div className="comment_container" key={id}>
+        <div className="comment_avatar_container">
+          <img src={snippet.authorProfileImageUrl} alt="user avatar" />
+        </div>
+        <div className="comment_text_container">
+          <div className="comment_author">
+            {snippet.authorDisplayName}
+            <span>
+              {dayjs(snippet.publishedAt).fromNow()}
+            </span>
+          </div>
+          <div className="comment_text">
+            {snippet.textOriginal}
+          </div>
+          <div className="comment_buttons">
+            <div>
+              <BiLike size={16} />
+              <span className='muted'>
+                100
+              </span>
+            </div>
+            <div>
+              <BiDislike size={16} />
+            </div>
+            <span className="muted">REPLY</span>
+          </div>
+        </div>
+      </div>
+    )
+  })
 
   const videoHeaderMarkUp = (
     <div className="video_main_info">
@@ -123,7 +168,10 @@ const VideoPage = () => {
           </div>
           <div className="video_comments_container">
             <div className="video_comments_count">{comments} Comments</div>
-            <div className="video_comments">{/* videoCommentsMarkUp */}</div>
+            <div className="video_comments">
+              {/* videoCommentsMarkUp */}
+              {videoCommentsMarkUp}
+            </div>
           </div>
         </div>
       </div>
