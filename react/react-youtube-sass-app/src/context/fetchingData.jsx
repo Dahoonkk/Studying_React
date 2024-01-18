@@ -39,13 +39,20 @@ export const getVideoInfo = async (videosArr) => {
   }
 }
 
-export const getRelatedVideos = async(videoId) => {
+export const getComments = async (videoId) => {
+  const response = await axios.get(
+    `/commentThreads?part=snippet&videoId=${videoId}`
+  )
+  return response.data.items
+}
+
+export const getRelatedVideos = async (videoId) => {
   try {
     const response = await axios.get(
-      `/search?part=snippet&maxResults=10&relatedToVideoId=${videoId}&type=video}`
+      `/search?part=snippet&maxResults=10&relatedToVideoId=${videoId}&type=video`
     )
     return response.data.items
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    console.log(err)
   }
 }
