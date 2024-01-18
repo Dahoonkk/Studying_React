@@ -113,7 +113,7 @@ const VideoPage = () => {
         <div className="column column_1">
           <div className="youtube_player_container">
             <Youtube
-              className="youtube-player"
+              className="youtube_player"
               videoId={videoId}
               onPlay={onPlayerReady}
               opts={opts}
