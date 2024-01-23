@@ -160,4 +160,112 @@ console.log("responseData", responseData);
 <details>
 <summary>모듈에서 exports 하는 방법</summary>
 
+> 이전에 공부한 module.exports = {} 와 같은 방법을 할 수도 있지만 다른 방법으로 exports 할 수도 있다.
+
+![Alt text](readme_img/image-6.png)
+
+#### 하지만 결국 처음 방법이 가장 좋다.
+
+- 그 이유는 아래와 같이 어떤 모듈이 export 되어 있는지 확인하기 쉽게 정리되어있기 때문이다.
+  ![Alt text](readme_img/image-7.png)
+
+</details>
+
+<details>
+<summary>CommonJS와 ECMAScript 모듈의 차이</summary>
+
+### CommonJS Module
+
+- 지금까지 공부한 Node.js의 모듈은 CommonJSdlek.
+- 이것은 바로 module.exports로 내보내고 require로 가져오는 것이었다.
+- 이 [CommonJS](https://nodejs.org/api/modules.html#modules-commonjs-modules)는 노드 JS에서 기본 모듈로 사용되고 있다.
+
+### ECMAScript Module
+
+- ECMAScript Module은 아래와 같이 export, import를 이용해서 모듈에서 내보내고 가져오는 Syntax를 이용한다.
+
+```javascript
+// addTwo.mjs
+function addTwo(num) {
+  return num + 2;
+}
+
+export { addTwo };
+```
+
+```javascript
+// app.mjs
+import { addTwo } from ".addTwo.mjs";
+
+// Prints: 6
+console.log(addTwo(4));
+```
+
+#### ECMAScript Modeul의 특징
+
+- ES 모듈은 JavaScript의 표준이고 CommonJS는 Node.js의 기본값이다.
+- 모든 주요 브라우저는 ES 모듈을 지원하며 React 및 Vue.js와 같은 프레임워크에서도 ES 모듈의 가져오기(import) / 내보내기(Export)를 사용할 수 있다.
+- 이러한 프레임워크는 Babel과 같은 transpiler를 사용하여 이전 Node.js 버전이 기본적으로 지원하는 가져오기(Import) / 내보내기(Export) 구문 (syntax)을 require()로 컴파일한다.
+- Node.js 13.2.0버전부터 ECMAScript Module을 지원
+
+### ECMAScript란?
+
+- ECMAScript는 ECMA 인터내셔널에 의해 제정된 ECMA-262 기술 규격에 의해 정의된 범용 스크립트 언어이다.
+- 또한 JavaScript는 ECMAScript 사양을 준수하는 범용 스크립팅 언어이다.
+  ![Alt text](readme_img/image-8.png)
+  ![Alt text](readme_img/image-9.png)
+
+### ECMAScript 6란? (ES6, ES2015, ECMAScript 2015)
+
+- 자바스크립트를 사용하다 보면 ES6에 대한 얘기를 많이하게 된다.
+- 이 ES6는 ECMAScript 언어의 6번째 버전이다.
+- ES6는 ES2015라고도 부르는데 그 이유는 2015년 ECMA 인터내셔널이 ECMAScript를 매년마다 개정하기로 발표했기 때문이다.
+- 따라서 앞으로 매년 해의 이름을 딴 ECMAScript가 새로 발표될 예정이다.
+- ECMAScript 버전 중에서 이 ES6가 가장 중요한데 그 이유는 ES6에서 추가된 문법들이 기존의 문제들을 매우 깔끔하게 해결하였으며, 가독성 및 유지 보수성을 보강하는 문법도 대거 추가됐기 때문이다.
+- 예를 들어 새롭게 추가된 기능으로는 Promise, Class, Arrow Function 등이 있다.
+
+</details>
+
+<details>
+<summary>Node.js에서 ECMAScript 모듈 이용하기</summary>
+
+### ECMAScript 모듈 사용하기
+
+- 현재 CommonJS 모듈로 되어 있는 Node.js 앱을 ECMAScript 모듈로 다시 구현해보자.
+  ![Alt text](readme_img/image-10.png)
+
+</details>
+
+<details>
+<summary>모듈 캐싱에 대해서</summary>
+
+### 모듈 캐싱이란?
+
+- 모듈에서 다른 모듀을 가져올 때 (load) ECMAScript 모듈을 사용하든지 CommonJS 모듈을 사용하든지 해당 모듈을 캐싱하게 된다.
+
+#### 캐싱이 잘 되는지 확인
+
+![Alt text](readme_img/image-11.png)
+
+#### 모듈 한번 더 불러온 후 다시 테스트
+
+![Alt text](readme_img/image-12.png)
+
+#### 만약 새로운 모듈에서 response 모듈을 또 가져온다면?
+
+![Alt text](readme_img/image-13.png)
+
+#### caching 된 정보 살펴보기
+
+![Alt text](readme_img/image-14.png)
+
+</details>
+
+<details>
+<summary>index.js 파일에 대해서</summary>
+
+### index.js 파일은 무엇인가?
+
+- 불필요하게 복잡한 모듈 로딩 시스템을 만드는 index.js 파일에 대해 알아보자.
+
 </details>
