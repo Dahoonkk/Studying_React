@@ -336,9 +336,76 @@ process.nextTick(cb);
 console.log("Start");
 ```
 
+![Alt text](readme_img/image-22.png)
+
+### setImmediate() 재귀 호출 시?
+
+![Alt text](readme_img/image-23.png)
+
+### setImmediate & nextTick 이름
+
+- 개본적으로 서로의 이름이 바뀌어야 한다.
+- 왜냐하면 process.nextTick()가 setImmediate() 보다 더 즉시 발생하기 때문이다.
+- 그렇지만 현재는 이 둘의 이름을 바꿀 수는 없다.
+  - 왜냐하면 이 둘의 이름을 바꾼다면 이 둘을 사용하고 있는 대다수의 npm 패키지가 망가질 수 있기 때문이다.
+  - 또한 매일 새로운 모듈들이 더해지고 있으므로 잠재적으로 더 많은 npm 패키지가 개질 수 있다.
+- 모든 경우에 setImmediate()를 사용하기를 추천하는데, 사용하기 쉽고 browser 등의 다양한 환경에서 호환이 더 잘되기 때문이다.
+
+### setTimeout & setImmediate
+
+- setImmediate()는 Poll 단계가 완료되면 스크립트를 실행하도록 설계되었다.
+- setTimeout()은 최소 임계값(ms)이 경과한 후 스크립트가 실행되도록 예약한다.
+  ![Alt text](readme_img/image-24.png)
+- setTimeout()보다 setImmediate()를 사용하는 주요 이점은 존재하는 타이머 수와 관계없이 I/O 주기 내에서 예약된 경우 setImmediate()가 항상 타이머보다 먼저 실행된다는 것이다.
+
+</details>
+
+<details>
+<summary>Node.js를 사용하면 좋은 곳</summary>
+
+![Alt text](readme_img/image-25.png)
+
+- Node에서 CPU는 주로 일을 나눠주는 (delegate)하는 역할을 한다.
+- 하지만 계산(calculation)이 많은 비디오 작업이나 머신러닝을 할 때는 CPU나 GPU 혹은 Graphic Card가 Blocking 된다.
+- 이렇데 되면 이벤트 루프가 막혀버린다.
+- 그렇기에 노드 JS는 계산이 많은 작업을 하기보다 데이터베이스 작업이 많거나 다른 서버와 통신이 많은 웹서비스를 하는데 좋다.
+  - (Input/Output operation > Heavy Calculation)
+
 </details>
 
 <details>
 <summary>Node.js Event Emitter</summary>
+
+> 브라우저에서 Javasciprt로 작업한 경우 마우스 클릭, 키보드 버튼 누르기, 마우스 움직임에 대한 반응 등과 같은 이벤트를 통해 사용자 상호 작용이 얼마나 처리되는지 알 수 있다.
+> 이러한 것처럼 백엔드 측에서 Node.js도 event-driven 시스템을 이용해서 작동된다.
+
+![Alt text](readme_img/image-26.png)
+
+### Observer Design Pattern
+
+- event-driven 시스템을 이용하는 것을 Observer Design Pattern 이라고도 부른다.
+  ![Alt text](readme_img/image-27.png)
+- 이 패턴에는 특정 Subject를 관찰하는 많은 Observer가 있다.
+- 관찰자는 기본적으로 관심이 있고 해당 주제 내부에 변경 사항이 있을 때 알림을 받기를 원한다.
+- 그래서 그들은 그 주제에 스스로를 등록(Register) 한다.
+- 주제에 대한 관심을 잃으면 단순히 해당 주제에서 등록을 취소한다.
+- 때때로 이 모델은 게시자-구독자(Publisher-Subscriber) 모델이라고도 한다.
+- 예를 들어, 트위터 팔로워가 많은 유명인을 생각하면
+  - 이 팔로워들 각각은 자신이 좋아하는 유명인의 최신 업데이트를 모두 받고 싶어 한다.
+  - 따라서 관심이 지속되는 한 유명인을 팔로우할 수 있다.
+  - 그가 흥미를 잃으면 그는 단순히 그 유명인을 따르는 것을 중단한다.
+  - 여기서 우리는 추종자를 관찰자(Observer)로, 유명인을 주체(Subject)로 생각할 수 있다.
+
+### [Event Emitter 클래스](https://nodejs.dev/en/learn/the-nodejs-event-emitter/) - [about Link2](https://nodejs.org/api/events.html#events)
+
+- Node.js도 Event 모듈을 사용하여 유사한 시스템을 구축할 수 있는 옵션을 제공한다.
+- 특히 이 모듈은 이벤트를 처리하는 데 사용할 EventEmitter 클래스를 제공한다.
+  ![Alt text](readme_img/image-28.png)
+- emit()에 추가 인수로 전달하여 이벤트 핸들러에 인수를 전달할 수 있다.
+  ![Alt text](readme_img/image-29.png)
+
+### [Process Module](https://nodejs.org/api/process.html)
+
+![Alt text](readme_img/image-30.png)
 
 </details>
